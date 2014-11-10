@@ -6,20 +6,51 @@
 		<meta charset="UTF-8">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+	<header>
+	<!-- Logo -->
+	 <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <a href="index.html"><img class="img-responsive img-rounded" src="img/logo.jpg" alt="Logo"></a>
+            </div>
+	</div>
+		<!-- Navigation -->
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">Mieten</a>
+                    </li>
+                    <li>
+						<a href="fahrzeuguebersicht.html">Fahrzeugmodelle</a>
+                    </li>
+                    <li>
+                        <a href="ueberuns.html">ÜberUns</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+	</header>
 	</head> 
 	
 	<body>
-	<header>
-		<a href="index.html"><img id="Logo" src="img/logo.jpg" alt="LOGO"></a>
-		<nav>
-			<ul>
-				<li><a href="index.html">Mieten</a></li>
-				<li><a href="fahrzeuguebersicht.html">Fahrzeugmodelle</a></li>
-				<li><a href="ueberuns.html">ÜberUns</a></li>
-			</ul>
-		</nav>
-	</header>
-	
 	<main>
 		
 		<div id="bootstrapCarousel">
@@ -54,13 +85,17 @@
 	</main>
 	
 	<footer>
-			<ul>
-				<li><a href="kontakt.html">Kontakt</a></li>
-				<li><a href="agb.html">AGB</a></li>
-				<li><a href="impressum.html">Impressum</a></li>
-			</ul>
+	
+	<div class="row">
+            <div class="col-md-6 col-md-offset-3">
+               
+				<p><a href="kontakt.html">Kontakt</a>
+				<a href="agb.html">AGB</a>
+				<a href="impressum.html">Impressum</a>
+			</p>
+            </div>
+	</div>
+	
 	</footer>  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
