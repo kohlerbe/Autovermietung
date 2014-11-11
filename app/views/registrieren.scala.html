@@ -1,0 +1,57 @@
+@main("Registrieren") {
+<main>
+	<h1>Registrieren</h1>
+	<div>
+		<p>Zur Registrierung füllen Sie bitte die folgenden Felder
+			vollständig aus.</p>
+
+		<form method="post" action="#">
+			<h2>Logindaten</h2>
+			<p>
+				EMail <input type="email" name="email" placeholder="EMail" required>
+			<p>
+			<p>
+				Passwort <input type="password" name="passwort"
+					placeholder="Passwort" required>
+			</p>
+			<h2>Kundendanten</h2>
+			<p>
+				Anrede <select name="Anrede">
+
+					<option value="Herr">Herr</option>
+					<option value="Frau">Frau</option>
+				</select>
+			</p>
+			<p>
+				Vorname <input type="text" name="Vorname" placeholder="Vorname"
+					required>
+			<p>
+				Nachname <input type="text" name="Nachname" placeholder="Nachname"
+					required>
+			</p>
+			<p>
+				Straße, Hausnummer <input type="text" name="Straße"
+					placeholder="Straße"> <input type="text" name="Hausnummer"
+					placeholder="Hausnummer">
+			</p>
+			<p>
+				Ort, PLZ <input type="text" name="Ort" placeholder="Ort"> <input
+					type="text" name="PLZ" placeholder="PLZ">
+			</p>
+			<p>
+				<input type="checkbox" name="AGBs"> <a href="agb.html"> AGB's</a> gelesen und
+				akzeptiert.
+			</p>
+			<p>
+				<input type="button" value="Jetzt Regestrieren!">
+			</p>
+		</form>
+
+
+
+
+	</div>
+	</main>
+    
+
+}
