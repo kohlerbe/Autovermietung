@@ -1,36 +1,69 @@
 @main("Startseite| Mieten") {
 <main>
-		
-		<div id="bootstrapCarousel">
-			
-			<div id="boxAbholung">
-				<p>Abholung</p>
-				<select size="1">
-					<option value="">XXX</option>
-					<option value="">XXX</option>
-					<option value="">XXX</option>
-					<option value="">XXX</option>
-				</select>
-				<input type="text" placeholder="DATUM" name="datum">
-				<input type="text" placeholder="ZEIT" name="zeit">
-			</div>
-			<div id="boxRückgabe">
-				<p>Rückgabe</p>
-				<select size="1" id="zeichen">
-					<option value="">XXX</option>
-					<option value="">XXX</option>
-					<option value="">XXX</option>
-					<option value="">XXX</option>
-				</select>
-				<input type="text" placeholder="DATUM" name="datum">
-				<input type="text" placeholder="ZEIT" name="zeit">
-			</div>
-		
-			<input type="button" value="Anfrage starten" onclick="">
-
+	<div class="row">
+		<div class="col-md-3 col-md-offset-3">
+			<h1>Verfügbarkeit prüfen</h1>
 		</div>
+	</div>	
+
+	 <div class="row">
+	 	<div id="boxMieten">
+            <div class="col-md-1 col-md-offset-3">
+            	
+               		
+               			<div class="dropdown">
+  							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    							Abholort
+    							<span class="caret"></span>
+  							</button>
+ 							 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Singen</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Konstanz</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Stuttgart</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">München</a></li>
+  							</ul>
+						</div>
+
+						<div class="dateauswahl">
+							<input type="date" placeholder="dd.mm.yyyy" name="datum">
+						</div>
+
+						<div class="timeauswahl">
+							<input type="time" placeholder="00:00" name="time">
+						</div>
+
+
+
+
+
+			</div>
+			<div class="col-md-1 col-md-offset-1">
+						<div class="dropdown">
+  							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    							Rückgabeort
+    							<span class="caret"></span>
+  							</button>
+ 							 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Singen</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Konstanz</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Stuttgart</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">München</a></li>
+  							</ul>
+						</div>
+						<div class="dateauswahl">
+							<input type="date" placeholder="dd.mm.yyyy" name="datum">
+						</div>
+						<div class="timeauswahl">
+							<input type="time" placeholder="00:00" name="time">
+						</div>
+						<button id="btn-anfrage" type="button" class="btn btn-danger">Anfrage starten</button>
+			 	</div>
 	
+		</div>
+
+				
+	</div>
+
 		</main>
-    
 
 }

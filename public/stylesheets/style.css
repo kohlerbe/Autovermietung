@@ -17,3 +17,26 @@
 .footer{
 	font-family: Ethnocentric;
 }
+.dateauswahl{
+	margin-top: 5px;
+}
+.timeauswahl{
+	margin-top: 5px;
+}
+.dropdown{
+	margin-top: 5px;
+}
+#btn-anfrage{
+	margin-top: 5px;
+}
+main{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+footer{
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+
