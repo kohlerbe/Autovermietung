@@ -1,7 +1,10 @@
 @main("Startseite | Mieten") {
 
 <script> function pickdate (){
-			$( ".timepicker" ).pickatime()	
+			$('dateauswahl').pickadate()	
+		}
+		function picktime (){
+			$('timeauswahl').pickatime()
 		}
 	</script>
 
@@ -30,23 +33,11 @@
 						</div>
 
 						<div class="dateauswahl">
-						
-						 
-        <fieldset class="fieldset fieldset--demo"><div class="fieldset__wrapper"><input class="fieldset__input js__timepicker" type="text" placeholder="Abholzeit" onclick()="pickdate"></div></fieldset>
-	
-
-     
-
-        
-       
-
-   
-
-							<!--<input type="date" placeholder="dd.mm.yyyy" onclick="pickdate()" name="datum">-->
+							<input type="date" placeholder="dd.mm.yyyy" onclick="pickdate()" name="datum">
 						</div>
 
 						<div class="timeauswahl">
-							<input type="time" placeholder="00:00" name="time">
+							<input type="time" placeholder="00:00" onclick="picktime()" name="time">
 						</div>
 
 
@@ -68,10 +59,10 @@
   							</ul>
 						</div>
 						<div class="dateauswahl">
-							<input type="date" placeholder="dd.mm.yyyy" name="datum">
+							<input type="date" placeholder="dd.mm.yyyy" onclick="pickdate()" name="datum">
 						</div>
 						<div class="timeauswahl">
-							<input type="time" placeholder="00:00" name="time">
+							<input type="time" placeholder="00:00" onclick="picktime()" name="time">
 						</div>
 						
 			 	</div>
