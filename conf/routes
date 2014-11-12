@@ -10,7 +10,7 @@ GET     /registrieren				controllers.Application.registrieren()
 GET     /ueberUns					controllers.Application.ueberUns()
 GET     /impressum					controllers.Application.impressum()
 GET     /kontakt					controllers.Application.kontakt()
-GET     /buchungsuebersicht				controllers.Application.buchungsuebersicht()
+GET     /buchungsuebersicht			controllers.Application.buchungsuebersicht()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
