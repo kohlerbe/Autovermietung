@@ -1,5 +1,10 @@
 @main("Startseite | Mieten") {
 
+<script> function pickdate (){
+			$( ".timepicker" ).pickatime()	
+		}
+	</script>
+
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
 			<h1>Verfügbarkeit prüfen</h1>
@@ -25,7 +30,20 @@
 						</div>
 
 						<div class="dateauswahl">
-							<input type="date" placeholder="dd.mm.yyyy" name="datum">
+						
+						 <pre class="pre--demo"><code data-language="javascript">// The time picker (<a href="time.htm">read the docs</a>)
+$('.timepicker').pickatime()</code></pre>
+        <fieldset class="fieldset fieldset--demo"><div class="fieldset__wrapper"><input class="fieldset__input js__timepicker" type="text" placeholder="Try me&hellip;"></div></fieldset>
+	
+
+     
+
+        
+       
+
+   
+
+							<!--<input type="date" placeholder="dd.mm.yyyy" onclick="pickdate()" name="datum">-->
 						</div>
 
 						<div class="timeauswahl">
