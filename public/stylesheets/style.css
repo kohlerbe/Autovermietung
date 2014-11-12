@@ -14,9 +14,7 @@
 .navbar-inverse .navbar-nav > li > a {
     color: #eee;
 }
-.footer{
-	font-family: Ethnocentric;
-}
+
 .dateauswahl{
 	margin-top: 5px;
 }
@@ -44,4 +42,7 @@ footer{
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
     color: #FFF;
     background-color: #A64848;
+}
+.container{
+	padding-left: 240px;
 }
