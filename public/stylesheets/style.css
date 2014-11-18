@@ -43,6 +43,7 @@ footer{
 	background-color: #DD4746;
 	padding-top: 5px;
 	margin-top: 20px;
+	color: #fff;
 }
 .car-list{
 	margin-top: 5px;
@@ -60,3 +61,4 @@ footer a{
 footer a:hover{
 	color: #fff;
 }
+
