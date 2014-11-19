@@ -1,5 +1,3 @@
-
-
 	pickdate (){
 	$('.dateauswahl').pickadate();	
 	}
