@@ -1,6 +1,7 @@
-	pickdate (){
+	
+	function pickdate (){
 	$('.dateauswahl').pickadate();	
 	}
-	picktime (){
+	function picktime (){
 	$('.timeauswahl').pickatime();
 	}
