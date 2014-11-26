@@ -11,7 +11,6 @@ public class Fahrzeug {
 	
 	public Fahrzeug(String fahrzeugID, String beschreibung, String typ,
 			String hersteller, String modell, String preisProTag) {
-		super();
 		this.fahrzeugID = fahrzeugID;
 		this.beschreibung = beschreibung;
 		this.typ = typ;

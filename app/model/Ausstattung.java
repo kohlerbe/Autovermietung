@@ -8,7 +8,6 @@ public class Ausstattung {
 	
 	public Ausstattung(String ausstattungsID, String ausstattungsname,
 			String beschreibung) {
-		super();
 		this.ausstattungsID = ausstattungsID;
 		this.ausstattungsname = ausstattungsname;
 		this.beschreibung = beschreibung;

@@ -7,7 +7,6 @@ public class Bild {
 	private String bildBeschreibung;
 	
 	public Bild(String bildID, String dateipfad, String bildBeschreibung) {
-		super();
 		this.bildID = bildID;
 		this.dateipfad = dateipfad;
 		this.bildBeschreibung = bildBeschreibung;

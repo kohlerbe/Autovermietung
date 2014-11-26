@@ -6,7 +6,6 @@ public class Station {
 	private String stationsname;
 	
 	public Station(String stationsID, String stationsname) {
-		super();
 		this.stationsID = stationsID;
 		this.stationsname = stationsname;
 	}

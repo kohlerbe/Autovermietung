@@ -6,7 +6,6 @@ public class Ort {
 	private String ortsname;
 	
 	public Ort(String ortsID, String ortsname) {
-		super();
 		this.ortsID = ortsID;
 		this.ortsname = ortsname;
 	}

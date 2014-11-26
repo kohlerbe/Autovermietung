@@ -10,7 +10,6 @@ public class Kunde {
 	
 	public Kunde(String kundenNr, String email, String nachname,
 			String vorname, String telNr) {
-		super();
 		this.kundenNr = kundenNr;
 		this.email = email;
 		this.nachname = nachname;

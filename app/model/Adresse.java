@@ -8,7 +8,6 @@ public class Adresse {
 	private String plz;
 	
 	public Adresse(String adressID, String strasse, String hausNr, String plz) {
-		super();
 		this.adressID = adressID;
 		this.strasse = strasse;
 		this.hausNr = hausNr;
