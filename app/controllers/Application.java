@@ -1,8 +1,8 @@
 package controllers;
 
+import model.Model;
 import play.*;
 import play.mvc.*;
-
 import views.html.*;
 
 public class Application extends Controller {
@@ -11,7 +11,8 @@ public class Application extends Controller {
         return ok(index.render());
     }
 	    public static Result fahrzeuguebersicht() {
-        return ok(fahrzeuguebersicht.render());
+	    	Collection<Fahrzeug> f= Model.sharedInstance.getFahrzeuge();
+	    	return ok(fahrzeuguebersicht.render());
     }
     public static Result ueberUns() {
         return ok(ueberUns.render());
