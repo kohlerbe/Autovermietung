@@ -39,13 +39,8 @@ public class Model {
 		ausstattungen.add(ausstattung1);
 		return ausstattungen;
 	}
-	public ArrayList<Bild> getBilder(){
-		Bild bild1 = new Bild("b1", "/img/bild1.jpg", "super geiles Autobild");
-		bilder.add(bild1);
-		return bilder;
-	}
 	public ArrayList<Fahrzeug> getFahrzeuge(){
-		Fahrzeug fahrzeug1 = new Fahrzeug("f1", "Super Auto", "Sportwagen", "BMW", "m3", "100");
+		Fahrzeug fahrzeug1 = new Fahrzeug("f1", "Sportwagen", "BMW", "m3", "100", "bmwx6.jpg");
 		fahrzeuge.add(fahrzeug1);
 		return fahrzeuge;
 	}

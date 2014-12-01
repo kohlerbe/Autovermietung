@@ -9,11 +9,15 @@ import java.util.*;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render());
+
+            return ok(index.render());
+        }
+        
     }
 	    public static Result fahrzeuguebersicht() {
-	        ArrayList<Fahrzeug> a = Model.sharedInstance.getFahrzeuge();
-	    	return ok(fahrzeuguebersicht.render());
+	        ArrayList<Fahrzeug> f = Model.sharedInstance.getFahrzeuge();
+            String beschreibung = f.get(1).getBeschreibung();     
+	    	return ok(fahrzeuguebersicht.render(beschreibung));
     }
     public static Result ueberUns() {
         return ok(ueberUns.render());
