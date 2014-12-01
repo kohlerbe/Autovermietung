@@ -1,9 +1,10 @@
 package controllers;
 
-import model.Model;
+import model.*;
 import play.*;
 import play.mvc.*;
 import views.html.*;
+import java.util.*;
 
 public class Application extends Controller {
 
@@ -11,7 +12,7 @@ public class Application extends Controller {
         return ok(index.render());
     }
 	    public static Result fahrzeuguebersicht() {
-	    	Collection<Fahrzeug> f= Model.sharedInstance.getFahrzeuge();
+	        ArrayList<Fahrzeug> a = Model.sharedInstance.getFahrzeuge();
 	    	return ok(fahrzeuguebersicht.render());
     }
     public static Result ueberUns() {

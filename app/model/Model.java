@@ -1,5 +1,5 @@
 package model;
-import java.util.*;
+import java.util.ArrayList;
 
 public class Model {
 	
@@ -18,17 +18,17 @@ public class Model {
 	
 	public ArrayList<Kunde> getKunden(){
 		Kunde kunde1 = new Kunde("k1", "hans@peter.de", "Peter", "Hans", "0123142", "psw1");
-		Kunde kunde2 = new Kunde("k2", "hans@Gruetz.de", "Vogel", "Jörg", "0123143", "psw2");
-		Kunde kunde3 = new Kunde("k3", "hans@depp.de", "Götz", "Tom", "0123144", "psw3");
+		Kunde kunde2 = new Kunde("k2", "hans@Gruetz.de", "Vogel", "JÃ¶rg", "0123143", "psw2");
+		Kunde kunde3 = new Kunde("k3", "hans@depp.de", "GÃ¶tz", "Tom", "0123144", "psw3");
 		kunden.add(kunde1);
 		kunden.add(kunde2);
 		kunden.add(kunde3);
 		return kunden;
 	}
 	public ArrayList<Adresse> getAdressen(){
-		Adresse adresse1 = new Adresse("a1", "straße", "1", "13423");
-		Adresse adresse2 = new Adresse("a2", "straße", "2", "13423");
-		Adresse adresse3 = new Adresse("a3", "straße", "3", "13423");
+		Adresse adresse1 = new Adresse("a1", "straÃŸe", "1", "13423");
+		Adresse adresse2 = new Adresse("a2", "straÃŸe", "2", "13423");
+		Adresse adresse3 = new Adresse("a3", "straÃŸe", "3", "13423");
 		adressen.add(adresse1);
 		adressen.add(adresse2);
 		adressen.add(adresse3);

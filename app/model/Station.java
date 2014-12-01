@@ -10,7 +10,7 @@ public class Station {
 		this.stationsname = stationsname;
 	}
 
-	//Kein Set da Primärattribut
+	//Kein Set da Primaerattribut
 	public String getStationsID() {
 		return stationsID;
 	}

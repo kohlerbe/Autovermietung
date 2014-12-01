@@ -12,7 +12,7 @@ public class Bild {
 		this.bildBeschreibung = bildBeschreibung;
 	}
 
-	//Kein Set da Primärattribut
+	//Kein Set da Primaerattribut
 	public String getBildID() {
 		return bildID;
 	}

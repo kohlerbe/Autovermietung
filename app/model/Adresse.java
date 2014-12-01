@@ -13,7 +13,7 @@ public class Adresse {
 		this.hausNr = hausNr;
 		this.plz = plz;
 	}
-	//Kein Set da Primärattribut
+	//Kein Set da Primaerattribut
 	public String getAdressID() {
 		return adressID;
 	}

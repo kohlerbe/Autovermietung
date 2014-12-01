@@ -10,7 +10,7 @@ public class Ort {
 		this.ortsname = ortsname;
 	}
 
-	//Kein Set da Primärattribut
+	//Kein Set da Primaerattribut
 	public String getOrtsID() {
 		return ortsID;
 	}

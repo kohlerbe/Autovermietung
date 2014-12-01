@@ -7,16 +7,18 @@ public class Kunde {
 	private String nachname;
 	private String vorname;
 	private String telNr;
+	private String psw;
 	
 	public Kunde(String kundenNr, String email, String nachname,
-			String vorname, String telNr) {
+			String vorname, String telNr, String psw) {
 		this.kundenNr = kundenNr;
 		this.email = email;
 		this.nachname = nachname;
 		this.vorname = vorname;
 		this.telNr = telNr;
+		this.psw = psw;
 	}
-	//Kein Set da Primärattribut
+	//Kein Set da Primaerattribut
 	public String getKundenNr() {
 		return kundenNr;
 	}
@@ -43,6 +45,9 @@ public class Kunde {
 	}
 	public void setTelNr(String telNr) {
 		this.telNr = telNr;
+	}
+	public String getPsw(){
+	return psw;
 	}
 	
 

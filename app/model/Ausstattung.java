@@ -13,7 +13,7 @@ public class Ausstattung {
 		this.beschreibung = beschreibung;
 	}
 
-	//Kein Set da Primärattribut
+	//Kein Set da Primaerattribut
 	public String getAusstattungsID() {
 		return ausstattungsID;
 	}
