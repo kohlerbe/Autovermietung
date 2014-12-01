@@ -1,14 +1,17 @@
+@(beschreibung: String, hersteller: String, modell: String, preisProTag: String, bild: String)
 @main("Buchungsuebersicht") {
 
 	<div class="row">
-		<div class="col-md-3 col-md-offset-3">
+		<div class="col-md-5 col-md-offset-3">
 			<h1>Bestellübersicht</h1>
 			<div class="row">
 					<div class="col-md-6">
 						<a href="/"><img class="img-responsive img-rounded" src="@routes.Assets.at("images/bmwx6.jpg")" alt="bspAuto"></a>
 					</div>
 					<div class="col-md-6">
-						<p> Beschreibung eafuhaoefhahfpaheifhapifhapefhaiefhiahfipheifafhafhoahfahfaheofhaofehoaefaofhofhaef</p>
+						<p>@hersteller @modell</p>
+						<p>@beschreibung</p>
+						<p>Preis pro Tag: @preisProTag Euro<p>
 					</div>
 				</div>
 		</div>

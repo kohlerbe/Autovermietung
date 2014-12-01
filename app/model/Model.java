@@ -40,7 +40,7 @@ public class Model {
 		return ausstattungen;
 	}
 	public ArrayList<Fahrzeug> getFahrzeuge(){
-		Fahrzeug fahrzeug1 = new Fahrzeug("f1", "Sportwagen", "BMW", "m3", "100", "bmwx6.jpg");
+		Fahrzeug fahrzeug1 = new Fahrzeug("f1", "SUV der Marke BMW 300 PS lalalaallalalalalallalalalla", "BMW", "X6", "100", "bmwx6.jpg");
 		fahrzeuge.add(fahrzeug1);
 		return fahrzeuge;
 	}
