@@ -51,4 +51,14 @@ public class Application extends Controller {
 	public static Result login() {
         return ok(login.render());
     }
+    public static Result fahrzeugwahl() {
+         ArrayList<Fahrzeug> f = Model.sharedInstance.getFahrzeuge();
+            String beschreibung = f.get(0).getBeschreibung();  
+            String hersteller = f.get(0).getHersteller();    
+            String modell = f.get(0).getModell();    
+            String preisProTag = f.get(0).getPreisProTag(); 
+            String bild = f.get(0).getBild();
+
+            return ok(fahrzeugwahl.render(beschreibung, hersteller, modell, preisProTag, bild));
+        }
 }

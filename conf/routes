@@ -12,6 +12,7 @@ GET     /impressum					controllers.Application.impressum()
 GET     /kontakt					controllers.Application.kontakt()
 GET     /buchungsuebersicht			controllers.Application.buchungsuebersicht()
 GET     /login						controllers.Application.login()
+GET     /fahrzeugwahl				controllers.Application.fahrzeugwahl()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
