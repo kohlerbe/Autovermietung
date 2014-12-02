@@ -15,14 +15,9 @@ public class Application extends Controller {
         
     
 	    public static Result fahrzeuguebersicht() {
-	        ArrayList<Fahrzeug> f = Model.sharedInstance.getFahrzeuge();
-            String beschreibung = f.get(0).getBeschreibung();  
-            String hersteller = f.get(0).getHersteller();    
-            String modell = f.get(0).getModell();    
-            String preisProTag = f.get(0).getPreisProTag(); 
-            String bild = f.get(0).getBild();   
-              
-	    	return ok(fahrzeuguebersicht.render(beschreibung, hersteller, modell, preisProTag, bild));
+	        //ArrayList<Fahrzeug> f = Model.sharedInstance.getFahrzeuge();
+          String a = "@routes.Assets.at('/images/";
+	    	return ok(fahrzeuguebersicht.render(Model.sharedInstance.getFahrzeuge()));
     }
     public static Result ueberUns() {
         return ok(ueberUns.render());

@@ -1,55 +1,33 @@
-@(beschreibung: String, hersteller: String, modell: String, preisProTag: String, bild: String)
+@(fahrzeuge: List[model.Fahrzeug])
 @main("Fuhrpark") {
 
 	<div class="col-md-6 col-md-offset-3">
 		<h1>Unser Fahrzeugpark</h1>
 	</div>
-	<!--  hersteller: String, modell: String, preisProTag: String, bild: String) -->
+
 	
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 <!--Dummy Objekt   -->
+			@for(f <- fahrzeuge){
 			<div class="car-list">
-				<h3>@hersteller @modell</h3>
+				<h3>@f.getHersteller() @f.getModell()</h3>
 				<div class="row">
 					<div class="col-md-6">
-						<a href="/"><img class="img-responsive img-rounded" src="@routes.Assets.at("images/bmwx6.jpg")" alt="bspAuto"></a>
-					</div>
+						<img class="img-responsive img-rounded" src="@routes.Assets.at("images/bmwx6.jpg")" alt="bspAuto">
+						</div>
 					<div class="col-md-6">
-						<p> @beschreibung</p>
-						<p>Preis pro Tag: @preisProTag Euro </p>
+						<p>@f.getBeschreibung()</p>
+						<p>Preis pro Tag: @f.getPreisProTag() Euro </p>
+						<h1>@f.getBild()</h1> 
 					</div>
 				</div>
 <!--Ende Dummy Objekt   -->				
-			<div class="car-list">
-				<h3>Audi A3</h3>
-				<div class="row">
-					<div class="col-md-6">
-						<a href="/"><img class="img-responsive img-rounded" src="@routes.Assets.at("images/audia3.jpg")" alt="bspAuto"></a>
-					</div>
-					<div class="col-md-6">
-						<p> Beschreibung eafuhaoefhahfpaheifhapifhapefhaiefhiahfipheifafhafhoahfahfaheofhaofehoaefaofhofhaef</p>
-					</div>
-				</div>
-
-				<div class="car-list">
-				<h3>Honda Civic</h3>
-				<div class="row">
-					<div class="col-md-6">
-						<a href="/"><img class="img-responsive img-rounded" src="@routes.Assets.at("images/bspAuto.jpg")" alt="bspAuto"></a>
-					</div>
-					<div class="col-md-6">
-						<p> Beschreibung eafuhaoefhahfpaheifhapifhapefhaiefhiahfipheifafhafhoahfahfaheofhaofehoaefaofhofhaef</p>
-					</div>
-				</div>
-
-
+			
 			</div>
-
+		}
 		</div>
 
 	</div>
 
-    </div>
-</div>
 }
