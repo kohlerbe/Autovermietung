@@ -10,13 +10,14 @@ public class Application extends Controller {
 
     public static Result index() {
 
+    	
             return ok(index.render());
         }
         
     
 	    public static Result fahrzeuguebersicht() {
 	        //ArrayList<Fahrzeug> f = Model.sharedInstance.getFahrzeuge();
-          String a = "@routes.Assets.at('/images/";
+          //String a = "@routes.Assets.at('/images/";
 	    	return ok(fahrzeuguebersicht.render(Model.sharedInstance.getFahrzeuge()));
     }
     public static Result ueberUns() {
@@ -44,6 +45,7 @@ public class Application extends Controller {
         return ok(kontakt.render());
     }
 	public static Result login() {
+	
         return ok(login.render());
     }
     public static Result fahrzeugwahl() {
