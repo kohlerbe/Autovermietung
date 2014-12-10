@@ -64,7 +64,7 @@ public class Model {
 						rs.getString("Beschreibung"), 
 						rs.getString("Hersteller"), 
 						rs.getString("Modell"), 
-						rs.getString("preisProTag"), 
+						rs.getString("PreisProTag"), 
 						"/assets/images/"+rs.getString("Bild")
 						);
 				fahrzeuge.add(fahrzeug);
