@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import play.db.DB;
 
 public class Model {
@@ -37,6 +38,23 @@ public class Model {
 		return kunden;
 	}
 
+	public Kunde getKunde(String email) {
+		String getKundeSQL = "SELECT * FROM Kunde WHERE Kunde.EMail = '"
+				+ email + "'";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(getKundeSQL);
+			ResultSet rs = pstmt.executeQuery();
+			Kunde kunde = new Kunde(rs.getString("KundenNr"),
+					rs.getString("EMail"), rs.getString("Nachname"),
+					rs.getString("Vorname"), rs.getString("TelNr"),
+					rs.getString("PSW"));
+			return kunde;
+		} catch (SQLException e) {
+			System.out.println("Kunde mit EMail " + email + " nicht gefunden!");
+			e.printStackTrace();
+		}
+	}
+
 	public ArrayList<Adresse> getAdressen() {
 		Adresse adresse1 = new Adresse("a1", "straße", "1", "13423");
 		Adresse adresse2 = new Adresse("a2", "straße", "2", "13423");
@@ -59,14 +77,11 @@ public class Model {
 					.prepareStatement("SELECT * FROM Fahrzeug");
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Fahrzeug fahrzeug = new Fahrzeug(
-						rs.getString("FahrzeugId"), 
-						rs.getString("Beschreibung"), 
-						rs.getString("Hersteller"), 
-						rs.getString("Modell"), 
-						rs.getString("PreisProTag"), 
-						"/assets/images/"+rs.getString("Bild")
-						);
+				Fahrzeug fahrzeug = new Fahrzeug(rs.getString("FahrzeugId"),
+						rs.getString("Beschreibung"),
+						rs.getString("Hersteller"), rs.getString("Modell"),
+						rs.getString("PreisProTag"), "/assets/images/"
+								+ rs.getString("Bild"));
 				fahrzeuge.add(fahrzeug);
 			}
 		} catch (SQLException e) {
