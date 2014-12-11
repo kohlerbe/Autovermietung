@@ -4,6 +4,7 @@ import model.*;
 import play.*;
 import play.mvc.*;
 import views.html.*;
+
 import java.util.*;
 
 public class Application extends Controller {
@@ -52,7 +53,6 @@ public class Application extends Controller {
 	}
 
 	public static Result login() {
-
 		return ok(login.render());
 	}
 
@@ -68,20 +68,24 @@ public class Application extends Controller {
 				preisProTag, bild));
 	}
 
-	public static Result checkLogin(String email, String password) {
-		ArrayList<Kunde> registrierterKunde = Model.sharedInstance.getKunden();
-		String checkEmail = email;
-		String checkPassword = password;
-		for (Kunde kunde : registrierterKunde) {
-			if (kunde.getEmail().equals(checkEmail)) {
-				if (kunde.getPsw().equals(checkPassword)) {
-					session("connected", "" + kunde.getEmail());
-					return redirect("/user/buchungsuebersicht/");
+	public static Result checkLogin() {
+		final Map<String, String[]> values = request().body()
+				.asFormUrlEncoded();
+		Kunde registrierterKunde = Model.sharedInstance.getKunde(values
+				.get("email")[0]);
+		String checkEmail = values.get("email")[0];
+		String checkPassword = values.get("password")[0];
+		if (registrierterKunde != null) {
+			if (registrierterKunde.getEmail().equals(checkEmail)) {
+				if (registrierterKunde.getPsw().equals(checkPassword)) {
+					session("connected", "" + registrierterKunde.getEmail());
+					return redirect("/buchungsuebersicht");
 				}
-				return redirect("/user/login/");
 			}
 		}
-		return badRequest("Fehler");
+		// return
+		// redirect(controllers.routes.Application.login("Falsche Email o. pwd"));
+		return redirect("/login");
 	}
 
 }

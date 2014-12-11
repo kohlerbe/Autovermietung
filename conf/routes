@@ -13,7 +13,7 @@ GET     /kontakt					controllers.Application.kontakt()
 GET     /buchungsuebersicht			controllers.Application.buchungsuebersicht()
 GET     /login						controllers.Application.login()
 GET     /fahrzeugwahl				controllers.Application.fahrzeugwahl()
-GET    /checkLogin						controllers.Application.checkLogin(email,password)
+POST    	/checkLogin					controllers.Application.checkLogin()
 
 
 # Map static resources from the /public folder to the /assets URL path

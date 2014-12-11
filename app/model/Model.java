@@ -53,6 +53,7 @@ public class Model {
 			System.out.println("Kunde mit EMail " + email + " nicht gefunden!");
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public ArrayList<Adresse> getAdressen() {
