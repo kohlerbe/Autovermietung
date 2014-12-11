@@ -6,6 +6,10 @@ insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(11,1,"Konstanzerstr
 insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(22,2,"Singenerstrasse","20","78224");
 insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(33,3,"Radolfzellerstrasse","30","78315");
 
+--Kundenadressen
+insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(44,3,"Radolfstreet 13","13","78315");
+insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(55,1,"Konzilstrasse","11","78462");
+
 insert into Station (StationsID,Adresse,Stationsname) values(111,11,"SK");
 insert into Station (StationsID,Adresse,Stationsname) values(222,22,"SS");
 insert into Station (StationsID,Adresse,Stationsname) values(333,33,"SR");
@@ -19,5 +23,12 @@ insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisPro
 insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(4,222,"Karosserieform: Coupe / Getriebe: Automatik / Gänge: 7 / Türen: 2 / PS: 210 / Farbe: Rot / Kraftstoff: Diesel","Honda","CR-Z","35","honda.jpg");
 
 insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(5,333,"Karosserieform: Limousine / Getriebe: Schaltgetriebe / Gänge: 6 / Türen: 4 / PS: 150 / Farbe: Weiss / Kraftstoff: Benzin","Suzuki","Swift","18","suzuki.jpg");
+
+--BeispielKunden
+
+insert into Kunde (Adresse,EMail,Nachname,Vorname,TelNr,PSW) values(44,"max@mustermann.de","Maxel","Max","0156898989","max");
+insert into Kunde (Adresse,EMail,Nachname,Vorname,TelNr,PSW) values(55,"mimi@musterfrau.de","Maxel","Mimi","0156989898","mimi");
+
+
 
 COMMIT;
