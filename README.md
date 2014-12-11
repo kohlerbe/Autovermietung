@@ -1,6 +1,5 @@
 Autovermietung
 ==============
-
 1. Kunde
 	- Login
 	- Registrierung
@@ -10,8 +9,6 @@ Autovermietung
 	- Preis Abrufen
 	- Kontakt zu Admin
 
-
-	
 2. Admin
 	- Kontakt zum Kunden
 	- Websockets zur Aktualisierung der Wagen, währed der Surfzeit des Kunden
