@@ -1,24 +1,25 @@
 ==========================TODO==========================
 -Login
 	-Fehlermeldung bei falscher Eingabe
-	-pwd und mail verschlüsselt übertragen
+	-pwd und mail verschlÃ¼sselt Ã¼bertragen
 
--Fahrzeugübersicht
+-FahrzeugÃ¼bersicht
 	-Daten werden bei reload dupliziert
-	-Bilder auf gleiche Größe zuschneiden
-	-Bilder sollten beim verkleinern des Browsers durchgehend kleiner werden, aktuell springen sie bei etwa halber Bildschirmgröße
+	-Bilder auf gleiche GrÃ¶ÃŸe zuschneiden
+	-Bilder sollten beim verkleinern des Browsers durchgehend kleiner werden, aktuell springen sie bei etwa halber BildschirmgrÃ¶ÃŸe
 
--Pseudodaten löschen und alles aus DB auslesen
+-Pseudodaten lÃ¶schen und alles aus DB auslesen
 
 -Main
 	-Abstand Bildschirmrand und Inhalt vereinheitlichen (Logo, Navigation, Content, Footer)
 	-Breite der 3 Buttons in der Navigation fixieren damit sie beim Mouseover nicht mehr verschoben werden
-	-Logo springt ebenfalls von klein auf groß beim verkleinern des Browsers 
+	-Logo springt ebenfalls von klein auf groÃŸ beim verkleinern des Browsers 
 	
 -Kontakt
 	-Pflichtfelder als solche Kennzeichnen
 	
 -Allgemein
 	-Seite mit anderen Browsern testen
-	-Seite auf Mobilgeräten testen
+	-Seite auf MobilgerÃ¤ten testen
+	-PasswÃ¶rter als Hash speichern
 	
