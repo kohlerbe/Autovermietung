@@ -26,9 +26,9 @@ public class Model {
 	private static ArrayList<Station> stationen = new ArrayList<Station>();
 	private static ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 
-	public ArrayList<Buchung> getBuchungen(String kundenid) {
-		String kundenbuchungenSQL = "SELECT * FROM Buchung WHERE Buchung.Kunde = '"
-				+ kundenid + "'";
+	public ArrayList<Buchung> getBuchungen(String kundenmail) {
+		String kundenbuchungenSQL = "SELECT * FROM Buchung, Kunde WHERE Kunde.KundenNr = Buchung.Kunde AND Kunde.email = '"
+				+ kundenmail + "'";
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement(kundenbuchungenSQL);
@@ -47,7 +47,7 @@ public class Model {
 
 		} catch (SQLException e) {
 			System.out.println("Fehler beim Abruf der Buchungen für KundenID: "
-					+ kundenid);
+					+ kundenmail);
 			e.printStackTrace();
 		}
 		return buchungen;

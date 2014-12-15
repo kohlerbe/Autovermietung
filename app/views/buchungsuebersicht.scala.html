@@ -1,17 +1,29 @@
 @(buchungen: List[model.Buchung])
 @main("Buchungsuebersicht") {
 
+<div class="col-md-6 col-md-offset-3">
+	<h1>Buchungsübersicht</h1>
+</div>
+
+<div class="row">
 	<div class="col-md-6 col-md-offset-3">
-			<h1>BuchungsÃ¼bersicht</h1>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			@for(b <- buchungen) {
-				<div class="buchungsliste">
-					<h3>@b.getBuchungsId() @b.getFahrzeug()<h3>
-				</div>
-			}
+	@if(buchungen.isEmpty()){
+	<h3>Keine Bestellungen</h3>
+	}else{
+		@for(b <- buchungen) {
+		<div class="buchungsliste">
+			<p>
+			<strong>Buchungsnummer:</strong> @b.getBuchungsId()<br>
+			<strong>Fahrzeug:</strong> @b.getFahrzeug()<br>
+			<strong>Abholstation:</strong> @b.getAbholStation()<br>
+			<strong>Abholdatum:</strong> @b.getAbholdatum()<br>
+			<strong>Abholzeit:</strong> @b.getAbholzeit()<br>
+			<strong>Rückgabestation:</strong> @b.getRueckgabeStation()<br>
+			<strong>Rückgabedatum:</strong> @b.getRueckgabedatum()<br>
+			<strong>Rückgabezeit:</strong> @b.getRueckgabezeit()
+			</p>
 		</div>
+		}}
 	</div>
+</div>
 }

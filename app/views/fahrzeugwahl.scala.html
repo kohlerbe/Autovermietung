@@ -1,30 +1,34 @@
-@(fahrzeuge: List[model.Fahrzeug])
-@main("Fahrzeugwahl") {
+@(fahrzeuge: List[model.Fahrzeug]) @main("Fahrzeugwahl") {
 
-	<div class="col-md-7 col-md-offset-3">
-		<h1>Verfügbare Fahrzeuge</h1>
-	</div>
-	<!--  hersteller: String, modell: String, preisProTag: String, bild: String) -->
-	
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
+<div class="col-md-7 col-md-offset-3">
+	<h1>Verfügbare Fahrzeuge</h1>
+</div>
+<!--  hersteller: String, modell: String, preisProTag: String, bild: String) -->
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
 		@for(f <- fahrzeuge){
-<!--Dummy Objekt   -->
-			<div class="car-list">
-				<h3>@f.getHersteller @f.getModell</h3>
-				<div class="row">
-					<div class="col-md-6">
-						<img class="img-responsive img-rounded" src=@f.getBild() alt="bspAuto">
-					</div>
-					<div class="col-md-6">
-						<p> @f.getBeschreibung</p>
-						<p>Preis pro Tag: @f.getPreisProTag Euro </p>
-					</div>
+		<!--Dummy Objekt   -->
+		<div class="car-list">
+		<form class="form-horizontal" action="" method="GET">
+			<h3>@f.getHersteller @f.getModell</h3>
+			<div class="row">
+				<div class="col-md-6">
+					<img class="img-responsive img-rounded" src=@f.getBild()
+						alt="bspAuto">
 				</div>
-			</div>}
+				<div class="col-md-6">
+					<p>@f.getBeschreibung</p>
+					<p>Preis pro Tag: @f.getPreisProTag Euro</p>
+					<button id="btn-anfrage" class="btn btn-danger" type="submit">Auswählen</button>
+				</div>
+			</div>
+			</form>
 		</div>
- 	</div>
-	
+		}
+	</div>
+</div>
 
-<!--Ende Dummy Objekt   -->				
+
+<!--Ende Dummy Objekt   -->
 }

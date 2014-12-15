@@ -6,25 +6,25 @@ public class Buchung {
 	private String Kunde;
 	private String Fahrzeug;
 	private String AbholStation;
-	private String RückgabeStation;
+	private String RueckgabeStation;
 	private String Abholdatum;
 	private String Abholzeit;
-	private String Rückgabedatum;
-	private String Rückgabezeit;
+	private String Rueckgabedatum;
+	private String Rueckgabezeit;
 	
 	public Buchung(String buchungsId, String kunde, String fahrzeug,
-			String abholStation, String rückgabeStation, String abholdatum,
-			String abholzeit, String rückgabedatum, String rückgabezeit) {
+			String abholStation, String rueckgabeStation, String abholdatum,
+			String abholzeit, String rueckgabedatum, String rueckgabezeit) {
 		super();
 		BuchungsId = buchungsId;
 		Kunde = kunde;
 		Fahrzeug = fahrzeug;
 		AbholStation = abholStation;
-		RückgabeStation = rückgabeStation;
+		RueckgabeStation = rueckgabeStation;
 		Abholdatum = abholdatum;
 		Abholzeit = abholzeit;
-		Rückgabedatum = rückgabedatum;
-		Rückgabezeit = rückgabezeit;
+		Rueckgabedatum = rueckgabedatum;
+		Rueckgabezeit = rueckgabezeit;
 	}
 
 	public String getBuchungsId() {
@@ -59,12 +59,12 @@ public class Buchung {
 		AbholStation = abholStation;
 	}
 
-	public String getRückgabeStation() {
-		return RückgabeStation;
+	public String getRueckgabeStation() {
+		return RueckgabeStation;
 	}
 
-	public void setRückgabeStation(String rückgabeStation) {
-		RückgabeStation = rückgabeStation;
+	public void setRueckgabeStation(String rueckgabeStation) {
+		RueckgabeStation = rueckgabeStation;
 	}
 
 	public String getAbholdatum() {
@@ -83,20 +83,20 @@ public class Buchung {
 		Abholzeit = abholzeit;
 	}
 
-	public String getRückgabedatum() {
-		return Rückgabedatum;
+	public String getRueckgabedatum() {
+		return Rueckgabedatum;
 	}
 
-	public void setRückgabedatum(String rückgabedatum) {
-		Rückgabedatum = rückgabedatum;
+	public void setRueckgabedatum(String rueckgabedatum) {
+		Rueckgabedatum = rueckgabedatum;
 	}
 
-	public String getRückgabezeit() {
-		return Rückgabezeit;
+	public String getRueckgabezeit() {
+		return Rueckgabezeit;
 	}
 
-	public void setRückgabezeit(String rückgabezeit) {
-		Rückgabezeit = rückgabezeit;
+	public void setRueckgabezeit(String rueckgabezeit) {
+		Rueckgabezeit = rueckgabezeit;
 	}
 	
 	

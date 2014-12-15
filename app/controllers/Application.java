@@ -8,8 +8,9 @@ import views.html.*;
 import java.util.*;
 
 public class Application extends Controller {
-	
-	
+
+	public static String s;
+
 	public static Result index() {
 
 		return ok(index.render());
@@ -17,21 +18,22 @@ public class Application extends Controller {
 
 	public static Result fahrzeuguebersicht() {
 
-		return ok(fahrzeuguebersicht.render(Model.sharedInstance.getFahrzeuge()));
+		return ok(fahrzeuguebersicht
+				.render(Model.sharedInstance.getFahrzeuge()));
 	}
 
 	public static Result ueberUns() {
 		return ok(ueberUns.render());
 	}
-
+// hier muss als übergabeparameter das ausgewählte auto übergeben werden
 	public static Result buchungsuebersicht() {
-		ArrayList<Fahrzeug> f = Model.sharedInstance.getFahrzeuge();
-		String beschreibung = f.get(0).getBeschreibung();
-		String hersteller = f.get(0).getHersteller();
-		String modell = f.get(0).getModell();
-		String preisProTag = f.get(0).getPreisProTag();
-		String bild = f.get(0).getBild();
-		return ok(buchungsuebersicht.render(Model.sharedInstance.getBuchungen("1"))); //Übergabewert für getBuchungen muss aus Session bestimmt werden!
+		if (session("connected") == null) {
+			// wenn nicht eingeloggt weiterleitung auf login
+			return redirect("/login");
+		} else
+			return ok(buchungsuebersicht.render(Model.sharedInstance
+					.getBuchungen(session("connected")))); 
+		//Übergabe der session mit email
 	}
 
 	public static Result registrieren() {
@@ -51,18 +53,37 @@ public class Application extends Controller {
 	}
 
 	public static Result login() {
-		return ok(login.render());
+		if (session("connected") == null) {
+
+			return ok(login.render());
+		} else {
+			// wenn schon eingeloggt weiterleitung auf index
+			return redirect("/");
+		}
 	}
 
 	public static Result fahrzeugwahl() {
-		return ok(fahrzeugwahl.render(Model.sharedInstance.getFahrzeuge()));
+		if (session("connected") == null) {
+			// wenn noch nicht eingeloggt, kann kein fahrzeug gewählt werden,
+			// weiterleitung startseite
+			return redirect("/");
+		} else {
+			return ok(fahrzeugwahl.render(Model.sharedInstance.getFahrzeuge()));
+		}
 	}
-	public static Result checkFahrzeugwahl(String abholstation, String abholdatum, String abholzeit, String rueckgabestation, String rueckgabedatum, String rueckgabezeit){
+
+	public static Result checkFahrzeugwahl(String abholstation,
+			String abholdatum, String abholzeit, String rueckgabestation,
+			String rueckgabedatum, String rueckgabezeit) {
 		
+		if (session("connected") == null) {
+			// wenn noch nicht eingeloggt, kann kein fahrzeug gewählt werden,
+			// weiterleitung startseite
+			return redirect("/");
+		} else {
 		return redirect("/fahrzeugwahl");
-		
+		}
 	}
-	
 
 	public static Result checkLogin() {
 		final Map<String, String[]> values = request().body()
