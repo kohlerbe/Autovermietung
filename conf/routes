@@ -13,7 +13,8 @@ GET     /kontakt					controllers.Application.kontakt()
 GET     /buchungsuebersicht			controllers.Application.buchungsuebersicht()
 GET     /login						controllers.Application.login()
 GET     /fahrzeugwahl				controllers.Application.fahrzeugwahl()
-POST    	/checkLogin					controllers.Application.checkLogin()
+GET     /checkFahrzeugwahl			controllers.Application.checkFahrzeugwahl(abholstation, abholdatum, abholzeit, rueckgabestation, rueckgabedatum, rueckgabezeit)
+POST    /checkLogin					controllers.Application.checkLogin()
 
 
 # Map static resources from the /public folder to the /assets URL path

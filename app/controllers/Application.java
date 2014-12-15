@@ -8,17 +8,16 @@ import views.html.*;
 import java.util.*;
 
 public class Application extends Controller {
-
+	
+	
 	public static Result index() {
 
 		return ok(index.render());
 	}
 
 	public static Result fahrzeuguebersicht() {
-		// ArrayList<Fahrzeug> f = Model.sharedInstance.getFahrzeuge();
-		// String a = "@routes.Assets.at('/images/";
-		return ok(fahrzeuguebersicht
-				.render(Model.sharedInstance.getFahrzeuge()));
+
+		return ok(fahrzeuguebersicht.render(Model.sharedInstance.getFahrzeuge()));
 	}
 
 	public static Result ueberUns() {
@@ -33,7 +32,7 @@ public class Application extends Controller {
 		String preisProTag = f.get(0).getPreisProTag();
 		String bild = f.get(0).getBild();
 		return ok(buchungsuebersicht.render(beschreibung, hersteller, modell,
-				preisProTag, bild/*Model.shredInstance.getBuchungen()*/));
+				preisProTag, bild));
 	}
 
 	public static Result registrieren() {
@@ -57,16 +56,14 @@ public class Application extends Controller {
 	}
 
 	public static Result fahrzeugwahl() {
-		ArrayList<Fahrzeug> f = Model.sharedInstance.getFahrzeuge();
-		String beschreibung = f.get(0).getBeschreibung();
-		String hersteller = f.get(0).getHersteller();
-		String modell = f.get(0).getModell();
-		String preisProTag = f.get(0).getPreisProTag();
-		String bild = f.get(0).getBild();
-
-		return ok(fahrzeugwahl.render(beschreibung, hersteller, modell,
-				preisProTag, bild));
+		return ok(fahrzeugwahl.render(Model.sharedInstance.getFahrzeuge()));
 	}
+	public static Result checkFahrzeugwahl(String abholstation, String abholdatum, String abholzeit, String rueckgabestation, String rueckgabedatum, String rueckgabezeit){
+		
+		return redirect("/fahrzeugwahl");
+		
+	}
+	
 
 	public static Result checkLogin() {
 		final Map<String, String[]> values = request().body()
