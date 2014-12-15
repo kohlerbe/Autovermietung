@@ -33,7 +33,7 @@ public class Application extends Controller {
 		String preisProTag = f.get(0).getPreisProTag();
 		String bild = f.get(0).getBild();
 		return ok(buchungsuebersicht.render(beschreibung, hersteller, modell,
-				preisProTag, bild));
+				preisProTag, bild/*Model.shredInstance.getBuchungen()*/));
 	}
 
 	public static Result registrieren() {

@@ -9,11 +9,12 @@
 
 	 <div class="row">
 	 	<div id="boxMieten">
+		<form action="checkFahrzeugwahl(this)" method="get" name="formular">
             <div class="col-md-3 col-md-offset-3">
             	
                		<h3>Abholung</h3>
 	               		<div>
-	               			<select class="selectpicker" data-width="auto">
+	               			<select class="selectpicker" data-width="auto" name="abholstation">
 							<option>Konstanz</option>
 							<option>Singen</option>
 							<option>Radolfzell</option>
@@ -21,11 +22,11 @@
 						</div>
 
 						<div>
-							<input class="dateauswahl" type="text" placeholder="Datum" onclick="pickdate()" name="datum" size="29">
+							<input class="dateauswahl" type="text" placeholder="Datum" onclick="pickdate()" name="abholdatum" size="29">
 						</div>
 
 						<div>
-							<input class="timeauswahl" type="text" placeholder="Uhrzeit" onclick="picktime()" name="time" size="12" >
+							<input class="timeauswahl" type="text" placeholder="Uhrzeit" onclick="picktime()" name="abholzeit" size="12" >
 						</div>
 
 
@@ -36,30 +37,32 @@
 			<div class="col-md-2 ">
 				<h3>Rückgabe</h3>
 						<div>
-	               			<select class="selectpicker" data-width="auto">
+	               			<select class="selectpicker" data-width="auto" name="rueckgabestation">
 							<option>Konstanz</option>
 							<option>Singen</option>
 							<option>Radolfzell</option>
 							</select>
 						</div>
 						<div>
-							<input class="dateauswahl" type="text" placeholder="Datum" onclick="pickdate()" name="datum" size="29">
+							<input class="dateauswahl" type="text" placeholder="Datum" onclick="pickdate()" name="rueckgabedatum" size="29">
 						</div>
 						<div>
-							<input class="timeauswahl" type="text" placeholder="Uhrzeit" onclick="picktime()" name="time" size="12">
+							<input class="timeauswahl" type="text" placeholder="Uhrzeit" onclick="picktime()" name="rueckgabezeit" size="12">
 						</div>
 						
 			 	</div>
+				
+				<div class="row">	
+					<div class="col-md-1 col-md-offset-3">
+						<button id="btn-anfrage" type="submit" class="btn btn-danger">Anfrage starten</button>
+					</div>
+				</div>
+		</form>
 			 	
 			
 		</div>
 
 				
-	</div>
-	<div class="row">	
-		<div class="col-md-1 col-md-offset-3">
-			 <button id="btn-anfrage" type="button" class="btn btn-danger">Anfrage starten</button>
-		</div>
 	</div>
 
 }
