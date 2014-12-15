@@ -31,8 +31,7 @@ public class Application extends Controller {
 		String modell = f.get(0).getModell();
 		String preisProTag = f.get(0).getPreisProTag();
 		String bild = f.get(0).getBild();
-		return ok(buchungsuebersicht.render(beschreibung, hersteller, modell,
-				preisProTag, bild));
+		return ok(buchungsuebersicht.render(Model.sharedInstance.getBuchungen("1"))); //Übergabewert für getBuchungen muss aus Session bestimmt werden!
 	}
 
 	public static Result registrieren() {
