@@ -24,6 +24,34 @@ public class Model {
 	private static ArrayList<Fahrzeug> fahrzeuge = new ArrayList<Fahrzeug>();
 	private static ArrayList<Ort> orte = new ArrayList<Ort>();
 	private static ArrayList<Station> stationen = new ArrayList<Station>();
+	private static ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
+
+	public ArrayList<Buchung> getBuchungen(String kundenid) {
+		String kundenbuchungenSQL = "SELECT * FROM Buchung WHERE Buchung.Kunde = '"
+				+ kundenid + "'";
+		try {
+			PreparedStatement pstmt = connection
+					.prepareStatement(kundenbuchungenSQL);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Buchung buchung = new Buchung(rs.getString("BuchungsID"),
+						rs.getString("Kunde"), rs.getString("Fahrzeug"),
+						rs.getString("AbholStation"),
+						rs.getString("RueckgabeStation"),
+						rs.getString("Abholdatum"), 
+						rs.getString("Abholzeit"),
+						rs.getString("Rueckgabedatum"),
+						rs.getString("Rueckgabezeit"));
+				buchungen.add(buchung);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Fehler beim Abruf der Buchungen für KundenID: "
+					+ kundenid);
+			e.printStackTrace();
+		}
+		return buchungen;
+	}
 
 	public ArrayList<Kunde> getKunden() {
 		Kunde kunde1 = new Kunde("k1", "hans@peter.de", "Peter", "Hans",

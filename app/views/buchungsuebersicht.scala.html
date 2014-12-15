@@ -1,20 +1,17 @@
-@(beschreibung: String, hersteller: String, modell: String, preisProTag: String, bild: String)
+@(buchungen: List[model.Buchung])
 @main("Buchungsuebersicht") {
 
+	<div class="col-md-6 col-md-offset-3">
+			<h1>Buchungsübersicht</h1>
+	</div>
+	
 	<div class="row">
-		<div class="col-md-5 col-md-offset-3">
-			<h1>Bestellübersicht</h1>
-			<div class="row">
-					<div class="col-md-6">
-						<a href="/"><img class="img-responsive img-rounded" src="@routes.Assets.at("images/bmwx6.jpg")" alt="bspAuto"></a>
-					</div>
-					<div class="col-md-6">
-						<p>@hersteller @modell</p>
-						<p>@beschreibung</p>
-						<p>Preis pro Tag: @preisProTag Euro<p>
-					</div>
+		<div class="col-md-6 col-md-offset-3">
+			@for(b <- buchungen) {
+				<div class="buchungsliste">
+					<h3>@b.getBuchungsId() @b.getFahrzeug()<h3>
 				</div>
+			}
 		</div>
-	</div>  
-
+	</div>
 }

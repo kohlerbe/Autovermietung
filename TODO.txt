@@ -1,4 +1,4 @@
-==========================TODO==========================
+﻿==========================TODO==========================
 -Login
 	-Fehlermeldung bei falscher Eingabe hinzufügen
 	-pwd und mail verschlüsselt übertragen
@@ -22,3 +22,5 @@
 	-Seite mit anderen Browsern testen
 	-Seite auf Mobilgeräten testen
 	-Passwörter als Hash speichern
+	-Setter für PK entfernen
+	-AlternativText für Bilder
