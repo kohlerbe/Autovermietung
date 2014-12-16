@@ -10,10 +10,16 @@ import java.util.*;
 public class Application extends Controller {
 
 	public static String s;
+	public static int a;
 
 	public static Result index() {
+		if (session("connected") == null) {
+			a = -1;
+		} else {
+			a = 0;
+		}
 
-		return ok(index.render());
+		return ok(index.render(a));
 	}
 
 	public static Result fahrzeuguebersicht() {
@@ -68,6 +74,7 @@ public class Application extends Controller {
 			// weiterleitung startseite
 			return redirect("/");
 		} else {
+			//hier alle verfügbaren Fahrzeuge zurückliefern 
 			return ok(fahrzeugwahl.render(Model.sharedInstance.getFahrzeuge()));
 		}
 	}
@@ -77,9 +84,9 @@ public class Application extends Controller {
 			String rueckgabedatum, String rueckgabezeit) {
 		
 		if (session("connected") == null) {
-			// wenn noch nicht eingeloggt, kann kein fahrzeug gewählt werden,
-			// weiterleitung startseite
-			return redirect("/");
+			// wenn noch nicht eingeloggt, erst einloggen
+			// weiterleitung login
+			return redirect("/login");
 		} else {
 		return redirect("/fahrzeugwahl");
 		}
