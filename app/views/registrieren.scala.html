@@ -1,65 +1,79 @@
 @main("Registrieren") {
 
-	<div class="row">
-		<div class="col-md-5 col-md-offset-3">
-			<h1>Registrieren</h1>
-			<p>Zur Registrierung füllen Sie bitte die folgenden Felder
+<div class="row">
+	<div class="col-md-5 col-md-offset-3">
+		<h1>Registrieren</h1>
+		<p>Zur Registrierung f�llen Sie bitte die folgenden Felder
 			vollständig aus.</p>
-
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-7 col-md-offset-3">
 		<form method="post" action="#">
 			<h2>Logindaten</h2>
-			<p>
-				EMail <input type="email" name="email" placeholder="EMail" required>
-
-				Passwort <input type="password" name="passwort"
-					placeholder="Passwort" required>
-			</p>
-			<h2>Kundendanten</h2>
-			<p>
-				Anrede <select name="Anrede">
-
-					<option value="Herr">Herr</option>
-					<option value="Frau">Frau</option>
-				</select>
-			</p>
-			<p>
-				Vorname <input type="text" name="Vorname" placeholder="Vorname"
-					required>
-			
-				Nachname <input type="text" name="Nachname" placeholder="Nachname"
-					required>
-			</p>
-			<p>
-				Straße <input type="text" name="Straße" placeholder="Straße"> 
-				Hausnummer <input type="text" name="Hausnummer" placeholder="Hausnummer">
-			</p>
-			<p>
-				Ort <input type="text" name="Ort" placeholder="Ort"> 
-				PLZ <input type="text" name="PLZ" placeholder="PLZ">
-			</p>
-			<p>
-				<input type="checkbox" name="AGBs"> <a href="@routes.Application.agb()"> AGB's</a> gelesen und
-				akzeptiert.
-			</p>
-			
-			
-			 <button id="btn-anfrage" type="button" class="btn btn-danger">Anfrage starten</button>
-
-	</div>
+			<div class="row">
+				<div class="col-md-2">EMail</diV>
+				<div class="col-md-4">
+					<input type="email" name="email" placeholder="EMail" required>
+				</diV>
+			</div>
+			<div class="row">
+				<div class="col-md-2">Passwort</diV>
+				<div class="col-md-4">
+					<input type="password" name="passwort" placeholder="Passwort"
+						required>
+				</diV>
+			</div>
+			<h2>Kundendaten</h2>
+			<div class="row">
+				<div class="col-md-2">Vorname</diV>
+				<div class="col-md-4">
+					<input type="text" name="Vorname" placeholder="Vorname" required>
+				</diV>
+			</div>
+			<div class="row">
+				<div class="col-md-2">Nachname</diV>
+				<div class="col-md-4">
+					<input type="text" name="Nachname" placeholder="Nachname" required>
+				</diV>
+			</div>
+			<div class="row">
+				<div class="col-md-2">Straße</diV>
+				<div class="col-md-4">
+					<input type="text" name="Straße" placeholder="Straße" required>
+				</diV>
+			</div>
+			<div class="row">
+				<div class="col-md-2">Hausnummer</diV>
+				<div class="col-md-4">
+					<input type="text" name="Hausnummer" placeholder="Hausnummer" required>
+				</diV>
+			</div>
+			<div class="row">
+				<div class="col-md-2">Ort</diV>
+				<div class="col-md-4">
+					<input type="text" name="Ort" placeholder="Ort" required>
+				</diV>
+			</div>
+			<div class="row">
+				<div class="col-md-2">PLZ</diV>
+				<div class="col-md-4">
+					<input type="text" name="PLZ" placeholder="PLZ" required>
+				</diV>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<input type="checkbox" name="AGBs" required> <a
+						href="@routes.Application.agb()"> AGB's</a> gelesen und
+					akzeptiert.
+				</diV>
+				<div class="col-md-4">
+					<button id="btn-anfrage" type="submit" class="btn btn-danger">Anfrage
+						starten</button>
+				</diV>
+			</div>
 		</form>
-
-		</div>
-	</div>  
-
-	
-
-		
-
-
-
-
-
-	
-    
+	</div>
+</div>
 
 }
