@@ -1,4 +1,5 @@
 ﻿=============Allgemein=============
+-Datenbankverbindung schließen
 -Passwörter als Hash speichern
 -Setter für PK entfernen
 -AlternativText für Bilder
@@ -8,13 +9,23 @@
 -Datenbankabfragen case-insensitive machen
 -Datenbank anlegen/ mit Testdaten füllen wenn nicht vorhanden/ leer - Automatisch beim Verbindungsaufbau (JDBC)
 -Testdaten erweitern (z.B. um Buchungen)
+-AJAX -->  nachlade Suchfeld bei Fahrzeuge
+
+Observer Pattern einbauen!!! am BEsten vor den Websockets
+-> siehe unoprojekt
+Websockets --> wenn zwei USer das gleiche Fahrzeug wählen
+
+Anfrage Daten in doppeltem Hashset speichern und dann mit Id oder so auslesen
+
+
 
 
 =============Seitenspezifisch=============
 -Main
 	-Abstand Bildschirmrand und Inhalt vereinheitlichen (Logo, Navigation, Content, Footer)
 	-Breite der 3 Buttons in der Navigation fixieren damit sie beim Mouseover nicht mehr verschoben werden
-	-Logo springt ebenfalls von klein auf groß beim verkleinern des Browsers 
+	-Logo springt ebenfalls von klein auf groß beim verkleinern des Browsers
+	-Login über sessions 
 
 -Login
 	-Fehlermeldung bei falscher Eingabe ausgeben
@@ -27,3 +38,4 @@
 	
 -Kontakt
 	-Pflichtfelder als solche Kennzeichnen
+

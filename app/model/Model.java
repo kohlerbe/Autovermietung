@@ -27,6 +27,7 @@ public class Model {
 	private static ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 
 	public ArrayList<Buchung> getBuchungen(String kundenmail) {
+		buchungen.clear();
 		String kundenbuchungenSQL = "SELECT * FROM Buchung, Kunde WHERE Kunde.KundenNr = Buchung.Kunde AND Kunde.email = '"
 				+ kundenmail + "'";
 		try {
@@ -52,7 +53,7 @@ public class Model {
 		}
 		return buchungen;
 	}
-
+/*
 	public ArrayList<Kunde> getKunden() {
 		Kunde kunde1 = new Kunde("k1", "hans@peter.de", "Peter", "Hans",
 				"0123142", "psw1");
@@ -65,7 +66,7 @@ public class Model {
 		kunden.add(kunde3);
 		return kunden;
 	}
-
+*/
 	public Kunde getKunde(String email) {
 		String getKundeSQL = "SELECT * FROM Kunde WHERE Kunde.EMail = '"
 				+ email + "'";
@@ -83,7 +84,7 @@ public class Model {
 		}
 		return null;
 	}
-
+/*
 	public ArrayList<Adresse> getAdressen() {
 		Adresse adresse1 = new Adresse("a1", "straße", "1", "13423");
 		Adresse adresse2 = new Adresse("a2", "straße", "2", "13423");
@@ -93,7 +94,7 @@ public class Model {
 		adressen.add(adresse3);
 		return adressen;
 	}
-
+*/
 	// public ArrayList<Ausstattung> getAusstattungen() {
 	// Ausstattung ausstattung1 = new Ausstattung("as1", "Klima", "Super Kalt");
 	// ausstattungen.add(ausstattung1);
@@ -101,6 +102,7 @@ public class Model {
 	// }
 
 	public ArrayList<Fahrzeug> getFahrzeuge() {
+		fahrzeuge.clear();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("SELECT * FROM Fahrzeug");
@@ -126,13 +128,13 @@ public class Model {
 		// fahrzeuge.add(fahrzeug2);
 		return fahrzeuge;
 	}
-
+/*
 	public ArrayList<Ort> getOrte() {
 		Ort ort1 = new Ort("o1", "Konstanz");
 		orte.add(ort1);
 		return orte;
 	}
-
+*/
 	public ArrayList<Station> getStationen() {
 		Station station1 = new Station("s1", "Station1");
 		stationen.add(station1);

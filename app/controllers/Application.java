@@ -23,7 +23,7 @@ public class Application extends Controller {
 	}
 
 	public static Result fahrzeuguebersicht() {
-
+System.out.println(Model.sharedInstance.getFahrzeuge());
 		return ok(fahrzeuguebersicht
 				.render(Model.sharedInstance.getFahrzeuge()));
 	}
