@@ -111,5 +111,26 @@ public class Application extends Controller {
 		// redirect(controllers.routes.Application.login("Falsche Email o. pwd"));
 		return redirect("/login");
 	}
+	public static Result checkRegistrieren() {
+		final Map<String, String[]> values = request().body()
+				.asFormUrlEncoded();
+		if(Model.sharedInstance.getKunde(values.get("email")[0]) == null){
+			//Kunde anlegen in datenbank
+			String email = values.get("email")[0];
+			String password = values.get("password")[0];
+			String vorname = values.get("vorname")[0];
+			String nachname = values.get("nachname")[0];
+			String strasse = values.get("strasse")[0];
+			String hausnummer = values.get("hausnummer")[0];
+			String ort = values.get("ort")[0];
+			String plz = values.get("plz")[0];
+			System.out.println(email + password + vorname + nachname + strasse + hausnummer + ort + plz);
+			return redirect("/login");
+			
+		}else{
+			//Kunde existiert bereits
+			return redirect("/registrieren");	
+		}
+	}}
 
-}
+
