@@ -8,7 +8,39 @@ import java.sql.SQLException;
 
 import play.db.DB;
 
-public class Model {
+public class Model implements IObservable{
+/*
+@Override
+    public void register(final String gameName, final String userName) {
+        observers.add(new RoundPointsDTO(userName, gameName));
+        System.out.println("Anzahl Observers: " + observers.size());
+    }
+	@Override
+    public void notifyController() {
+        update();
+    }
+	@Override
+    public void unregister(final String gameName, final String userName) {
+        for (RoundPointsDTO obs : observers) {
+            if (obs.getGame().equals(gameName) && obs.getUsername().equals(userName)) {
+                observers.remove(obs);
+            }
+        }
+    }
+	 public HashSet<RoundPointsDTO> getUpdate(final String gameName) {
+        System.out.println("Updates von: " + gameName + " holen");
+        HashSet<RoundPointsDTO> returns = new HashSet<>();
+
+        for (RoundPointsDTO obs : observers) {
+            if (obs.getGame().equals(gameName)) {
+                returns.add(obs);
+            }
+        }
+
+        return returns;
+    }
+	*/
+
 	private Model() {
 	}
 

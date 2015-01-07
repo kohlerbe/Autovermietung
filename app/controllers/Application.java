@@ -7,11 +7,15 @@ import views.html.*;
 
 import java.util.*;
 
-public class Application extends Controller {
+public class Application extends Controller implements IObserver{
 
 	public static String s;
 	public static int a;
-
+	
+	/*  @Override
+    public final void update() {
+	}
+*/
 	public static Result index() {
 		if (session("connected") == null) {
 			a = -1;
