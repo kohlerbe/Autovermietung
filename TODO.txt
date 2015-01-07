@@ -6,14 +6,14 @@
 -Pseudodaten löschen und alles aus DB auslesen
 -Seite mit anderen Browsern testen
 -Seite auf Mobilgeräten testen
--Datenbankabfragen case-insensitive machen
--Datenbank anlegen/ mit Testdaten füllen wenn nicht vorhanden/ leer - Automatisch beim Verbindungsaufbau (JDBC)
+-Datenbankabfragen case-insensitive machen (falls nicht ohnehin Standard?)
+-Automatisch beim Verbindungsaufbau (JDBC) Datenbank anlegen/ mit Testdaten füllen wenn nicht vorhanden/ leer
 -Testdaten erweitern (z.B. um Buchungen)
 -AJAX -->  nachlade Suchfeld bei Fahrzeuge
 
-Observer Pattern einbauen!!! am BEsten vor den Websockets
+Observer Pattern einbauen! am Besten vor den Websockets
 -> siehe unoprojekt
-Websockets --> wenn zwei USer das gleiche Fahrzeug wählen
+Websockets --> wenn zwei User das gleiche Fahrzeug wählen
 
 Anfrage Daten in doppeltem Hashset speichern und dann mit Id oder so auslesen
 
@@ -24,15 +24,13 @@ Anfrage Daten in doppeltem Hashset speichern und dann mit Id oder so auslesen
 -Main
 	-Abstand Bildschirmrand und Inhalt vereinheitlichen (Logo, Navigation, Content, Footer)
 	-Breite der 3 Buttons in der Navigation fixieren damit sie beim Mouseover nicht mehr verschoben werden
-	-Logo springt ebenfalls von klein auf groß beim verkleinern des Browsers
-	-Login über sessions 
+	-Logo springt von klein auf groß beim verkleinern des Browsers
 
 -Login
 	-Fehlermeldung bei falscher Eingabe ausgeben
-	-pwd [und mail] verschlüsselt übertragen
+	-pwd gehashed übertragen
 
 -Fahrzeugübersicht
-	-Daten werden bei reload dupliziert
 	-Bilder auf gleiche Größe zuschneiden
 	-Bilder sollten beim verkleinern des Browsers durchgehend kleiner werden, aktuell springen sie bei etwa halber Bildschirmgröße
 	
