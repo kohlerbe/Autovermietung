@@ -3,11 +3,12 @@ package controllers;
 import model.*;
 import play.*;
 import play.mvc.*;
+import util.IObserver;
 import views.html.*;
 
 import java.util.*;
 
-public class Application extends Controller implements IObserver{
+public class Application extends Controller implements IObserver {
 
 	public static String s;
 	public static int a;
@@ -135,6 +136,12 @@ System.out.println(Model.sharedInstance.getFahrzeuge());
 			//Kunde existiert bereits
 			return redirect("/registrieren");	
 		}
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}}
 
 

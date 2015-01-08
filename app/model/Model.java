@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import play.db.DB;
+import util.IObservable;
 
 public class Model implements IObservable{
 /*
@@ -171,5 +172,20 @@ public class Model implements IObservable{
 		Station station1 = new Station("s1", "Station1");
 		stationen.add(station1);
 		return stationen;
+	}
+	@Override
+	public void register(String gameName, String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void unregister(String gameName, String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void notifyController() {
+		// TODO Auto-generated method stub
+		
 	}
 }
