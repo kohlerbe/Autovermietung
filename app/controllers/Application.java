@@ -65,8 +65,8 @@ System.out.println(Model.sharedInstance.getFahrzeuge());
 
 	public static Result login() {
 		if (session("connected") == null) {
-
-			return ok(login.render());
+			int b=0;
+			return ok(login.render(b));
 		} else {
 			// wenn schon eingeloggt weiterleitung auf index
 			return redirect("/");
@@ -93,7 +93,7 @@ System.out.println(Model.sharedInstance.getFahrzeuge());
 			// weiterleitung login
 			return redirect("/login");
 		} else {
-		return redirect("/fahrzeugwahl");
+			return redirect("/fahrzeugwahl");
 		}
 	}
 
@@ -109,12 +109,25 @@ System.out.println(Model.sharedInstance.getFahrzeuge());
 				if (registrierterKunde.getPsw().equals(checkPassword)) {
 					session("connected", "" + registrierterKunde.getEmail());
 					return redirect("/buchungsuebersicht");
+				} else {
+					//Passwort falsch
+					int b = -1;
+					return ok(login.render(b));
 				}
+			} else {
+				//Benutzername falsch
+				int b = -1;
+				return ok(login.render(b));
 			}
+		} else {
+			//Email nicht angelegt
+			int b = -1;
+			return ok(login.render(b));
+
 		}
 		// return
 		// redirect(controllers.routes.Application.login("Falsche Email o. pwd"));
-		return redirect("/login");
+
 	}
 	public static Result checkRegistrieren() {
 		final Map<String, String[]> values = request().body()

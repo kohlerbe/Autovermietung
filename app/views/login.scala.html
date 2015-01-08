@@ -1,4 +1,4 @@
-@main("Login") {
+@(a : Int) @main("Login") {
 
 <div class="row">
 	<div class="col-md-2 col-md-offset-3">
@@ -9,7 +9,10 @@
 						<fieldset>
 
 							<h1>Login</h1>
-							
+							@if(a == -1){
+							<h4 style="color:red;">Benutzername oder Passwort falsch!</h4>
+							}
+										
 				</div>
 				<div class="control-group">
 					<!-- Username -->
