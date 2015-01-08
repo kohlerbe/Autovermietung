@@ -12,6 +12,9 @@ public class Application extends Controller implements IObserver {
 
 	public static String s;
 	public static int a;
+	public static int eingeloggt;
+	
+
 	
 	/*  @Override
     public final void update() {
@@ -19,12 +22,13 @@ public class Application extends Controller implements IObserver {
 */
 	public static Result index() {
 		if (session("connected") == null) {
+			eingeloggt = 0;
 			a = -1;
 		} else {
 			a = 0;
+			eingeloggt = 1;
 		}
-
-		return ok(index.render(a));
+		return ok(index.render(a, eingeloggt));
 	}
 
 	public static Result fahrzeuguebersicht() {
@@ -71,6 +75,11 @@ System.out.println(Model.sharedInstance.getFahrzeuge());
 			// wenn schon eingeloggt weiterleitung auf index
 			return redirect("/");
 		}
+	}
+	public static Result logout() {
+		session().clear();
+			return redirect("/");
+		
 	}
 
 	public static Result fahrzeugwahl() {

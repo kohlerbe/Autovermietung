@@ -15,6 +15,7 @@ GET     /login						controllers.Application.login()
 GET     /fahrzeugwahl				controllers.Application.fahrzeugwahl()
 GET     /checkFahrzeugwahl			controllers.Application.checkFahrzeugwahl(abholstation : String, abholdatum : String, abholzeit : String, rueckgabestation : String, rueckgabedatum : String, rueckgabezeit : String)
 POST    /checkLogin					controllers.Application.checkLogin()
+GET     /logout						controllers.Application.logout()
 POST    /checkRegistrieren			controllers.Application.checkRegistrieren()
 
 # Map static resources from the /public folder to the /assets URL path
