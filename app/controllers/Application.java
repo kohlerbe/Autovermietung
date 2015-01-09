@@ -123,6 +123,18 @@ public class Application extends Controller implements IObserver {
 			return redirect("/");
 		} else {
 			//hier alle verfügbaren Fahrzeuge zurückliefern 
+			
+			//Map auslesen
+			String email = session("connected").toString();
+			   String value = ((HashMap<String, String>)outerMap.get(email)).get("abholstation").toString();
+			    String value2 = ((HashMap<String, String>)outerMap.get(email)).get("abholdatum").toString();
+			    String value3 = ((HashMap<String, String>)outerMap.get(email)).get("abholzeit").toString();
+			String value4 = ((HashMap<String, String>)outerMap.get(email)).get("rueckgabedatum").toString();
+			System.out.println("Abholstation : " + value);
+		    System.out.println("Abholdatum : " + value2);
+		    System.out.println("Abholzeit : " + value3);
+			System.out.println("Rueckgabedatum: " +value4);
+			
 			return ok(fahrzeugwahl.render(Model.sharedInstance.getFahrzeuge()));
 		}
 	}
@@ -132,32 +144,38 @@ public class Application extends Controller implements IObserver {
 			String rueckgabedatum, String rueckgabezeit) {
 		String email = session("connected").toString();
 		
-		outerMap.put(email, innerMap);
-		innerMap.put("abholstation", abholstation);
-		innerMap.put("abholdatum", abholdatum);
-		innerMap.put("abholzeit", abholzeit);
-		innerMap.put("rueckgabestation", rueckgabestation);
-		innerMap.put("rueckgabedatum", rueckgabedatum);
-		innerMap.put("rueckgabezeit", rueckgabezeit);
 		
-	    
-	    System.out.println(email);
-	    String value = ((HashMap<String, String>)outerMap.get(email)).get("abholstation").toString();
-	    String value2 = ((HashMap<String, String>)outerMap.get(email)).get("abholdatum").toString();
-	    String value3 = ((HashMap<String, String>)outerMap.get(email)).get("abholzeit").toString();
-	    String value4 = ((HashMap<String, String>)outerMap.get(email)).get("rueckgabedatum").toString();
-	    System.out.println("Abholstation : " + value);
-	    System.out.println("Abholdatum : " + value2);
-	    System.out.println("Abholzeit : " + value3);
-	    System.out.println("Rueckgabedatum : " + value4);
+		 
+		//    String value4 = ((HashMap<String, String>)outerMap.get(email)).get("rueckgabedatum").toString();
+		//	    System.out.println("Rueckgabedatum : " + value4);
 	    
 		if (session("connected") == null) {
 			// wenn noch nicht eingeloggt, erst einloggen
 			// weiterleitung login
 			return redirect("/login");
 		} else {
+			outerMap.put(email, innerMap);
+			innerMap.put("abholstation", abholstation);
+			innerMap.put("abholdatum", abholdatum);
+			innerMap.put("abholzeit", abholzeit);
+			innerMap.put("rueckgabestation", rueckgabestation);
+			innerMap.put("rueckgabedatum", rueckgabedatum);
+			innerMap.put("rueckgabezeit", rueckgabezeit);
 			return redirect("/fahrzeugwahl");
 		}
+		
+	}
+	public static Result buchen() {
+		if (session("connected") == null) {
+			eingeloggt = 0;
+			return redirect("/login");
+		} else {
+			final Map<String, String[]> values = request().body()
+					.asFormUrlEncoded();
+//Hier muss ausgelesen werden welcher Button gedrückt wurde
+			eingeloggt = 1;
+		}
+		return ok(kontakt.render(eingeloggt));
 	}
 
 	public static Result checkLogin() {

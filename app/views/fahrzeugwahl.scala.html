@@ -16,8 +16,9 @@
 		@for(f <- fahrzeuge){
 		<!--Dummy Objekt   -->
 		<div class="car-list">
-		<form class="form-horizontal" action="" method="GET">
+		<form class="form-horizontal" action="buchen" method="POST">
 			<h3>@f.getHersteller @f.getModell</h3>
+			
 			<div class="row">
 				<div class="col-md-6">
 					<img class="img-responsive img-rounded" src=@f.getBild()
@@ -26,7 +27,7 @@
 				<div class="col-md-6">
 					<p>@f.getBeschreibung</p>
 					<p>Preis pro Tag: @f.getPreisProTag Euro</p>
-					<button id="btn-anfrage" class="btn btn-danger" type="submit">Auswählen</button>
+					<button id="btn-anfrage" class="btn btn-danger" name=@f.getFahrzeugID type="submit">Auswählen</button>
 				</div>
 			</div>
 			</form>
