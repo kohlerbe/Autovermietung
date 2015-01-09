@@ -32,13 +32,24 @@ public class Application extends Controller implements IObserver {
 	}
 
 	public static Result fahrzeuguebersicht() {
-System.out.println(Model.sharedInstance.getFahrzeuge());
+		if (session("connected") == null) {
+			eingeloggt = 0;
+			a = -1;
+		} else {
+			a = 0;
+			eingeloggt = 1;
+		}		
 		return ok(fahrzeuguebersicht
-				.render(Model.sharedInstance.getFahrzeuge()));
+				.render(Model.sharedInstance.getFahrzeuge(), eingeloggt));
 	}
 
 	public static Result ueberUns() {
-		return ok(ueberUns.render());
+		if (session("connected") == null) {
+			eingeloggt = 0;
+		} else {
+			eingeloggt = 1;
+		}
+		return ok(ueberUns.render(eingeloggt));
 	}
 // hier muss als übergabeparameter das ausgewählte auto übergeben werden
 	public static Result buchungsuebersicht() {
@@ -52,19 +63,38 @@ System.out.println(Model.sharedInstance.getFahrzeuge());
 	}
 
 	public static Result registrieren() {
-		return ok(registrieren.render());
+		if(session("connected") == null){
+			return ok(registrieren.render());
+		}else{
+			return redirect("/");
+		}
 	}
 
 	public static Result agb() {
-		return ok(agb.render());
+		if (session("connected") == null) {
+			eingeloggt = 0;
+		} else {
+			eingeloggt = 1;
+		}
+		return ok(agb.render(eingeloggt));
 	}
 
 	public static Result impressum() {
-		return ok(impressum.render());
+		if (session("connected") == null) {
+			eingeloggt = 0;
+		} else {
+			eingeloggt = 1;
+		}
+		return ok(impressum.render(eingeloggt));
 	}
 
 	public static Result kontakt() {
-		return ok(kontakt.render());
+		if (session("connected") == null) {
+			eingeloggt = 0;
+		} else {
+			eingeloggt = 1;
+		}
+		return ok(kontakt.render(eingeloggt));
 	}
 
 	public static Result login() {
@@ -121,6 +151,9 @@ System.out.println(Model.sharedInstance.getFahrzeuge());
 				} else {
 					//Passwort falsch
 					int b = -1;
+				//	System.out.println(checkPassword);
+					//	System.out.println(checkPassword.hashCode());
+					//	System.out.println(Integer.toString(checkPassword.hashCode()));
 					return ok(login.render(b));
 				}
 			} else {
@@ -151,7 +184,9 @@ System.out.println(Model.sharedInstance.getFahrzeuge());
 			String hausnummer = values.get("hausnummer")[0];
 			String ort = values.get("ort")[0];
 			String plz = values.get("plz")[0];
-			System.out.println(email + password + vorname + nachname + strasse + hausnummer + ort + plz);
+			int hash = password.hashCode();
+			
+			System.out.println(email + password + vorname + nachname + strasse + hausnummer + ort + plz + hash);
 			return redirect("/login");
 			
 		}else{

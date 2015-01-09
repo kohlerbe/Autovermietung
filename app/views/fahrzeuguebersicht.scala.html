@@ -1,5 +1,16 @@
-@(fahrzeuge: List[model.Fahrzeug])
+@(fahrzeuge: List[model.Fahrzeug], eingeloggt : Int)
 @main("Fuhrpark") {
+
+<div class="row">
+	<div class="col-md-1 col-md-offset-8">
+		@if(eingeloggt == 0){ 
+		<a href="/login"><button type="button" class="btn btn-danger">LOGIN</button></a> 
+		} 
+		@if(eingeloggt == 1){ 
+		<a href="/logout"><button type="button" class="btn btn-danger">LOGOUT</button></a> 
+		}
+	</div>
+</div>
 
 	<div class="col-md-6 col-md-offset-3">
 		<h1>Unser Fahrzeugpark</h1>

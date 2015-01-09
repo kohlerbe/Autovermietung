@@ -27,7 +27,6 @@ Anfrage Daten in doppeltem Hashset speichern und dann mit Id oder so auslesen
 	-Logo springt von klein auf groß beim verkleinern des Browsers
 
 -Login
-	-Fehlermeldung bei falscher Eingabe ausgeben
 	-pwd gehashed übertragen
 
 -Fahrzeugübersicht
