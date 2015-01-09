@@ -55,7 +55,7 @@ public class Application extends Controller implements IObserver {
 		}
 		return ok(ueberUns.render(eingeloggt));
 	}
-// hier muss als übergabeparameter das ausgewählte auto übergeben werden
+
 	public static Result buchungsuebersicht() {
 		if (session("connected") == null) {
 			// wenn nicht eingeloggt weiterleitung auf login
@@ -116,6 +116,28 @@ public class Application extends Controller implements IObserver {
 		
 	}
 
+	public static Result checkFahrzeugwahl(String abholstation,
+			String abholdatum, String abholzeit, String rueckgabestation,
+			String rueckgabedatum, String rueckgabezeit) {
+	    
+		if (session("connected") == null) {
+			// wenn noch nicht eingeloggt, erst einloggen
+			// weiterleitung login
+			return redirect("/login");
+		} else {
+			String email = session("connected").toString();
+			outerMap.put(email, innerMap);
+			innerMap.put("abholstation", abholstation);
+			innerMap.put("abholdatum", abholdatum);
+			innerMap.put("abholzeit", abholzeit);
+			innerMap.put("rueckgabestation", rueckgabestation);
+			innerMap.put("rueckgabedatum", rueckgabedatum);
+			innerMap.put("rueckgabezeit", rueckgabezeit);
+			return redirect("/fahrzeugwahl");
+		}
+		
+	}
+	
 	public static Result fahrzeugwahl() {
 		if (session("connected") == null) {
 			// wenn noch nicht eingeloggt, kann kein fahrzeug gewählt werden,
@@ -137,33 +159,6 @@ public class Application extends Controller implements IObserver {
 			
 			return ok(fahrzeugwahl.render(Model.sharedInstance.getFahrzeuge()));
 		}
-	}
-
-	public static Result checkFahrzeugwahl(String abholstation,
-			String abholdatum, String abholzeit, String rueckgabestation,
-			String rueckgabedatum, String rueckgabezeit) {
-		String email = session("connected").toString();
-		
-		
-		 
-		//    String value4 = ((HashMap<String, String>)outerMap.get(email)).get("rueckgabedatum").toString();
-		//	    System.out.println("Rueckgabedatum : " + value4);
-	    
-		if (session("connected") == null) {
-			// wenn noch nicht eingeloggt, erst einloggen
-			// weiterleitung login
-			return redirect("/login");
-		} else {
-			outerMap.put(email, innerMap);
-			innerMap.put("abholstation", abholstation);
-			innerMap.put("abholdatum", abholdatum);
-			innerMap.put("abholzeit", abholzeit);
-			innerMap.put("rueckgabestation", rueckgabestation);
-			innerMap.put("rueckgabedatum", rueckgabedatum);
-			innerMap.put("rueckgabezeit", rueckgabezeit);
-			return redirect("/fahrzeugwahl");
-		}
-		
 	}
 
 	public static Result buchen() {

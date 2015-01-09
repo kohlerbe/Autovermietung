@@ -27,7 +27,7 @@
 	</div>
 	}
 </div>
-
+@if(eingeloggt == 1){
 <form action="checkFahrzeugwahl" method="get" name="formular">
 	<div class="row">
 		<div id="boxMieten">
@@ -45,12 +45,12 @@
 
 				<div>
 					<input class="dateauswahl" type="text" placeholder="Datum"
-						onclick="pickdate()" name="abholdatum" size="29">
+						onclick="pickdate()" name="abholdatum" size="29" required>
 				</div>
 
 				<div>
 					<input class="timeauswahl" type="text" placeholder="Uhrzeit"
-						onclick="picktime()" name="abholzeit" size="12">
+						onclick="picktime()" name="abholzeit" size="12" required>
 				</div>
 
 
@@ -70,11 +70,11 @@
 				</div>
 				<div>
 					<input class="dateauswahl" type="text" placeholder="Datum"
-						onclick="pickdate()" name="rueckgabedatum" size="29">
+						onclick="pickdate()" name="rueckgabedatum" size="29" required>
 				</div>
 				<div>
 					<input class="timeauswahl" type="text" placeholder="Uhrzeit"
-						onclick="picktime()" name="rueckgabezeit" size="12">
+						onclick="picktime()" name="rueckgabezeit" size="12" required>
 				</div>
 			</div>
 		</div>
@@ -86,4 +86,5 @@
 		</div>
 	</div>
 </form>
+}
 }
