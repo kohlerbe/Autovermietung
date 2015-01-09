@@ -165,17 +165,35 @@ public class Application extends Controller implements IObserver {
 		}
 		
 	}
+
 	public static Result buchen() {
+		
 		if (session("connected") == null) {
 			eingeloggt = 0;
 			return redirect("/login");
-		} else {
+		} 
+		else {
 			final Map<String, String[]> values = request().body()
 					.asFormUrlEncoded();
-//Hier muss ausgelesen werden welcher Button gedrückt wurde
-			eingeloggt = 1;
+			
+			boolean z = false;
+			int i = 1;
+			
+			while(z == false || i <= Model.sharedInstance.getFahrzeuge().size()){
+				if (values.get(Integer.toString(i)) != null) {
+					System.out.println("Fahrzeug"+ i +" gewählt");
+					z=true;
+					// Hier in Datenbank Daten ablegen von Kunde & Fahrzeug
+					return ok(buchungsuebersicht.render(Model.sharedInstance
+							.getBuchungen(session("connected"))));
+				} else{
+					System.out.println("nicht Fahrzeug "+ i +" gewählt");
+					i++;
+					
+				}		
+			}
 		}
-		return ok(kontakt.render(eingeloggt));
+		return redirect("/");
 	}
 
 	public static Result checkLogin() {
@@ -214,7 +232,7 @@ public class Application extends Controller implements IObserver {
 		final Map<String, String[]> values = request().body()
 				.asFormUrlEncoded();
 		if(Model.sharedInstance.getKunde(values.get("email")[0]) == null){
-			//Kunde anlegen in datenbank
+			//Hier Kunde anlegen in datenbank
 			String email = values.get("email")[0];
 			String password = values.get("password")[0];
 			String vorname = values.get("vorname")[0];
