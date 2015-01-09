@@ -145,28 +145,29 @@ public class Application extends Controller implements IObserver {
 		String checkPassword = values.get("password")[0];
 		if (registrierterKunde != null) {
 			if (registrierterKunde.getEmail().equals(checkEmail)) {
-				if (registrierterKunde.getPsw().equals(checkPassword)) {
+				if (registrierterKunde.getPsw().equals(Integer.toString(checkPassword.hashCode()))) {
 					session("connected", "" + registrierterKunde.getEmail());
+					//Zum testen
 					System.out.println(registrierterKunde.getPsw());
-					System.out.println(checkPassword.hashCode());
+					System.out.println(Integer.toString(checkPassword.hashCode()));
 					return redirect("/buchungsuebersicht");
 				} else {
+					System.out.println("Passwort falsch");
 					//Passwort falsch
 					int b = -1;
-				//	System.out.println(checkPassword);
-					//	System.out.println(checkPassword.hashCode());
-					//	System.out.println(Integer.toString(checkPassword.hashCode()));
+					System.out.println(registrierterKunde.getPsw());
+					System.out.println(Integer.toString(checkPassword.hashCode()));
 					return ok(login.render(b));
 				}
 			} else {
 				//Benutzername falsch
 				int b = -1;
-				System.out.println(registrierterKunde.getPsw());
-				System.out.println(checkPassword);
+				System.out.println("Benutzername falsch");
 				return ok(login.render(b));
 			}
 		} else {
 			//Email nicht angelegt
+			System.out.println("Email nicht angelegt");
 			int b = -1;
 			return ok(login.render(b));
 
