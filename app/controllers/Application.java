@@ -147,6 +147,8 @@ public class Application extends Controller implements IObserver {
 			if (registrierterKunde.getEmail().equals(checkEmail)) {
 				if (registrierterKunde.getPsw().equals(checkPassword)) {
 					session("connected", "" + registrierterKunde.getEmail());
+					System.out.println(registrierterKunde.getPsw());
+					System.out.println(checkPassword.hashCode());
 					return redirect("/buchungsuebersicht");
 				} else {
 					//Passwort falsch
@@ -159,6 +161,8 @@ public class Application extends Controller implements IObserver {
 			} else {
 				//Benutzername falsch
 				int b = -1;
+				System.out.println(registrierterKunde.getPsw());
+				System.out.println(checkPassword);
 				return ok(login.render(b));
 			}
 		} else {
