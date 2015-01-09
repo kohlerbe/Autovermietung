@@ -13,6 +13,10 @@ public class Application extends Controller implements IObserver {
 	public static String s;
 	public static int a;
 	public static int eingeloggt;
+	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String,String>>();
+    public static HashMap<String, String> innerMap = new HashMap<String, String>();
+    
+
 	
 
 	
@@ -126,7 +130,27 @@ public class Application extends Controller implements IObserver {
 	public static Result checkFahrzeugwahl(String abholstation,
 			String abholdatum, String abholzeit, String rueckgabestation,
 			String rueckgabedatum, String rueckgabezeit) {
+		String email = session("connected").toString();
 		
+		outerMap.put(email, innerMap);
+		innerMap.put("abholstation", abholstation);
+		innerMap.put("abholdatum", abholdatum);
+		innerMap.put("abholzeit", abholzeit);
+		innerMap.put("rueckgabestation", rueckgabestation);
+		innerMap.put("rueckgabedatum", rueckgabedatum);
+		innerMap.put("rueckgabezeit", rueckgabezeit);
+		
+	    
+	    System.out.println(email);
+	    String value = ((HashMap<String, String>)outerMap.get(email)).get("abholstation").toString();
+	    String value2 = ((HashMap<String, String>)outerMap.get(email)).get("abholdatum").toString();
+	    String value3 = ((HashMap<String, String>)outerMap.get(email)).get("abholzeit").toString();
+	    String value4 = ((HashMap<String, String>)outerMap.get(email)).get("rueckgabedatum").toString();
+	    System.out.println("Abholstation : " + value);
+	    System.out.println("Abholdatum : " + value2);
+	    System.out.println("Abholzeit : " + value3);
+	    System.out.println("Rueckgabedatum : " + value4);
+	    
 		if (session("connected") == null) {
 			// wenn noch nicht eingeloggt, erst einloggen
 			// weiterleitung login
@@ -147,27 +171,19 @@ public class Application extends Controller implements IObserver {
 			if (registrierterKunde.getEmail().equals(checkEmail)) {
 				if (registrierterKunde.getPsw().equals(Integer.toString(checkPassword.hashCode()))) {
 					session("connected", "" + registrierterKunde.getEmail());
-					//Zum testen
-					System.out.println(registrierterKunde.getPsw());
-					System.out.println(Integer.toString(checkPassword.hashCode()));
 					return redirect("/buchungsuebersicht");
 				} else {
-					System.out.println("Passwort falsch");
 					//Passwort falsch
 					int b = -1;
-					System.out.println(registrierterKunde.getPsw());
-					System.out.println(Integer.toString(checkPassword.hashCode()));
 					return ok(login.render(b));
 				}
 			} else {
 				//Benutzername falsch
 				int b = -1;
-				System.out.println("Benutzername falsch");
 				return ok(login.render(b));
 			}
 		} else {
 			//Email nicht angelegt
-			System.out.println("Email nicht angelegt");
 			int b = -1;
 			return ok(login.render(b));
 
@@ -196,7 +212,7 @@ public class Application extends Controller implements IObserver {
 			
 		}else{
 			//Kunde existiert bereits
-			return redirect("/registrieren");	
+			return redirect("/login");	
 		}
 	}
 
