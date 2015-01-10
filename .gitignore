@@ -45,3 +45,6 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+SQLiteDatabaseBrowserPortableSettings.ini
+sqlitebrowser.reg
