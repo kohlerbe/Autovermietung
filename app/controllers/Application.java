@@ -1,7 +1,6 @@
 package controllers;
 
 import model.*;
-import play.*;
 import play.mvc.*;
 import util.IObserver;
 import views.html.*;
@@ -13,17 +12,12 @@ public class Application extends Controller implements IObserver {
 	public static String s;
 	public static int a;
 	public static int eingeloggt;
-	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String,String>>();
-    public static HashMap<String, String> innerMap = new HashMap<String, String>();
-    
+	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String, String>>();
+	public static HashMap<String, String> innerMap = new HashMap<String, String>();
 
-	
-
-	
-	/*  @Override
-    public final void update() {
-	}
-*/
+	/*
+	 * @Override public final void update() { }
+	 */
 	public static Result index() {
 		if (session("connected") == null) {
 			eingeloggt = 0;
@@ -42,9 +36,9 @@ public class Application extends Controller implements IObserver {
 		} else {
 			a = 0;
 			eingeloggt = 1;
-		}		
-		return ok(fahrzeuguebersicht
-				.render(Model.sharedInstance.getFahrzeuge(), eingeloggt));
+		}
+		return ok(fahrzeuguebersicht.render(
+				Model.sharedInstance.getFahrzeuge(), eingeloggt));
 	}
 
 	public static Result ueberUns() {
@@ -62,14 +56,14 @@ public class Application extends Controller implements IObserver {
 			return redirect("/login");
 		} else
 			return ok(buchungsuebersicht.render(Model.sharedInstance
-					.getBuchungen(session("connected")))); 
-		//Übergabe der session mit email
+					.getBuchungen(session("connected"))));
+		// Übergabe der session mit email
 	}
 
 	public static Result registrieren() {
-		if(session("connected") == null){
+		if (session("connected") == null) {
 			return ok(registrieren.render());
-		}else{
+		} else {
 			return redirect("/");
 		}
 	}
@@ -103,23 +97,24 @@ public class Application extends Controller implements IObserver {
 
 	public static Result login() {
 		if (session("connected") == null) {
-			int b=0;
+			int b = 0;
 			return ok(login.render(b));
 		} else {
 			// wenn schon eingeloggt weiterleitung auf index
 			return redirect("/");
 		}
 	}
+
 	public static Result logout() {
 		session().clear();
-			return redirect("/");
-		
+		return redirect("/");
+
 	}
 
 	public static Result checkFahrzeugwahl(String abholstation,
 			String abholdatum, String abholzeit, String rueckgabestation,
 			String rueckgabedatum, String rueckgabezeit) {
-	    
+
 		if (session("connected") == null) {
 			// wenn noch nicht eingeloggt, erst einloggen
 			// weiterleitung login
@@ -135,57 +130,83 @@ public class Application extends Controller implements IObserver {
 			innerMap.put("rueckgabezeit", rueckgabezeit);
 			return redirect("/fahrzeugwahl");
 		}
-		
+
 	}
-	
+
 	public static Result fahrzeugwahl() {
 		if (session("connected") == null) {
 			// wenn noch nicht eingeloggt, kann kein fahrzeug gewählt werden,
 			// weiterleitung startseite
 			return redirect("/");
 		} else {
-			//hier alle verfügbaren Fahrzeuge zurückliefern 
-			
-			//Map auslesen
+			// Map auslesen
 			String email = session("connected").toString();
-			   String value = ((HashMap<String, String>)outerMap.get(email)).get("abholstation").toString();
-			    String value2 = ((HashMap<String, String>)outerMap.get(email)).get("abholdatum").toString();
-			    String value3 = ((HashMap<String, String>)outerMap.get(email)).get("abholzeit").toString();
-			String value4 = ((HashMap<String, String>)outerMap.get(email)).get("rueckgabedatum").toString();
-			System.out.println("Abholstation : " + value);
-		    System.out.println("Abholdatum : " + value2);
-		    System.out.println("Abholzeit : " + value3);
-			System.out.println("Rueckgabedatum: " +value4);
-			
-			return ok(fahrzeugwahl.render(Model.sharedInstance.getFahrzeuge()));
+			String abholstation = ((HashMap<String, String>) outerMap
+					.get(email)).get("abholstation").toString();
+			String abholdatum = ((HashMap<String, String>) outerMap.get(email))
+					.get("abholdatum").toString();
+			String abholzeit = ((HashMap<String, String>) outerMap.get(email))
+					.get("abholzeit").toString();
+			String rueckgabestation = ((HashMap<String, String>) outerMap
+					.get(email)).get("rueckgabestation").toString();
+			String rueckgabedatum = ((HashMap<String, String>) outerMap
+					.get(email)).get("rueckgabedatum").toString();
+			String rueckgabezeit = ((HashMap<String, String>) outerMap
+					.get(email)).get("rueckgabezeit").toString();
+
+			System.out.println("Abholstation : " + abholstation);
+			System.out.println("Abholdatum : " + abholdatum);
+			System.out.println("Abholzeit : " + abholzeit);
+			System.out.println("rueckgabestation : " + rueckgabestation);
+			System.out.println("rueckgabedatum : " + rueckgabedatum);
+			System.out.println("rueckgabezeit : " + rueckgabezeit);
+
+			return ok(fahrzeugwahl.render(Model.sharedInstance.getFahrzeuge(
+					abholstation, abholdatum, abholzeit, rueckgabestation,
+					rueckgabedatum, rueckgabezeit)));
 		}
 	}
 
 	public static Result buchen() {
-		
+
 		if (session("connected") == null) {
 			eingeloggt = 0;
 			return redirect("/login");
-		} 
-		else {
+		} else {
 			final Map<String, String[]> values = request().body()
 					.asFormUrlEncoded();
-			
+
 			boolean z = false;
 			int i = 1;
-			
-			while(z == false || i <= Model.sharedInstance.getFahrzeuge().size()){
+
+			while (z == false
+					|| i <= Model.sharedInstance.getFahrzeuge().size()) {
 				if (values.get(Integer.toString(i)) != null) {
-					System.out.println("Fahrzeug"+ i +" gewählt");
-					z=true;
+					System.out.println("Fahrzeug" + i + " gewählt");
+					z = true;
 					// Hier in Datenbank Daten ablegen von Kunde & Fahrzeug
+					String email = session("connected").toString();
+					String abholstation = ((HashMap<String, String>) outerMap
+							.get(email)).get("abholstation").toString();
+					String abholdatum = ((HashMap<String, String>) outerMap.get(email))
+							.get("abholdatum").toString();
+					String abholzeit = ((HashMap<String, String>) outerMap.get(email))
+							.get("abholzeit").toString();
+					String rueckgabestation = ((HashMap<String, String>) outerMap
+							.get(email)).get("rueckgabestation").toString();
+					String rueckgabedatum = ((HashMap<String, String>) outerMap
+							.get(email)).get("rueckgabedatum").toString();
+					String rueckgabezeit = ((HashMap<String, String>) outerMap
+							.get(email)).get("rueckgabezeit").toString();
+					int Fahrzeug = i;
+					Model.sharedInstance.setBuchung(email, Fahrzeug, abholstation, abholdatum, abholzeit, rueckgabestation, rueckgabedatum, rueckgabezeit);
 					return ok(buchungsuebersicht.render(Model.sharedInstance
 							.getBuchungen(session("connected"))));
-				} else{
-					System.out.println("nicht Fahrzeug "+ i +" gewählt");
+				} else {
+					System.out.println("nicht Fahrzeug " + i + " gewählt");
 					i++;
-					
-				}		
+
+				}
 			}
 		}
 		return redirect("/");
@@ -200,21 +221,22 @@ public class Application extends Controller implements IObserver {
 		String checkPassword = values.get("password")[0];
 		if (registrierterKunde != null) {
 			if (registrierterKunde.getEmail().equals(checkEmail)) {
-				if (registrierterKunde.getPsw().equals(Integer.toString(checkPassword.hashCode()))) {
+				if (registrierterKunde.getPsw().equals(
+						Integer.toString(checkPassword.hashCode()))) {
 					session("connected", "" + registrierterKunde.getEmail());
 					return redirect("/buchungsuebersicht");
 				} else {
-					//Passwort falsch
+					// Passwort falsch
 					int b = -1;
 					return ok(login.render(b));
 				}
 			} else {
-				//Benutzername falsch
+				// Benutzername falsch
 				int b = -1;
 				return ok(login.render(b));
 			}
 		} else {
-			//Email nicht angelegt
+			// Email nicht angelegt
 			int b = -1;
 			return ok(login.render(b));
 
@@ -223,11 +245,12 @@ public class Application extends Controller implements IObserver {
 		// redirect(controllers.routes.Application.login("Falsche Email o. pwd"));
 
 	}
+
 	public static Result checkRegistrieren() {
 		final Map<String, String[]> values = request().body()
 				.asFormUrlEncoded();
-		if(Model.sharedInstance.getKunde(values.get("email")[0]) == null){
-			//Hier Kunde anlegen in datenbank
+		if (Model.sharedInstance.getKunde(values.get("email")[0]) == null) {
+			// Hier Kunde anlegen in datenbank
 			String email = values.get("email")[0];
 			String password = values.get("password")[0];
 			String vorname = values.get("vorname")[0];
@@ -237,20 +260,20 @@ public class Application extends Controller implements IObserver {
 			String ort = values.get("ort")[0];
 			String plz = values.get("plz")[0];
 			int hash = password.hashCode();
-			
-			System.out.println(email + password + vorname + nachname + strasse + hausnummer + ort + plz + hash);
+
+			System.out.println(email + password + vorname + nachname + strasse
+					+ hausnummer + ort + plz + hash);
 			return redirect("/login");
-			
-		}else{
-			//Kunde existiert bereits
-			return redirect("/login");	
+
+		} else {
+			// Kunde existiert bereits
+			return redirect("/login");
 		}
 	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
-	}}
 
-
+	}
+}

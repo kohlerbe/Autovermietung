@@ -1,18 +1,17 @@
-insert into Ort (OrtsID,Ortsname) values(1,"Konstanz");
+﻿insert into Ort (OrtsID,Ortsname) values(1,"Konstanz");
 insert into Ort (OrtsID,Ortsname) values(2,"Singen");
 insert into Ort (OrtsID,Ortsname) values(3,"Radolfzell");
 
 insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(11,1,"Konstanzerstrasse","10","78462");
 insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(22,2,"Singenerstrasse","20","78224");
 insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(33,3,"Radolfzellerstrasse","30","78315");
-
 --Kundenadressen
 insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(44,3,"Radolfstreet 13","13","78315");
 insert into Adresse (AdressID,Ort,Strasse,HausNr,PLZ) values(55,1,"Konzilstrasse","11","78462");
 
-insert into Station (StationsID,Adresse,Stationsname) values(111,11,"SK");
-insert into Station (StationsID,Adresse,Stationsname) values(222,22,"SS");
-insert into Station (StationsID,Adresse,Stationsname) values(333,33,"SR");
+insert into Station (StationsID,Adresse,Stationsname) values(111,11,"Konstanz");
+insert into Station (StationsID,Adresse,Stationsname) values(222,22,"Singen");
+insert into Station (StationsID,Adresse,Stationsname) values(333,33,"Radolfzell");
 
 insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(1,111,"Karosserieform: Limousine / Getriebe: Automatik / Antriebsart: Allrad / Hubraum: 2993cm3 / Kraftstoff: Diesel / Türen: 4 / Farbe: Schwarz","BMW","X6","30","bmwx6.jpg");
 
