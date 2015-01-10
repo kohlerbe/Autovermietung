@@ -1,9 +1,17 @@
 	
 	function pickdate (){
-	$('.dateauswahl').pickadate();	
+	$('.dateauswahl').pickadate({
+	format: 'dd, mm, yyyy',
+	today: 'Heute',
+	clear: 'Loeschen',
+	close: 'Schliessen',
+	min: 'true'
+	});	
 	}
 	function picktime (){
-	$('.timeauswahl').pickatime();
+	$('.timeauswahl').pickatime({
+	format: 'HH:i',
+	});
 	}
 	
 	function checkKontakt( form ){
