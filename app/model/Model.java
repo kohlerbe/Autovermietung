@@ -184,7 +184,7 @@ public class Model implements IObservable {
 		fahrzeuge.clear();
 		try {
 			PreparedStatement pstmt = connection
-					.prepareStatement("SELECT * FROM Fahrzeug"); // SQL
+					.prepareStatement("SELECT * FROM Fahrzeug WHERE Fahrzeug.FahrzeugID not in (select Fahrzeug FROM Buchung)"); // SQL
 																	// Statement
 																	// bauen!
 			ResultSet rs = pstmt.executeQuery();

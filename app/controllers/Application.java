@@ -200,8 +200,9 @@ public class Application extends Controller implements IObserver {
 							.get(email)).get("rueckgabezeit").toString();
 					int Fahrzeug = i;
 					Model.sharedInstance.setBuchung(email, Fahrzeug, abholstation, abholdatum, abholzeit, rueckgabestation, rueckgabedatum, rueckgabezeit);
-					return ok(buchungsuebersicht.render(Model.sharedInstance
-							.getBuchungen(session("connected"))));
+					return redirect("/buchungsuebersicht");
+//					return ok(buchungsuebersicht.render(Model.sharedInstance
+//							.getBuchungen(session("connected"))));
 				} else {
 					System.out.println("nicht Fahrzeug " + i + " gewählt");
 					i++;

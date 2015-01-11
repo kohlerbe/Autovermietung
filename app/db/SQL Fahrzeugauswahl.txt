@@ -1,0 +1,8 @@
+Abholstation = Rückgabestation
+-Fahrzeug muss an Station stehen (optional: oder vorher durch Kunden zu Station gefahren werden)
+-Fahrzeug darf in zu buchendem Zeitraum nicht bereits gebucht sein
+-Es darf keine vorhergehende Buchung existieren, bei der Abholstation != Rückgabestation
+
+
+Abholstation != Rückgabestation zusätzlich
+-Fahrzeug darf keine späteren Buchungen haben (da dann ja nicht mehr an richtiger Station)

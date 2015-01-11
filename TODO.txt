@@ -1,7 +1,6 @@
 ﻿=======EILT DB ANFRAGEN=======
 -für die funktion fahrzeugwahl() benötigen wir eine sql abfrage die alle autos im ausgewählten
  zeitraum anzeigt
--in der funktion buchen() benötigen wir einen sql befehl, der die Daten des Kunden, sowie des gewählten autos in der Buchungstabelle speichert.
 - in der Funktion checkRegistrieren() wird ein SQl Befehl benötigt der einen neuen Kunden anlegt
 
 =============Allgemein=============
