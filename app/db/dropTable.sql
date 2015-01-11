@@ -1,5 +1,3 @@
-BEGIN TRANSACTION;
-
 DROP TABLE Buchung;
 DROP TABLE Fahrzeug;
 DROP TABLE Station;

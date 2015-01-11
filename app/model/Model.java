@@ -96,8 +96,7 @@ public class Model implements IObservable {
 				+ abholzeit
 				+ "','"
 				+ rueckgabedatum
-				+ "','"
-				+ rueckgabezeit + "'); commit;";
+				+ "','" + rueckgabezeit + "'); commit;";
 		System.out.println("insertBuchungSQL: " + insertBuchung);
 		try {
 			PreparedStatement pstmt = connection
@@ -137,6 +136,43 @@ public class Model implements IObservable {
 			return kunde;
 		} catch (SQLException e) {
 			System.out.println("Kunde mit EMail " + email + " nicht gefunden!");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void setKunde(String email, int hash, String vorname,
+			String nachname, String strasse, String hausnummer, String ort,
+			String plz) {
+		// TODO Ort Anlegen; Adresse anlegen; Kunde anlegen
+
+	}
+
+	public void setAdresse(String Ort, String Strasse, String HausNr, String PLZ) {
+		// TODO setOrt(Ort) + insert into Adresse(Ort, Strasse, HausNr, PLZ)
+	}
+
+	public String setOrt(String Ort) {
+		String ortid = "-1"; // failed
+		Ort temport = getOrt(Ort);
+		if (temport == null) {
+			//TODO insert ort, get ortid
+		} else {
+			ortid = temport.getOrtsID();
+		}
+		System.out.println("setOrt Ortid: " + ortid);
+		return ortid;
+	}
+
+	public Ort getOrt(String Ortsname) {
+		String getOrtSQL = "SELECT * FROM Ort WHERE Ortsname = '" + Ortsname + "'";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(getOrtSQL);
+			ResultSet rs = pstmt.executeQuery();
+			Ort ort = new Ort(rs.getString("OrtsID"), rs.getString("Ortsname"));
+			return ort;
+		} catch (SQLException e) {
+			System.out.println("Fehler in getOrt(String Ortsname)");
 			e.printStackTrace();
 		}
 		return null;
@@ -185,8 +221,8 @@ public class Model implements IObservable {
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("SELECT * FROM Fahrzeug WHERE Fahrzeug.FahrzeugID not in (select Fahrzeug FROM Buchung)"); // SQL
-																	// Statement
-																	// bauen!
+			// Statement
+			// bauen!
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Fahrzeug fahrzeug = new Fahrzeug(rs.getString("FahrzeugId"),
@@ -224,8 +260,8 @@ public class Model implements IObservable {
 
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			Station station = new Station(rs.getString("StationsID"), rs.getString("Adresse"),
-					rs.getString("Stationsname"));
+			Station station = new Station(rs.getString("StationsID"),
+					rs.getString("Adresse"), rs.getString("Stationsname"));
 			pstmt.close();
 			return station;
 		} catch (SQLException e) {
@@ -253,4 +289,5 @@ public class Model implements IObservable {
 		// TODO Auto-generated method stub
 
 	}
+
 }
