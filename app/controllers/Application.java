@@ -251,7 +251,6 @@ public class Application extends Controller implements IObserver {
 		final Map<String, String[]> values = request().body()
 				.asFormUrlEncoded();
 		if (Model.sharedInstance.getKunde(values.get("email")[0]) == null) {
-			// Hier Kunde anlegen in datenbank
 			String email = values.get("email")[0];
 			String password = values.get("password")[0];
 			String vorname = values.get("vorname")[0];
@@ -264,6 +263,9 @@ public class Application extends Controller implements IObserver {
 
 			System.out.println(email + password + vorname + nachname + strasse
 					+ hausnummer + ort + plz + hash);
+			
+			Model.sharedInstance.setKunde(email, hash, vorname, nachname, strasse, hausnummer, ort, plz);
+			
 			return redirect("/login");
 
 		} else {
