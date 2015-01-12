@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import play.db.DB;
 import util.IObservable;
 
-public class Model implements IObservable {
+public class Model implements IObservable { // TODO
 	/*
 	 * @Override public void register(final String gameName, final String
 	 * userName) { observers.add(new RoundPointsDTO(userName, gameName));
@@ -37,26 +37,25 @@ public class Model implements IObservable {
 
 	public static Model sharedInstance = new Model();
 
+	// TODO @SuppressWarnings("unused") und nicht benötigte Zeilen entfernen
 	@SuppressWarnings("unused")
 	private static ArrayList<Kunde> kunden = new ArrayList<Kunde>();
 	@SuppressWarnings("unused")
 	private static ArrayList<Adresse> adressen = new ArrayList<Adresse>();
-	// private static ArrayList<Ausstattung> ausstattungen = new
-	// ArrayList<Ausstattung>();
-	// private static ArrayList<Bild> bilder= new ArrayList<Bild>();
 	private static ArrayList<Fahrzeug> fahrzeuge = new ArrayList<Fahrzeug>();
 	@SuppressWarnings("unused")
 	private static ArrayList<Ort> orte = new ArrayList<Ort>();
+	@SuppressWarnings("unused")
 	private static ArrayList<Station> stationen = new ArrayList<Station>();
 	private static ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 
 	public ArrayList<Buchung> getBuchungen(String kundenmail) {
 		buchungen.clear();
-		String kundenbuchungenSQL = "SELECT * FROM Buchung, Kunde WHERE Kunde.KundenNr = Buchung.Kunde AND Kunde.email = '"
-				+ kundenmail + "'";
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection
-					.prepareStatement(kundenbuchungenSQL);
+			pstmt = connection
+					.prepareStatement("SELECT * FROM Buchung, Kunde WHERE Kunde.KundenNr = Buchung.Kunde AND Kunde.email = ?");
+			pstmt.setString(1, kundenmail);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Buchung buchung = new Buchung(rs.getString("BuchungsID"),
@@ -73,6 +72,12 @@ public class Model implements IObservable {
 			System.out.println("Fehler beim Abruf der Buchungen für KundenID: "
 					+ kundenmail);
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return buchungen;
 	}
@@ -80,64 +85,66 @@ public class Model implements IObservable {
 	public void setBuchung(String email, int Fahrzeug, String abholstation,
 			String abholdatum, String abholzeit, String rueckgabestation,
 			String rueckgabedatum, String rueckgabezeit) {
-
-		String insertBuchung = "INSERT INTO Buchung(Kunde, Fahrzeug, Abholstation, RueckgabeStation, Abholdatum, Abholzeit, Rueckgabedatum, Rueckgabezeit) "
-				+ "VALUES ("
-				+ getKunde(email).getKundenNr()
-				+ ","
-				+ Fahrzeug
-				+ ","
-				+ getStation(abholstation).getStationsID()
-				+ ","
-				+ getStation(rueckgabestation).getStationsID()
-				+ ",'"
-				+ abholdatum
-				+ "','"
-				+ abholzeit
-				+ "','"
-				+ rueckgabedatum
-				+ "','" + rueckgabezeit + "'); commit;";
-		System.out.println("insertBuchungSQL: " + insertBuchung);
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection
-					.prepareStatement(insertBuchung);
+			pstmt = connection
+					.prepareStatement("INSERT INTO Buchung(Kunde, Fahrzeug, Abholstation, RueckgabeStation, Abholdatum, Abholzeit, Rueckgabedatum, Rueckgabezeit) "
+							+ "VALUES (?,?,?,?,?,?,?,?)");
+			pstmt.setString(1, getKunde(email).getKundenNr());
+			pstmt.setInt(2, Fahrzeug);
+			pstmt.setString(3, getStation(abholstation).getStationsID());
+			pstmt.setString(4, getStation(rueckgabestation).getStationsID());
+			pstmt.setString(5, abholdatum);
+			pstmt.setString(6, abholzeit);
+			pstmt.setString(7, rueckgabedatum);
+			pstmt.setString(8, rueckgabezeit);
+
 			pstmt.executeUpdate();
-			pstmt.close();
+			System.out.println("Buchung eingefügt: Fahrzeug " + Fahrzeug
+					+ " abholstation " + abholstation + " abholdatum "
+					+ abholdatum + " abholzeit " + abholzeit
+					+ " rueckgabestation " + rueckgabestation
+					+ " rueckgabedatum " + rueckgabedatum + " rueckgabezeit "
+					+ rueckgabezeit);
 		} catch (SQLException e) {
 			System.out.println("Fehler beim Einfügen der Buchung in die DB");
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-
-		System.out.println("Fahrzeug " + Fahrzeug + " abholstation "
-				+ abholstation + " abholdatum " + abholdatum + " abholzeit "
-				+ abholzeit + " rueckgabestation " + rueckgabestation
-				+ " rueckgabedatum " + rueckgabedatum + " rueckgabezeit "
-				+ rueckgabezeit);
 	}
 
-	/*
-	 * public ArrayList<Kunde> getKunden() { Kunde kunde1 = new Kunde("k1",
-	 * "hans@peter.de", "Peter", "Hans", "0123142", "psw1"); Kunde kunde2 = new
-	 * Kunde("k2", "hans@Gruetz.de", "Vogel", "Jörg", "0123143", "psw2"); Kunde
-	 * kunde3 = new Kunde("k3", "hans@depp.de", "Götz", "Tom", "0123144",
-	 * "psw3"); kunden.add(kunde1); kunden.add(kunde2); kunden.add(kunde3);
-	 * return kunden; }
-	 */
 	public Kunde getKunde(String email) {
-		String getKundeSQL = "SELECT * FROM Kunde WHERE Kunde.EMail = '"
-				+ email + "'";
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection.prepareStatement(getKundeSQL);
+			pstmt = connection
+					.prepareStatement("SELECT * FROM Kunde WHERE Kunde.EMail =?");
+			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
-			Kunde kunde = new Kunde(rs.getString("KundenNr"),
-					rs.getString("EMail"), rs.getString("Nachname"),
-					rs.getString("Vorname"), rs.getString("TelNr"),
-					rs.getString("PSW"));
-			pstmt.close();
-			return kunde;
+			if (rs.next()) {
+				Kunde kunde = new Kunde(rs.getString("KundenNr"),
+						rs.getString("EMail"), rs.getString("Nachname"),
+						rs.getString("Vorname"), 
+						rs.getString("PSW"));
+				return kunde;
+			} else {
+				System.out.println("Info: Kunde mit EMail " + email
+						+ " nicht gefunden!");
+			}
+
 		} catch (SQLException e) {
-			System.out.println("Kunde mit EMail " + email + " nicht gefunden!");
+			System.out.println("Fehler in Model.getKunde(String email)");
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -145,123 +152,142 @@ public class Model implements IObservable {
 	public void setKunde(String email, int hash, String vorname,
 			String nachname, String strasse, String hausnummer, String ort,
 			String plz) {
-		setAdresse(ort, strasse, hausnummer, plz);
-		String adressID = getAdresse(ort, strasse, hausnummer, plz)
-				.getAdressID();
-		String setKundeSQL = "INSERT INTO Kunde(Adresse, EMail, Nachname, Vorname, PSW) VALUES ("
-				+ adressID
-				+ ",'"
-				+ email
-				+ "','"
-				+ nachname
-				+ "','"
-				+ vorname
-				+ "','" + hash + "'); commit;";
+		// setAdresse(ort, strasse, hausnummer, plz);
+		// String adressID = getAdresse(ort, strasse, hausnummer, plz)
+		// .getAdressID();
+		String adressID = "11"; // TODO adressID muss bestimmt werden
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection.prepareStatement(setKundeSQL);
+			pstmt = connection
+					.prepareStatement("INSERT INTO Kunde(Adresse, EMail, Nachname, Vorname, PSW) VALUES (?,?,?,?,?)");
+			pstmt.setString(1, adressID);
+			pstmt.setString(2, email);
+			pstmt.setString(3, nachname);
+			pstmt.setString(4, vorname);
+			pstmt.setInt(5, hash);
+			
 			pstmt.executeUpdate();
-			pstmt.close();
 		} catch (SQLException e) {
 			System.out.println("Fehler in Model.setKunde");
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void setAdresse(String Ort, String Strasse, String HausNr, String PLZ) {
 		setOrt(Ort);
 		String ortId = getOrt(Ort).getOrtsID();
-		String setAdresseSQL = "INSERT INTO Adresse(Ort, Strasse, HausNr, PLZ) VALUES ('"
-				+ ortId
-				+ "', '"
-				+ Strasse
-				+ "', '"
-				+ HausNr
-				+ "', '"
-				+ PLZ
-				+ "'); commit;";
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection
-					.prepareStatement(setAdresseSQL);
+			pstmt = connection
+					.prepareStatement("INSERT INTO Adresse(Ort, Strasse, HausNr, PLZ) VALUES (?,?,?,?)");
+			pstmt.setString(1, ortId);
+			pstmt.setString(2, Strasse);
+			pstmt.setString(3, HausNr);
+			pstmt.setString(4, PLZ);
+
 			pstmt.executeUpdate();
-			pstmt.close();
 		} catch (SQLException e) {
 			System.out.println("Fehler in Model.setAdresse");
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public Adresse getAdresse(String Ort, String Strasse, String HausNr,
 			String PLZ) {
-		String getAdresseSQL = "SELECT * FROM Adresse WHERE Ort = '"
-				+ getOrt(Ort).getOrtsID() + "AND Strasse = '" + Strasse
-				+ "' AND HausNr = '" + HausNr + "' AND PLZ = '" + PLZ + "'";
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection
-					.prepareStatement(getAdresseSQL);
+			pstmt = connection
+					.prepareStatement("SELECT * FROM Adresse WHERE Ort = ? AND Strasse = ? AND HausNr = ? AND PLZ = ?");
+			pstmt.setString(1, getOrt(Ort).getOrtsID());
+			pstmt.setString(2, Strasse);
+			pstmt.setString(3, HausNr);
+			pstmt.setString(4, PLZ);
+
 			ResultSet rs = pstmt.executeQuery();
+
 			Adresse adresse = new Adresse(Integer.toString(rs
 					.getInt("AdressID")), rs.getString("Strasse"),
 					rs.getString("HausNr"), rs.getString("PLZ"),
 					rs.getString("Ort"));
-			pstmt.close();
+
+			System.out.println("getAdresse gibt zurück: " + adresse.toString());
 			return adresse;
 		} catch (SQLException e) {
 			System.out.println("Fehler in Model.getAdresse(...)");
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
 
 	public void setOrt(String Ort) {
 		if (getOrt(Ort) == null) {
-			String setOrtSQL = "INSERT INTO Ort(Ortsname) VALUES ('" + Ort
-					+ "'); commit;";
+			PreparedStatement pstmt = null;
 			try {
-				PreparedStatement pstmt = connection
-						.prepareStatement(setOrtSQL);
+				pstmt = connection
+						.prepareStatement("INSERT INTO Ort(Ortsname) VALUES (?)");
+				pstmt.setString(1, Ort);
 				pstmt.executeUpdate();
-				pstmt.close();
 			} catch (SQLException e) {
 				System.out.println("Fehler in Model.setOrt");
 				e.printStackTrace();
+			} finally {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 
 	public Ort getOrt(String Ortsname) {
-		String getOrtSQL = "SELECT * FROM Ort WHERE Ortsname = '" + Ortsname
-				+ "'";
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection.prepareStatement(getOrtSQL);
+			pstmt = connection
+					.prepareStatement("SELECT * FROM Ort WHERE Ortsname = ?");
+			pstmt.setString(1, Ortsname);
+
 			ResultSet rs = pstmt.executeQuery();
+
 			Ort ort = new Ort(rs.getString("OrtsID"), rs.getString("Ortsname"));
-			pstmt.close();
 			return ort;
 		} catch (SQLException e) {
 			System.out.println("Fehler in Model.getOrt(String Ortsname)");
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
 
-	/*
-	 * public ArrayList<Adresse> getAdressen() { Adresse adresse1 = new
-	 * Adresse("a1", "straße", "1", "13423"); Adresse adresse2 = new
-	 * Adresse("a2", "straße", "2", "13423"); Adresse adresse3 = new
-	 * Adresse("a3", "straße", "3", "13423"); adressen.add(adresse1);
-	 * adressen.add(adresse2); adressen.add(adresse3); return adressen; }
-	 */
-	// public ArrayList<Ausstattung> getAusstattungen() {
-	// Ausstattung ausstattung1 = new Ausstattung("as1", "Klima", "Super Kalt");
-	// ausstattungen.add(ausstattung1);
-	// return ausstattungen;
-	// }
-
 	public ArrayList<Fahrzeug> getFahrzeuge() {
 		fahrzeuge.clear();
+		PreparedStatement pstmt = null;
+
 		try {
-			PreparedStatement pstmt = connection
-					.prepareStatement("SELECT * FROM Fahrzeug");
+			pstmt = connection.prepareStatement("SELECT * FROM Fahrzeug");
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Fahrzeug fahrzeug = new Fahrzeug(rs.getString("FahrzeugId"),
@@ -271,10 +297,15 @@ public class Model implements IObservable {
 								+ rs.getString("Bild"));
 				fahrzeuge.add(fahrzeug);
 			}
-			pstmt.close();
 		} catch (SQLException e) {
 			System.out.println("Fehler beim laden der Fahrzeuge");
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return fahrzeuge;
@@ -284,8 +315,9 @@ public class Model implements IObservable {
 			String abholdatum, String abholzeit, String rueckgabestation,
 			String rueckgabedatum, String rueckgabezeit) {
 		fahrzeuge.clear();
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection
+			pstmt = connection
 					.prepareStatement("SELECT * FROM Fahrzeug WHERE Fahrzeug.FahrzeugID not in (select Fahrzeug FROM Buchung)"); // SQL
 			// Statement
 			// bauen!
@@ -298,42 +330,50 @@ public class Model implements IObservable {
 								+ rs.getString("Bild"));
 				fahrzeuge.add(fahrzeug);
 			}
-			pstmt.close();
 		} catch (SQLException e) {
 			System.out.println("Fehler beim laden der Fahrzeuge");
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return fahrzeuge;
 	}
 
-	/*
-	 * public ArrayList<Ort> getOrte() { Ort ort1 = new Ort("o1", "Konstanz");
-	 * orte.add(ort1); return orte; }
-	 */
-	public ArrayList<Station> getStationen() { // TODO Löschen o. SQL bauen wenn
-												// benötigt
-		Station station1 = new Station("s1", "11", "Pseudodaten!!");
-		stationen.add(station1);
-		return stationen;
-	}
+	// TODO Löschen o. SQL bauen wenn benötigt -> Für Dropdownlist auf
+	// indexseite
+	// public ArrayList<Station> getStationen() {
+	// Station station1 = new Station("s1", "11", "Pseudodaten!!");
+	// stationen.add(station1);
+	// return stationen;
+	// }
 
 	public Station getStation(String name) {
+		PreparedStatement pstmt = null;
 		try {
-			PreparedStatement pstmt = connection
-					.prepareStatement("SELECT * FROM Station s WHERE s.Stationsname = '"
-							+ name + "'");
+			pstmt = connection
+					.prepareStatement("SELECT * FROM Station s WHERE s.Stationsname = ?");
+			pstmt.setString(1, name);
 
 			ResultSet rs = pstmt.executeQuery();
-			rs.next();
+			// rs.next();
 			Station station = new Station(rs.getString("StationsID"),
 					rs.getString("Adresse"), rs.getString("Stationsname"));
-			pstmt.close();
 			return station;
 		} catch (SQLException e) {
 			System.out.println("Fehler beim laden der Station mit Name: "
 					+ name);
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}

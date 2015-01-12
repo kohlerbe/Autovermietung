@@ -260,12 +260,9 @@ public class Application extends Controller implements IObserver {
 			String ort = values.get("ort")[0];
 			String plz = values.get("plz")[0];
 			int hash = password.hashCode();
-
-			System.out.println(email + password + vorname + nachname + strasse
-					+ hausnummer + ort + plz + hash);
 			
 			Model.sharedInstance.setKunde(email, hash, vorname, nachname, strasse, hausnummer, ort, plz);
-			
+	
 			return redirect("/login");
 
 		} else {

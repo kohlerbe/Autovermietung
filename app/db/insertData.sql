@@ -25,8 +25,8 @@ insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisPro
 
 --BeispielKunden
 
-insert into Kunde (Adresse,EMail,Nachname,Vorname,TelNr,PSW) values(44,"max@mustermann.de","Maxel","Max","0156898989","107876");
-insert into Kunde (Adresse,EMail,Nachname,Vorname,TelNr,PSW) values(55,"mimi@musterfrau.de","Maxel","Mimi","0156989898","mimi");
+insert into Kunde (Adresse,EMail,Nachname,Vorname,PSW) values(44,"max@mustermann.de","Maxel","Max","107876");
+insert into Kunde (Adresse,EMail,Nachname,Vorname,PSW) values(55,"mimi@musterfrau.de","Maxel","Mimi","mimi");
 
 
 
