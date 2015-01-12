@@ -128,8 +128,7 @@ public class Model implements IObservable { // TODO
 			if (rs.next()) {
 				Kunde kunde = new Kunde(rs.getString("KundenNr"),
 						rs.getString("EMail"), rs.getString("Nachname"),
-						rs.getString("Vorname"), 
-						rs.getString("PSW"));
+						rs.getString("Vorname"), rs.getString("PSW"));
 				return kunde;
 			} else {
 				System.out.println("Info: Kunde mit EMail " + email
@@ -152,10 +151,9 @@ public class Model implements IObservable { // TODO
 	public void setKunde(String email, int hash, String vorname,
 			String nachname, String strasse, String hausnummer, String ort,
 			String plz) {
-		// setAdresse(ort, strasse, hausnummer, plz);
-		// String adressID = getAdresse(ort, strasse, hausnummer, plz)
-		// .getAdressID();
-		String adressID = "11"; // TODO adressID muss bestimmt werden
+		setAdresse(ort, strasse, hausnummer, plz);
+		String adressID = getAdresse(ort, strasse, hausnummer, plz)
+				.getAdressID();
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = connection
@@ -165,7 +163,7 @@ public class Model implements IObservable { // TODO
 			pstmt.setString(3, nachname);
 			pstmt.setString(4, vorname);
 			pstmt.setInt(5, hash);
-			
+
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Fehler in Model.setKunde");
@@ -180,58 +178,67 @@ public class Model implements IObservable { // TODO
 	}
 
 	public void setAdresse(String Ort, String Strasse, String HausNr, String PLZ) {
-		setOrt(Ort);
-		String ortId = getOrt(Ort).getOrtsID();
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = connection
-					.prepareStatement("INSERT INTO Adresse(Ort, Strasse, HausNr, PLZ) VALUES (?,?,?,?)");
-			pstmt.setString(1, ortId);
-			pstmt.setString(2, Strasse);
-			pstmt.setString(3, HausNr);
-			pstmt.setString(4, PLZ);
-
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println("Fehler in Model.setAdresse");
-			e.printStackTrace();
-		} finally {
+		if (getAdresse(Ort, Strasse, HausNr, PLZ) == null) {
+			setOrt(Ort);
+			String ortId = getOrt(Ort).getOrtsID();
+			PreparedStatement pstmt = null;
 			try {
-				pstmt.close();
+				pstmt = connection
+						.prepareStatement("INSERT INTO Adresse(Ort, Strasse, HausNr, PLZ) VALUES (?,?,?,?)");
+				pstmt.setString(1, ortId);
+				pstmt.setString(2, Strasse);
+				pstmt.setString(3, HausNr);
+				pstmt.setString(4, PLZ);
+
+				pstmt.executeUpdate();
+				System.out.println("Adresse angelegt");
 			} catch (SQLException e) {
+				System.out.println("Fehler in Model.setAdresse");
 				e.printStackTrace();
+			} finally {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
+		} else {
+			System.out.println("Adresse gibts schon");
 		}
 	}
 
 	public Adresse getAdresse(String Ort, String Strasse, String HausNr,
 			String PLZ) {
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = connection
-					.prepareStatement("SELECT * FROM Adresse WHERE Ort = ? AND Strasse = ? AND HausNr = ? AND PLZ = ?");
-			pstmt.setString(1, getOrt(Ort).getOrtsID());
-			pstmt.setString(2, Strasse);
-			pstmt.setString(3, HausNr);
-			pstmt.setString(4, PLZ);
-
-			ResultSet rs = pstmt.executeQuery();
-
-			Adresse adresse = new Adresse(Integer.toString(rs
-					.getInt("AdressID")), rs.getString("Strasse"),
-					rs.getString("HausNr"), rs.getString("PLZ"),
-					rs.getString("Ort"));
-
-			System.out.println("getAdresse gibt zurück: " + adresse.toString());
-			return adresse;
-		} catch (SQLException e) {
-			System.out.println("Fehler in Model.getAdresse(...)");
-			e.printStackTrace();
-		} finally {
+		if (getOrt(Ort) != null) {
+			PreparedStatement pstmt = null;
 			try {
-				pstmt.close();
+				pstmt = connection
+						.prepareStatement("SELECT * FROM Adresse WHERE Ort = ? AND Strasse = ? AND HausNr = ? AND PLZ = ?");
+				pstmt.setString(1, getOrt(Ort).getOrtsID());
+				pstmt.setString(2, Strasse);
+				pstmt.setString(3, HausNr);
+				pstmt.setString(4, PLZ);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					Adresse adresse = new Adresse(Integer.toString(rs
+							.getInt("AdressID")), rs.getString("Strasse"),
+							rs.getString("HausNr"), rs.getString("PLZ"),
+							rs.getString("Ort"));
+					return adresse;
+				} else {
+					return null;
+				}
 			} catch (SQLException e) {
+				System.out.println("Fehler in Model.getAdresse(...)");
 				e.printStackTrace();
+			} finally {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return null;
@@ -255,6 +262,8 @@ public class Model implements IObservable { // TODO
 					e.printStackTrace();
 				}
 			}
+		} else {
+			System.out.println("Ort " + Ort + " existiert schon");
 		}
 	}
 
@@ -266,15 +275,22 @@ public class Model implements IObservable { // TODO
 			pstmt.setString(1, Ortsname);
 
 			ResultSet rs = pstmt.executeQuery();
-
-			Ort ort = new Ort(rs.getString("OrtsID"), rs.getString("Ortsname"));
-			return ort;
+			if (rs.next()) {
+				Ort ort = new Ort(rs.getString("OrtsID"),
+						rs.getString("Ortsname"));
+				return ort;
+			} else {
+				System.out.println("Ort: " + Ortsname + " nicht gefunden");
+				return null;
+			}
 		} catch (SQLException e) {
 			System.out.println("Fehler in Model.getOrt(String Ortsname)");
 			e.printStackTrace();
 		} finally {
 			try {
+				System.out.println("getOrt finally try");
 				pstmt.close();
+				System.out.println("getOrt finally try2");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
