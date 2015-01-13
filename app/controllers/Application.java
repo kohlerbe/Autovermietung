@@ -37,8 +37,26 @@ public class Application extends Controller implements IObserver {
 			a = 0;
 			eingeloggt = 1;
 		}
-		return ok(fahrzeuguebersicht.render(
-				Model.sharedInstance.getFahrzeuge(), eingeloggt));
+		return ok(fahrzeuguebersicht.render(eingeloggt));
+	}
+	
+	 public static Result fahrzeuge(int count) {
+		
+		ArrayList<Fahrzeug> arrayList = Model.sharedInstance.getFahrzeuge();
+		
+		String hersteller = arrayList.get(count).getHersteller();
+		String modell = arrayList.get(count).getModell();
+		String bild = arrayList.get(count).getBild();
+		String beschreibung = arrayList.get(count).getBeschreibung();
+		String preisProTag = arrayList.get(count).getPreisProTag();
+	
+		return ok(fahrzeuge.render(
+			hersteller, modell, bild, beschreibung, preisProTag
+			
+			
+			
+			));
+		
 	}
 
 	public static Result ueberUns() {

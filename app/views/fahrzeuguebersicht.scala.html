@@ -1,4 +1,4 @@
-@(fahrzeuge: List[model.Fahrzeug], eingeloggt : Int)
+@(eingeloggt : Int)
 @main("Fuhrpark") {
 
 <div class="row">
@@ -12,32 +12,15 @@
 	</div>
 </div>
 
+<div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<h1>Unser Fahrzeugpark</h1>
 	</div>
 
-	
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-<!--Dummy Objekt   -->
-			@for(f <- fahrzeuge){
-			<div class="car-list">
-				<h3>@f.getHersteller() @f.getModell()</h3>
-				<div class="row">
-					<div class="col-md-6">
-						<img class="img-responsive img-rounded" src=@f.getBild() alt=@f.getHersteller>
-						</div>
-					<div class="col-md-6">
-						<p>@f.getBeschreibung()</p>
-						<p>Preis pro Tag: @f.getPreisProTag() Euro </p>
-					</div>
-				</div>
-<!--Ende Dummy Objekt   -->				
-			
-			</div>
-		}
-		</div>
-
-	</div>
+	<!--<div id="ajax" class="col-md-6 col-md-offset-3">
+		<button id="button" onclick="dynamischesLaden()" type="button" class="btn btn-danger">Fahrzeuge Laden...</button>
+	</div> -->
+	<div id="container" class="col-md-6 col-md-offset-3"></div>
+</div>
 
 }

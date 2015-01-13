@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET		/fahrzeuge					controllers.Application.fahrzeuge(count : Int)
 GET     /fahrzeuguebersicht			controllers.Application.fahrzeuguebersicht()
 GET     /agb						controllers.Application.agb()
 GET     /registrieren				controllers.Application.registrieren()
