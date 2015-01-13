@@ -18,9 +18,9 @@
 						<p>Wir stehen Ihnen rund um die Uhr für Fragen gern zur Verfügung!</p> 
 				</div><br>
 			<form action="mailto:viktorwich@@googlemail.com" enctype="text/plain" method="post" name="formular" onSubmit="return checkKontakt(this)">
-				<p><input type="text" placeholder="Name.." name="name" size="30"></p>
-				<p><input type="email" placeholder="Email.." name="email" size="30"></p>
-				<textarea name="nachricht" placeholder="Ihre Nachricht an uns.." rows="5" cols="45"></textarea><br>
+				<p><input type="text" placeholder="Name.." name="name" size="30" required></p>
+				<p><input type="email" placeholder="Email.." name="email" size="30" required></p>
+				<textarea name="nachricht" placeholder="Ihre Nachricht an uns.." rows="5" cols="45" required></textarea><br>
 				<p id ="dringend">Dringlichkeit:</p>
 				<p><input type="radio" name="Dringlichkeit" value="Hoch">HOCH
 				<input type="radio" name="Dringlichkeit" value="Normal">NORMAL</p>
