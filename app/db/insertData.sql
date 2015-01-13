@@ -23,6 +23,16 @@ insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisPro
 
 insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(5,333,"Karosserieform: Limousine / Getriebe: Schaltgetriebe / Gänge: 6 / Türen: 4 / PS: 150 / Farbe: Weiss / Kraftstoff: Benzin","Suzuki","Swift","18","suzuki.jpg");
 
+insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(6,222,"Karosserieform: Limousine / Getriebe: Automatik / Antriebsart: Allrad / Hubraum: 2967cm3 / Kraftstoff: Diesel / Türen: 4 / Farbe: Schwarz","Audi","Q7","70","audiq7.jpg");
+
+insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(7,333,"Karosserieform: Coupe / Getriebe: Automatik / Antriebsart: Allrad / Hubraum: 3953cm3 / Kraftstoff: Diesel / Türen: 3 / Farbe: Dunkelblau","Nissan","R34 GTR","30","nissangtr.jpg");
+
+insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(8,111,"Karosserieform: Coupe / Getriebe: Automatik / Antriebsart: Allrad / Hubraum: 4961cm3 / Kraftstoff: Diesel / Türen: 2 / Farbe: Weiss","Lamborghini","Gallardo Spyder","200","lamborghini.jpg");
+
+insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(9,222,"Karosserieform: Limousine / Getriebe: Schaltgetriebe / Antriebsart: Heck / Hubraum: 2982cm3 / Kraftstoff: Benzin / Türen: 4 / Farbe: Schwarz","Jaguar","420","120","jaguar420.jpg");
+
+insert into Fahrzeug (FahrzeugID,Station,Beschreibung,Hersteller,Modell,PreisProTag,Bild) values(10,333,"Karosserieform: Cabrio / Getriebe: Automatik / Antriebsart: Heck  / Hubraum: 4593cm3 / Kraftstoff: Benzin / Türen: 4 / Farbe: Weissach Weiss","Porsche","918 Spyder","200","porsche918spyder.jpg");
+
 --BeispielKunden
 
 insert into Kunde (Adresse,EMail,Nachname,Vorname,PSW) values(44,"max@mustermann.de","Maxel","Max","107876");
