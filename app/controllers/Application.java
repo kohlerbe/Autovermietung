@@ -10,7 +10,6 @@ import java.util.*;
 public class Application extends Controller implements IObserver {
 
 	public static String s;
-	public static int a;
 	public static int eingeloggt;
 	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String, String>>();
 	public static HashMap<String, String> innerMap = new HashMap<String, String>();
@@ -38,9 +37,8 @@ public class Application extends Controller implements IObserver {
 	public static Result fahrzeuguebersicht() {
 		if (session("connected") == null) {
 			eingeloggt = 0;
-			a = -1;
+			
 		} else {
-			a = 0;
 			eingeloggt = 1;
 		}
 		return ok(fahrzeuguebersicht.render(eingeloggt));
@@ -50,19 +48,24 @@ public class Application extends Controller implements IObserver {
 		
 		ArrayList<Fahrzeug> arrayList = Model.sharedInstance.getFahrzeuge();
 		
+		if (count <= arrayList.size()-1){
 		String hersteller = arrayList.get(count).getHersteller();
 		String modell = arrayList.get(count).getModell();
 		String bild = arrayList.get(count).getBild();
 		String beschreibung = arrayList.get(count).getBeschreibung();
 		String preisProTag = arrayList.get(count).getPreisProTag();
-	
-		return ok(fahrzeuge.render(
-			hersteller, modell, bild, beschreibung, preisProTag
-			
-			
-			
-			));
 		
+		return ok(fahrzeuge.render(
+			hersteller, modell, bild, beschreibung, preisProTag));
+		}else {
+		String hersteller = "";
+		String modell = "";
+		String bild = "";
+		String beschreibung = "";
+		String preisProTag = "";
+		
+		return null;
+		}
 	}
 
 	public static Result ueberUns() {

@@ -67,6 +67,8 @@ $(document).ready(function() {
 
  //AJAX mit Scroll Function
 	function loadcontent() {
+	
+
 		$("div.loader").show();     
      
 		$.ajax({
