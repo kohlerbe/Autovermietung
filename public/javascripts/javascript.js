@@ -1,7 +1,7 @@
 	
 	function pickdate (){
 	$('.dateauswahl').pickadate({
-	format: 'dd, mm, yyyy',
+	format: 'dd.mm.yyyy',
 	today: 'Heute',
 	clear: 'Loeschen',
 	close: 'Schliessen',
