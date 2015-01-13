@@ -54,14 +54,14 @@ public class Model implements IObservable { // TODO
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = connection
-					.prepareStatement("SELECT * FROM Buchung, Kunde WHERE Kunde.KundenNr = Buchung.Kunde AND Kunde.email = ?");
+					.prepareStatement("SELECT * FROM Buchung, Kunde, Fahrzeug WHERE Kunde.KundenNr = Buchung.Kunde AND Kunde.email = ? AND Fahrzeug.FahrzeugID = Buchung.Fahrzeug");
 			pstmt.setString(1, kundenmail);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Buchung buchung = new Buchung(rs.getString("BuchungsID"),
-						rs.getString("Kunde"), rs.getString("Fahrzeug"),
-						rs.getString("AbholStation"),
-						rs.getString("RueckgabeStation"),
+						rs.getString("Kunde"), rs.getString("Hersteller") + " " + rs.getString("Modell"),
+						getStation(rs.getInt("AbholStation")).getStationsname(),
+						getStation(rs.getInt("RueckgabeStation")).getStationsname(),
 						rs.getString("Abholdatum"), rs.getString("Abholzeit"),
 						rs.getString("Rueckgabedatum"),
 						rs.getString("Rueckgabezeit"));
@@ -393,7 +393,34 @@ public class Model implements IObservable { // TODO
 		}
 		return null;
 	}
+	
+	public Station getStation(int id) {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = connection
+					.prepareStatement("SELECT * FROM Station s WHERE s.StationsID = ?");
+			pstmt.setInt(1, id);
 
+			ResultSet rs = pstmt.executeQuery();
+			// rs.next();
+			Station station = new Station(rs.getString("StationsID"),
+					rs.getString("Adresse"), rs.getString("Stationsname"));
+			return station;
+		} catch (SQLException e) {
+			System.out.println("Fehler beim laden der Station mit ID: "
+					+ id);
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	
 	@Override
 	public void register(String gameName, String userName) {
 		// TODO Auto-generated method stub

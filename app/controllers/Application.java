@@ -252,7 +252,7 @@ public class Application extends Controller implements IObserver {
 				if (registrierterKunde.getPsw().equals(
 						Integer.toString(checkPassword.hashCode()))) {
 					session("connected", "" + registrierterKunde.getEmail());
-					return redirect("/buchungsuebersicht");
+					return redirect("/");
 				} else {
 					// Passwort falsch
 					int b = -1;
