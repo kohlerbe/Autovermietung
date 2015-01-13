@@ -1,4 +1,4 @@
-@(buchungen: List[model.Buchung])
+@(buchungen: List[model.Buchung], email : String)
 @main("Buchungsuebersicht") {
 
 <div class="row">
@@ -6,17 +6,21 @@
 		<a href="/logout"><button type="button" class="btn btn-danger">LOGOUT</button></a> 		
 	</div>
 </div>
-
-<div class="col-md-6 col-md-offset-3">
-	<h1>Buchungsübersicht</h1>
+<div class="row">
+<div class="col-md-4 col-md-offset-3">
+	<h2>Buchungsübersicht</h2>	
 </div>
-
+</div>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 	@if(buchungen.isEmpty()){
-	<h3>Keine Bestellungen</h3>
+	<h4>Keine Bestellungen</h4>
+	<h4>für @email</h4>
 	}else{
+		<h4>für @email</h4>
 		@for(b <- buchungen) {
+		<div class="row">
+		<div class="col-md-5">
 		<div class="buchungsliste">
 			<p>
 			<strong>Buchungsnummer:</strong> @b.getBuchungsId()<br>
@@ -29,6 +33,12 @@
 			<strong>Rückgabezeit:</strong> @b.getRueckgabezeit()
 			</p>
 		</div>
+		</div>
+		<div class="col-md-4">
+		<img class="img-responsive img-rounded" src=@b.getBildpfad() alt=@b.getFahrzeug()>
+		</div>
+		</div>
+		</br>
 		}}
 	</div>
 </div>

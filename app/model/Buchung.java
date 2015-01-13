@@ -11,6 +11,7 @@ public class Buchung {
 	private String Abholzeit;
 	private String Rueckgabedatum;
 	private String Rueckgabezeit;
+	private String Bildpfad;
 	
 	public Buchung(String buchungsId, String kunde, String fahrzeug,
 			String abholStation, String rueckgabeStation, String abholdatum,
@@ -27,6 +28,26 @@ public class Buchung {
 		Rueckgabezeit = rueckgabezeit;
 	}
 
+	public Buchung(String buchungsId, String kunde, String fahrzeug,
+			String abholStation, String rueckgabeStation, String abholdatum,
+			String abholzeit, String rueckgabedatum, String rueckgabezeit, String bildpfad) {
+		super();
+		BuchungsId = buchungsId;
+		Kunde = kunde;
+		Fahrzeug = fahrzeug;
+		AbholStation = abholStation;
+		RueckgabeStation = rueckgabeStation;
+		Abholdatum = abholdatum;
+		Abholzeit = abholzeit;
+		Rueckgabedatum = rueckgabedatum;
+		Rueckgabezeit = rueckgabezeit;
+		Bildpfad = bildpfad;
+	}
+	
+	public String getBildpfad() {
+		return Bildpfad;
+	}
+	
 	public String getBuchungsId() {
 		return BuchungsId;
 	}

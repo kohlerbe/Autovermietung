@@ -64,7 +64,8 @@ public class Model implements IObservable { // TODO
 						getStation(rs.getInt("RueckgabeStation")).getStationsname(),
 						rs.getString("Abholdatum"), rs.getString("Abholzeit"),
 						rs.getString("Rueckgabedatum"),
-						rs.getString("Rueckgabezeit"));
+						rs.getString("Rueckgabezeit"),
+						"/assets/images/" + rs.getString("Bild"));
 				buchungen.add(buchung);
 			}
 

@@ -83,7 +83,7 @@ public class Application extends Controller implements IObserver {
 			return redirect("/login");
 		} else
 			return ok(buchungsuebersicht.render(Model.sharedInstance
-					.getBuchungen(session("connected"))));
+					.getBuchungen(session("connected")), session("connected")));
 		// Übergabe der session mit email
 	}
 
