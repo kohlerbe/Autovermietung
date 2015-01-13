@@ -28,16 +28,18 @@ import static org.fest.assertions.Assertions.*;
 */
 public class ApplicationTest {
 	public static int eingeloggt;
+	public static String z;
     @Test
     public void simpleCheck() {
         int a = 1 + 1;
         assertThat(a).isEqualTo(2);
         eingeloggt=1;
+        z ="a";
     }
 
     @Test
     public void renderTemplate() {
-        Content html = views.html.index.render(2, eingeloggt);
+        Content html = views.html.index.render(eingeloggt, z, z, z);
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }

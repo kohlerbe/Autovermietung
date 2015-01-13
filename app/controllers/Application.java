@@ -21,12 +21,18 @@ public class Application extends Controller implements IObserver {
 	public static Result index() {
 		if (session("connected") == null) {
 			eingeloggt = 0;
-			a = -1;
+			ArrayList<Fahrzeug> arrayList = Model.sharedInstance.getFahrzeuge();
+			String bild1 = arrayList.get(9).getBild();
+			String bild2 = arrayList.get(7).getBild();
+			String bild3 = arrayList.get(6).getBild();
+			return ok(index.render(eingeloggt, bild1, bild2, bild3));
 		} else {
-			a = 0;
+			String bild1 = "";
+			String bild2 = "";
+			String bild3 = "";
 			eingeloggt = 1;
+			return ok(index.render(eingeloggt, bild1, bild2, bild3));
 		}
-		return ok(index.render(a, eingeloggt));
 	}
 
 	public static Result fahrzeuguebersicht() {
