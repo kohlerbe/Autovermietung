@@ -1,6 +1,13 @@
 @(hersteller : String, modell : String, bild : String, beschreibung : String, preisProTag : String)
 
 
+
+			@if(hersteller == "" && modell == "" && bild == "" && beschreibung == "" && preisProTag == ""){
+			
+			<div name="LEEER"></div>
+			
+			}else{
+			
 			<div class="car-list">
 				<h3>@hersteller @modell</h3>
 				<div class="row">
@@ -15,6 +22,8 @@
 		
 			
 			</div>
+			
+			} 
 			
 		
 	

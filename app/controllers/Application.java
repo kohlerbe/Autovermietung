@@ -13,6 +13,13 @@ public class Application extends Controller implements IObserver {
 	public static int eingeloggt;
 	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String, String>>();
 	public static HashMap<String, String> innerMap = new HashMap<String, String>();
+	
+	//Ajax Variablen method(fahrzeuge)
+	public static String hersteller;
+	public static String modell;
+	public static String bild;
+	public static String beschreibung;
+	public static String preisProTag;
 
 	/*
 	 * @Override public final void update() { }
@@ -44,27 +51,30 @@ public class Application extends Controller implements IObserver {
 		return ok(fahrzeuguebersicht.render(eingeloggt));
 	}
 	
+	//Ajax Methode
 	 public static Result fahrzeuge(int count) {
 		
 		ArrayList<Fahrzeug> arrayList = Model.sharedInstance.getFahrzeuge();
 		
 		if (count <= arrayList.size()-1){
-		String hersteller = arrayList.get(count).getHersteller();
-		String modell = arrayList.get(count).getModell();
-		String bild = arrayList.get(count).getBild();
-		String beschreibung = arrayList.get(count).getBeschreibung();
-		String preisProTag = arrayList.get(count).getPreisProTag();
+		hersteller = arrayList.get(count).getHersteller();
+		modell = arrayList.get(count).getModell();
+		bild = arrayList.get(count).getBild();
+		beschreibung = arrayList.get(count).getBeschreibung();
+		preisProTag = arrayList.get(count).getPreisProTag();
 		
 		return ok(fahrzeuge.render(
 			hersteller, modell, bild, beschreibung, preisProTag));
-		}else {
-		String hersteller = "";
-		String modell = "";
-		String bild = "";
-		String beschreibung = "";
-		String preisProTag = "";
 		
-		return null;
+		}else {
+		hersteller = "";
+		modell = "";
+		bild = "";
+		beschreibung = "";
+		preisProTag = "";
+		
+		return ok(fahrzeuge.render(
+			hersteller, modell, bild, beschreibung, preisProTag));
 		}
 	}
 
