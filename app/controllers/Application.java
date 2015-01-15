@@ -311,7 +311,7 @@ public class Application extends Controller {
 		}
 	}
 	public static WebSocket<JsonNode> autoSocket() {
-		
+		System.out.println("Im Autosocket");
 		return new WebSocket<JsonNode>() {
 			public void onReady(WebSocket.In<JsonNode> in,
 					final WebSocket.Out<JsonNode> out) {
