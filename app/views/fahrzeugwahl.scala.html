@@ -1,5 +1,33 @@
 @(fahrzeuge: List[model.Fahrzeug]) @main("Fahrzeugwahl") {
 
+<script>
+	var ersetzen = " ";
+	var webSocket;
+	$(function() {
+		var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
+		webSocket = new WS(
+				"@routes.Application.autoSocket().webSocketURL(request)");
+		webSocket.onmessage = receiveEvent;
+	})
+	
+	function idSenden(idErsetzen) {
+		alert("Ich geh in idSenden");
+		ersetzen = idErsetzen;
+
+		var JsonString = {
+				AutoID:ersetzen
+		};
+		var JsonObj = JSON.stringify(JsonString);
+		webSocket.send(JsonObj);
+	};
+	function receiveEvent(event) {
+		alert("Ich erhalte ein Event");
+		var obj = JSON.parse(event.data);
+		$("#auto" + obj.AutoID).html("Nicht mehr verfügbar");
+
+	};
+</script>
+
 <div class="row">
 	<div class="col-md-1 col-md-offset-8">	
 		<a href="/logout"><button type="button" class="btn btn-danger">LOGOUT</button></a> 		
@@ -15,7 +43,7 @@
 	<div class="col-md-6 col-md-offset-3">
 		@for(f <- fahrzeuge){
 		<!--Dummy Objekt   -->
-		<div class="car-list">
+		<div id ="auto@f.getFahrzeugID" class="car-list">
 		<form class="form-horizontal" action="buchen" method="POST">
 			<h3>@f.getHersteller @f.getModell</h3>
 			
@@ -27,7 +55,7 @@
 				<div class="col-md-6">
 					<p>@f.getBeschreibung</p>
 					<p>Preis pro Tag: @f.getPreisProTag Euro</p>
-					<button id="btn-anfrage" class="btn btn-danger" name=@f.getFahrzeugID type="submit">Buchen</button>
+					<button id="btn-anfrage" class="btn btn-danger" onclick="idSenden('@f.getFahrzeugID')" name=@f.getFahrzeugID type="submit">Buchen</button>
 				</div>
 			</div>
 			</form>

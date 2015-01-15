@@ -1,13 +1,16 @@
 package controllers;
 
 import model.*;
+import play.libs.F.Callback;
+import play.libs.F.Callback0;
 import play.mvc.*;
-import util.IObserver;
 import views.html.*;
 
 import java.util.*;
 
-public class Application extends Controller implements IObserver {
+import com.fasterxml.jackson.databind.JsonNode;
+
+public class Application extends Controller {
 
 	public static String s;
 	public static int eingeloggt;
@@ -307,10 +310,33 @@ public class Application extends Controller implements IObserver {
 			return redirect("/login");
 		}
 	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
+	public static WebSocket<JsonNode> autoSocket() {
+		
+		return new WebSocket<JsonNode>() {
+			public void onReady(WebSocket.In<JsonNode> in,
+					final WebSocket.Out<JsonNode> out) {
+				System.out.println(": WebSocketArtikel ready...");
+				
+				final AutoObserver	obs = new AutoObserver();
+				obs.auto = out;
+				
+				System.out.println(": Anzahl observer: "
+						+ Model.sharedInstance.countObservers());
+				
+				in.onMessage(new Callback<JsonNode>() {
+					public void invoke(JsonNode obj) {
+						// out.write(Model.sharedInstance.zeigeAktuelleMenge(obj));
+					}
+				});
+				in.onClose(new Callback0() {
+					public void invoke() {
+						// observer.remove(id);
+						Model.sharedInstance.deleteObserver(obs);
+					}
+				});
+			}
+		};
 
 	}
+
 }

@@ -1,15 +1,20 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import play.db.DB;
-import util.IObservable;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Model implements IObservable { // TODO
+import play.db.DB;
+
+public class Model extends Observable { // TODO
 	/*
 	 * @Override public void register(final String gameName, final String
 	 * userName) { observers.add(new RoundPointsDTO(userName, gameName));
@@ -421,23 +426,23 @@ public class Model implements IObservable { // TODO
 		return null;
 	}
 
-	
-	@Override
-	public void register(String gameName, String userName) {
-		// TODO Auto-generated method stub
-
+	public JsonNode zeigeAktuelleAutos(JsonNode obj) {
+		System.out.println("update bei observer wurde aufgerufen");
+		JsonNode autos = null;
+		String autoID = obj.get("AutoID").asText();
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			autos = mapper.readTree("{\"AutoID\":\""+autoID+"\"}");
+			System.out.println("JSON try in Models: "+autos);
+		} catch (JsonProcessingException e) {
+			System.out.println("Json erstellen in Model fehlgeschlagen");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("IO Exception bei Json erstellen in Model fehlgeschlagen");
+			e.printStackTrace();
+		}
+		
+		return autos;
 	}
-
-	@Override
-	public void unregister(String gameName, String userName) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void notifyController() {
-		// TODO Auto-generated method stub
-
-	}
-
 }
