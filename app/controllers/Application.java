@@ -24,9 +24,6 @@ public class Application extends Controller {
 	public static String beschreibung;
 	public static String preisProTag;
 
-	/*
-	 * @Override public final void update() { }
-	 */
 	public static Result index() {
 		if (session("connected") == null) {
 			eingeloggt = 0;
@@ -311,11 +308,11 @@ public class Application extends Controller {
 		}
 	}
 	public static WebSocket<JsonNode> autoSocket() {
-		System.out.println("Im Autosocket");
+		System.out.println("Application Websocket");
 		return new WebSocket<JsonNode>() {
 			public void onReady(WebSocket.In<JsonNode> in,
 					final WebSocket.Out<JsonNode> out) {
-				System.out.println(": WebSocketArtikel ready...");
+				System.out.println(": Application return Websocket");
 				
 				final AutoObserver	obs = new AutoObserver();
 				obs.auto = out;
@@ -325,12 +322,12 @@ public class Application extends Controller {
 				
 				in.onMessage(new Callback<JsonNode>() {
 					public void invoke(JsonNode obj) {
-						// out.write(Model.sharedInstance.zeigeAktuelleMenge(obj));
+						System.out.println("Application Callback JSON:"+ obj);
 					}
 				});
 				in.onClose(new Callback0() {
 					public void invoke() {
-						// observer.remove(id);
+						System.out.println("Observer gelöscht");
 						Model.sharedInstance.deleteObserver(obs);
 					}
 				});

@@ -21,7 +21,7 @@ public class AutoObserver implements Observer{
 
 	@Override
 	public void update(Observable arg0, Object autoID) {
-		System.out.println("ER UPDATET!");
+		System.out.println("ER UPDATET in AutoObserver!");
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode jsonAutoID = null;
 		try{
