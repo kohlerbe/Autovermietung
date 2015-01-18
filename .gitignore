@@ -47,7 +47,5 @@ $RECYCLE.BIN/
 *.msp
 
 #SQLiteBrowser files
-/SQLiteDatabaseBrowserPortable/Data/settings
-/SQLiteDatabaseBrowserPortable/Data/settings/
-SQLiteDatabaseBrowserPortableSettings.ini
-sqlitebrowser.reg
+SQLiteDatabaseBrowserPortable/Data/settings/sqlitebrowser.reg
+SQLiteDatabaseBrowserPortable/Data/settings/SQLiteDatabaseBrowserPortableSettings.ini
