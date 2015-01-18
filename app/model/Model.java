@@ -1,6 +1,9 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Observable;
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,8 +17,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import play.db.DB;
 
-public class Model extends Observable { // TODO
-	/*
+public class Model extends Observable {
+	/* TODO
 	 * @Override public void register(final String gameName, final String
 	 * userName) { observers.add(new RoundPointsDTO(userName, gameName));
 	 * System.out.println("Anzahl Observers: " + observers.size()); }
@@ -63,19 +66,25 @@ public class Model extends Observable { // TODO
 					.prepareStatement("SELECT * FROM Buchung, Kunde, Fahrzeug WHERE Kunde.KundenNr = Buchung.Kunde AND Kunde.email = ? AND Fahrzeug.FahrzeugID = Buchung.Fahrzeug");
 			pstmt.setString(1, kundenmail);
 			ResultSet rs = pstmt.executeQuery();
+			
+			SimpleDateFormat parseFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			SimpleDateFormat printFormatDate = new SimpleDateFormat("E, d. MMM yyyy", Locale.GERMANY);
+			SimpleDateFormat printFormatTime = new SimpleDateFormat("HH:mm");
+			
 			while (rs.next()) {
 				Buchung buchung = new Buchung(rs.getString("BuchungsID"),
 						rs.getString("Kunde"), rs.getString("Hersteller") + " " + rs.getString("Modell"),
 						getStation(rs.getInt("AbholStation")).getStationsname(),
 						getStation(rs.getInt("RueckgabeStation")).getStationsname(),
-						rs.getString("Abholdatum"), rs.getString("Abholzeit"),
-						rs.getString("Rueckgabedatum"),
-						rs.getString("Rueckgabezeit"),
+						printFormatDate.format(parseFormat.parse(rs.getString("Abholdatum"))), 
+						printFormatTime.format(parseFormat.parse(rs.getString("Abholdatum"))), 
+						printFormatDate.format(parseFormat.parse(rs.getString("Rueckgabedatum"))), 
+						printFormatTime.format(parseFormat.parse(rs.getString("Rueckgabedatum"))),
 						"/assets/images/" + rs.getString("Bild"));
 				buchungen.add(buchung);
 			}
 
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			System.out.println("Fehler beim Abruf der Buchungen für KundenID: "
 					+ kundenmail);
 			e.printStackTrace();
@@ -95,16 +104,15 @@ public class Model extends Observable { // TODO
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = connection
-					.prepareStatement("INSERT INTO Buchung(Kunde, Fahrzeug, Abholstation, RueckgabeStation, Abholdatum, Abholzeit, Rueckgabedatum, Rueckgabezeit) "
-							+ "VALUES (?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO Buchung(Kunde, Fahrzeug, Abholstation, RueckgabeStation, Abholdatum, Rueckgabedatum) "
+							+ "VALUES (?,?,?,?,?,?)");
 			pstmt.setString(1, getKunde(email).getKundenNr());
 			pstmt.setInt(2, Fahrzeug);
 			pstmt.setString(3, getStation(abholstation).getStationsID());
 			pstmt.setString(4, getStation(rueckgabestation).getStationsID());
-			pstmt.setString(5, abholdatum);
-			pstmt.setString(6, abholzeit);
-			pstmt.setString(7, rueckgabedatum);
-			pstmt.setString(8, rueckgabezeit);
+			System.out.println("Abholdate: " + abholdatum + " " + abholzeit);
+			pstmt.setString(5, abholdatum + " " + abholzeit);
+			pstmt.setString(6, rueckgabedatum + " " + rueckgabezeit);
 
 			pstmt.executeUpdate();
 			System.out.println("Buchung eingefügt: Fahrzeug " + Fahrzeug
@@ -119,7 +127,7 @@ public class Model extends Observable { // TODO
 		} finally {
 			try {
 				pstmt.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -148,7 +156,7 @@ public class Model extends Observable { // TODO
 		} finally {
 			try {
 				pstmt.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -178,7 +186,7 @@ public class Model extends Observable { // TODO
 		} finally {
 			try {
 				pstmt.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -205,7 +213,7 @@ public class Model extends Observable { // TODO
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
+				} catch (SQLException | NullPointerException e) {
 					e.printStackTrace();
 				}
 			}
@@ -243,7 +251,7 @@ public class Model extends Observable { // TODO
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
+				} catch (SQLException | NullPointerException e) {
 					e.printStackTrace();
 				}
 			}
@@ -265,7 +273,7 @@ public class Model extends Observable { // TODO
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
+				} catch (SQLException | NullPointerException e) {
 					e.printStackTrace();
 				}
 			}
@@ -295,10 +303,8 @@ public class Model extends Observable { // TODO
 			e.printStackTrace();
 		} finally {
 			try {
-				System.out.println("getOrt finally try");
 				pstmt.close();
-				System.out.println("getOrt finally try2");
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -326,7 +332,7 @@ public class Model extends Observable { // TODO
 		} finally {
 			try {
 				pstmt.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -359,7 +365,7 @@ public class Model extends Observable { // TODO
 		} finally {
 			try {
 				pstmt.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -394,7 +400,7 @@ public class Model extends Observable { // TODO
 		} finally {
 			try {
 				pstmt.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -420,7 +426,7 @@ public class Model extends Observable { // TODO
 		} finally {
 			try {
 				pstmt.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}

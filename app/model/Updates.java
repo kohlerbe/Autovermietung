@@ -10,7 +10,6 @@ import play.db.DB;
 
 public class Updates {
 	public void updates() {
-		System.out.println("Insert.java sagt Hi");
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -162,10 +161,8 @@ public class Updates {
 						+ "Fahrzeug	INTEGER NOT NULL, "
 						+ "AbholStation	INTEGER NOT NULL, "
 						+ "RueckgabeStation	INTEGER NOT NULL, "
-						+ "Abholdatum TEXT NOT NULL, "
-						+ "Abholzeit TEXT NOT NULL, "
-						+ "Rueckgabedatum TEXT NOT NULL, "
-						+ "Rueckgabezeit TEXT NOT NULL, "
+						+ "Abholdatum datetime  NOT NULL, "
+						+ "Rueckgabedatum datetime  NOT NULL, "
 						+ "FOREIGN KEY(Fahrzeug) REFERENCES Fahrzeug(FahrzeugID), "
 						+ "FOREIGN KEY(Kunde) REFERENCES Kunde(KundenNr), "
 						+ "FOREIGN KEY(AbholStation) REFERENCES Station(StationsID), "
@@ -174,11 +171,13 @@ public class Updates {
 			}
 			rs.close();
 		} catch (SQLException e) {
+			System.err.println("ERROR beim füllen der Datenbank!");
 			e.printStackTrace();
 		} finally {
 			try {
 				connection.close();
 			} catch (SQLException | NullPointerException e) {
+				System.out.println("Verbindung zu DB fehlgeschlagen oder konnte nicht geschlossen werden!");
 				e.printStackTrace();
 			}
 
