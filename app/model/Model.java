@@ -36,6 +36,7 @@ public class Model extends Observable { // TODO
 	 */
 
 	private Model() {
+		new Updates().updates();
 	}
 
 	private static Connection connection = DB.getConnection();
