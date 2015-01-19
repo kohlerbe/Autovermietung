@@ -88,6 +88,7 @@ function loadcontent() {
 			if (html) {
 				$('#container').append(html);
 				count += 1;
+				lock = false;
 			}
 			;
 		},
