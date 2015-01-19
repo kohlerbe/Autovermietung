@@ -18,7 +18,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import play.db.DB;
 
 public class Model extends Observable {
-	/* TODO
+	/*
+	 * TODO
+	 * 
 	 * @Override public void register(final String gameName, final String
 	 * userName) { observers.add(new RoundPointsDTO(userName, gameName));
 	 * System.out.println("Anzahl Observers: " + observers.size()); }
@@ -66,20 +68,28 @@ public class Model extends Observable {
 					.prepareStatement("SELECT * FROM Buchung, Kunde, Fahrzeug WHERE Kunde.KundenNr = Buchung.Kunde AND Kunde.email = ? AND Fahrzeug.FahrzeugID = Buchung.Fahrzeug");
 			pstmt.setString(1, kundenmail);
 			ResultSet rs = pstmt.executeQuery();
-			
-			SimpleDateFormat parseFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-			SimpleDateFormat printFormatDate = new SimpleDateFormat("E, d. MMM yyyy", Locale.GERMANY);
+
+			SimpleDateFormat parseFormat = new SimpleDateFormat(
+					"dd.MM.yyyy HH:mm");
+			SimpleDateFormat printFormatDate = new SimpleDateFormat(
+					"E, d. MMM yyyy", Locale.GERMANY);
 			SimpleDateFormat printFormatTime = new SimpleDateFormat("HH:mm");
-			
+
 			while (rs.next()) {
 				Buchung buchung = new Buchung(rs.getString("BuchungsID"),
-						rs.getString("Kunde"), rs.getString("Hersteller") + " " + rs.getString("Modell"),
-						getStation(rs.getInt("AbholStation")).getStationsname(),
-						getStation(rs.getInt("RueckgabeStation")).getStationsname(),
-						printFormatDate.format(parseFormat.parse(rs.getString("Abholdatum"))), 
-						printFormatTime.format(parseFormat.parse(rs.getString("Abholdatum"))), 
-						printFormatDate.format(parseFormat.parse(rs.getString("Rueckgabedatum"))), 
-						printFormatTime.format(parseFormat.parse(rs.getString("Rueckgabedatum"))),
+						rs.getString("Kunde"), rs.getString("Hersteller") + " "
+								+ rs.getString("Modell"), getStation(
+								rs.getInt("AbholStation")).getStationsname(),
+						getStation(rs.getInt("RueckgabeStation"))
+								.getStationsname(),
+						printFormatDate.format(parseFormat.parse(rs
+								.getString("Abholdatum"))),
+						printFormatTime.format(parseFormat.parse(rs
+								.getString("Abholdatum"))),
+						printFormatDate.format(parseFormat.parse(rs
+								.getString("Rueckgabedatum"))),
+						printFormatTime.format(parseFormat.parse(rs
+								.getString("Rueckgabedatum"))),
 						"/assets/images/" + rs.getString("Bild"));
 				buchungen.add(buchung);
 			}
@@ -343,19 +353,53 @@ public class Model extends Observable {
 	public ArrayList<Fahrzeug> getFahrzeuge(String abholstation,
 			String abholdatum, String abholzeit, String rueckgabestation,
 			String rueckgabedatum, String rueckgabezeit) {
+		rueckgabedatum = rueckgabedatum + " " + rueckgabezeit;
+		abholdatum = abholdatum + " " + abholzeit;
+		abholstation = getStation(abholstation).getStationsID();
+		rueckgabestation = getStation(rueckgabestation).getStationsID();
+		//Integer tage = // TODO
 		fahrzeuge.clear();
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = connection
-					.prepareStatement("SELECT * FROM Fahrzeug WHERE Fahrzeug.FahrzeugID not in (select Fahrzeug FROM Buchung)"); // SQL
-			// Statement
-			// bauen!
+			if (abholstation.equals(rueckgabestation)) {
+				pstmt = connection
+						.prepareStatement("SELECT * FROM Fahrzeug f WHERE f.Station = ? AND f.FahrzeugID not in ("
+								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= ?) AND f.FahrzeugID not in ("
+								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < ? AND b.Rueckgabedatum > ?)");
+				pstmt.setString(1, abholstation);
+				pstmt.setString(2, rueckgabedatum);
+				pstmt.setString(3, rueckgabedatum);
+				pstmt.setString(4, abholdatum);
+//				System.out
+//						.println("SELECT * FROM Fahrzeug f WHERE f.Station = "
+//								+ abholstation
+//								+ " AND f.FahrzeugID not in ( "
+//								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= "
+//								+ rueckgabedatum
+//								+ ") AND f.FahrzeugID not in ("
+//								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < "
+//								+ rueckgabedatum + " AND b.Rueckgabedatum > "
+//								+ rueckgabedatum + ")");
+			} else {
+				pstmt = connection
+						.prepareStatement("SELECT * FROM Fahrzeug f WHERE f.Station = ? AND f.FahrzeugID not in ("
+								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= ?) AND f.FahrzeugID not in ("
+								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < ? AND b.Rueckgabedatum > ?) AND f.FahrzeugID not in ("
+								+ "SELECT FahrzeugID FROM Fahrzeug f, Buchung b WHERE f.FahrzeugID = b.Fahrzeug AND b.Abholdatum >= ?)");
+				pstmt.setString(1, abholstation);
+				pstmt.setString(2, rueckgabedatum);
+				pstmt.setString(3, rueckgabedatum);
+				pstmt.setString(4, abholdatum);
+				pstmt.setString(5, abholdatum);
+			}
+			
 			ResultSet rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				Fahrzeug fahrzeug = new Fahrzeug(rs.getString("FahrzeugId"),
 						rs.getString("Beschreibung"),
 						rs.getString("Hersteller"), rs.getString("Modell"),
-						rs.getString("PreisProTag"), "/assets/images/"
+						rs.getString("PreisProTag"), "/assets/images/" //TODO rs.getString("PreisProTag") * tage --> PreisGesamt
 								+ rs.getString("Bild"));
 				fahrzeuge.add(fahrzeug);
 			}
@@ -406,7 +450,7 @@ public class Model extends Observable {
 		}
 		return null;
 	}
-	
+
 	public Station getStation(int id) {
 		PreparedStatement pstmt = null;
 		try {
@@ -420,8 +464,7 @@ public class Model extends Observable {
 					rs.getString("Adresse"), rs.getString("Stationsname"));
 			return station;
 		} catch (SQLException e) {
-			System.out.println("Fehler beim laden der Station mit ID: "
-					+ id);
+			System.out.println("Fehler beim laden der Station mit ID: " + id);
 			e.printStackTrace();
 		} finally {
 			try {
@@ -438,18 +481,19 @@ public class Model extends Observable {
 		JsonNode autos = null;
 		String autoID = obj.get("AutoID").asText();
 		ObjectMapper mapper = new ObjectMapper();
-		
+
 		try {
-			autos = mapper.readTree("{\"AutoID\":\""+autoID+"\"}");
-			System.out.println("JSON try in Models: "+autos);
+			autos = mapper.readTree("{\"AutoID\":\"" + autoID + "\"}");
+			System.out.println("JSON try in Models: " + autos);
 		} catch (JsonProcessingException e) {
 			System.out.println("Json erstellen in Model fehlgeschlagen");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("IO Exception bei Json erstellen in Model fehlgeschlagen");
+			System.out
+					.println("IO Exception bei Json erstellen in Model fehlgeschlagen");
 			e.printStackTrace();
 		}
-		
+
 		return autos;
 	}
 }
