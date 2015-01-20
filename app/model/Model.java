@@ -92,7 +92,8 @@ public class Model extends Observable {
 								.getString("Rueckgabedatum"))),
 						printFormatTime.format(parseFormat.parse(rs
 								.getString("Rueckgabedatum"))),
-						"/assets/images/" + rs.getString("Bild"));
+						"/assets/images/" + rs.getString("Bild"),
+						rs.getInt("Preis"));
 				buchungen.add(buchung);
 			}
 
@@ -110,14 +111,28 @@ public class Model extends Observable {
 		return buchungen;
 	}
 
+
+	
 	public void setBuchung(String email, int Fahrzeug, String abholstation,
 			String abholdatum, String abholzeit, String rueckgabestation,
 			String rueckgabedatum, String rueckgabezeit) {
 		PreparedStatement pstmt = null;
+		
+		rueckgabedatum = rueckgabedatum + " " + rueckgabezeit;
+		abholdatum = abholdatum + " " + abholzeit;
+		SimpleDateFormat parseFormat = new SimpleDateFormat(
+				"dd.MM.yyyy HH:mm");
+		Date abholung;
+		Date rueckgabe;		
+		
 		try {
+			abholung = parseFormat.parse(abholdatum);
+			rueckgabe = parseFormat.parse(rueckgabedatum);
+			int gesamtpreis = getGesamtpreis(Fahrzeug, abholung, rueckgabe);
+			
 			pstmt = connection
-					.prepareStatement("INSERT INTO Buchung(Kunde, Fahrzeug, Abholstation, RueckgabeStation, Abholdatum, Rueckgabedatum) "
-							+ "VALUES (?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO Buchung(Kunde, Fahrzeug, Abholstation, RueckgabeStation, Abholdatum, Rueckgabedatum, Preis) "
+							+ "VALUES (?,?,?,?,?,?,?)");
 			pstmt.setString(1, getKunde(email).getKundenNr());
 			pstmt.setInt(2, Fahrzeug);
 			pstmt.setString(3, getStation(abholstation).getStationsID());
@@ -125,6 +140,7 @@ public class Model extends Observable {
 			System.out.println("Abholdate: " + abholdatum + " " + abholzeit);
 			pstmt.setString(5, abholdatum + " " + abholzeit);
 			pstmt.setString(6, rueckgabedatum + " " + rueckgabezeit);
+			pstmt.setInt(7, gesamtpreis);
 
 			pstmt.executeUpdate();
 			System.out.println("Buchung eingefügt: Fahrzeug " + Fahrzeug
@@ -133,7 +149,7 @@ public class Model extends Observable {
 					+ " rueckgabestation " + rueckgabestation
 					+ " rueckgabedatum " + rueckgabedatum + " rueckgabezeit "
 					+ rueckgabezeit);
-		} catch (SQLException e) {
+		} catch (ParseException | SQLException e) {
 			System.out.println("Fehler beim Einfügen der Buchung in die DB");
 			e.printStackTrace();
 		} finally {
@@ -145,6 +161,13 @@ public class Model extends Observable {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public int getGesamtpreis(int FahrzeugID, Date abholdatetime, Date rueckgabedatetime) {
+		int preisProTag = Integer.parseInt(getFahrzeug(FahrzeugID).getPreisProTag());
+		int tage = (int) Math.ceil((double) TimeUnit.MILLISECONDS.toMinutes(rueckgabedatetime.getTime() - abholdatetime.getTime()) / 60 / 24); //Differenz in Tagen (aufgerundet) zwischen Abholung und Rückgabe  
+		int gesamtpreis = preisProTag * tage;
+		return gesamtpreis;
 	}
 
 	public Kunde getKunde(String email) {
@@ -361,18 +384,19 @@ public class Model extends Observable {
 		abholdatum = abholdatum + " " + abholzeit;
 		abholstation = getStation(abholstation).getStationsID();
 		rueckgabestation = getStation(rueckgabestation).getStationsID();
-		// Integer tage = // TODO
 		fahrzeuge.clear();
 		PreparedStatement pstmt = null;
-		SimpleDateFormat parseFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
 		try {
+			SimpleDateFormat parseFormat = new SimpleDateFormat(
+					"dd.MM.yyyy HH:mm");
 			Date abholung = parseFormat.parse(abholdatum);
 			Date rueckgabe = parseFormat.parse(rueckgabedatum);
 			int tage = (int) Math
 					.ceil((double) TimeUnit.MILLISECONDS.toMinutes(rueckgabe
 							.getTime() - abholung.getTime()) / 60 / 24);
 
-			if (abholung.compareTo(rueckgabe) < 0) {
+			if (abholung.compareTo(rueckgabe) < 0) { //Nur wenn Zeitraum positiv (mind 1 Min)
 				try {
 					if (abholstation.equals(rueckgabestation)) {
 						pstmt = connection
@@ -416,7 +440,7 @@ public class Model extends Observable {
 								rs.getString("Beschreibung"),
 								rs.getString("Hersteller"),
 								rs.getString("Modell"),
-								Double.toString((Integer.parseInt(rs
+								Integer.toString((Integer.parseInt(rs
 										.getString("PreisProTag"))) * tage),
 								"/assets/images/" + rs.getString("Bild"));
 						fahrzeuge.add(fahrzeug);
@@ -440,13 +464,34 @@ public class Model extends Observable {
 		return fahrzeuge;
 	}
 
-	// TODO Löschen o. SQL bauen wenn benötigt -> Für Dropdownlist auf
-	// indexseite
-	// public ArrayList<Station> getStationen() {
-	// Station station1 = new Station("s1", "11", "Pseudodaten!!");
-	// stationen.add(station1);
-	// return stationen;
-	// }
+	public Fahrzeug getFahrzeug(int FahrzeugID) {
+		PreparedStatement pstmt = null;
+		Fahrzeug fahrzeug = null;
+		try {
+			pstmt = connection.prepareStatement("SELECT * FROM Fahrzeug f WHERE f.FahrzeugID = ?");
+			pstmt.setInt(1, FahrzeugID);
+			ResultSet rs = pstmt.executeQuery();
+
+			fahrzeug = new Fahrzeug(rs.getString("FahrzeugId"),
+					rs.getString("Beschreibung"),
+					rs.getString("Hersteller"), rs.getString("Modell"),
+					rs.getString("PreisProTag"), "/assets/images/"
+							+ rs.getString("Bild"));
+			fahrzeuge.add(fahrzeug);
+		} catch (SQLException e) {
+			System.out.println("Fehler beim laden des Fahrzeugs mit der ID " + FahrzeugID);
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException | NullPointerException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return fahrzeug;
+	}
+	
 
 	public Station getStation(String name) {
 		PreparedStatement pstmt = null;

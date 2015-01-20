@@ -163,6 +163,7 @@ public class Updates {
 						+ "RueckgabeStation	INTEGER NOT NULL, "
 						+ "Abholdatum datetime  NOT NULL, "
 						+ "Rueckgabedatum datetime  NOT NULL, "
+						+ "Preis INTEGER NOT NULL, "
 						+ "FOREIGN KEY(Fahrzeug) REFERENCES Fahrzeug(FahrzeugID), "
 						+ "FOREIGN KEY(Kunde) REFERENCES Kunde(KundenNr), "
 						+ "FOREIGN KEY(AbholStation) REFERENCES Station(StationsID), "

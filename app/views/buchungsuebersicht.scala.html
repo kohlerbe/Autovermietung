@@ -17,7 +17,7 @@
 	<h4>Keine Bestellungen</h4>
 	<h4>Für @email</h4>
 	}else{
-		<h4>für @email</h4>
+		<h4>Für @email</h4>
 		@for(b <- buchungen) {
 		<div class="row">
 		<div class="col-md-5">
@@ -27,10 +27,11 @@
 			<strong>Fahrzeug:</strong> @b.getFahrzeug()<br>
 			<strong>Abholstation:</strong> @b.getAbholStation()<br>
 			<strong>Abholdatum:</strong> @b.getAbholdatum()<br>
-			<strong>Abholzeit:</strong> @b.getAbholzeit()<br>
+			<strong>Abholzeit:</strong> @b.getAbholzeit() Uhr<br>
 			<strong>Rückgabestation:</strong> @b.getRueckgabeStation()<br>
 			<strong>Rückgabedatum:</strong> @b.getRueckgabedatum()<br>
-			<strong>Rückgabezeit:</strong> @b.getRueckgabezeit()
+			<strong>Rückgabezeit:</strong> @b.getRueckgabezeit() Uhr<br>
+			<strong>Gesamtpreis:</strong> @b.getPreis() Euro
 			</p>
 		</div>
 		</div>
