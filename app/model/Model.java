@@ -3,8 +3,10 @@ package model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Observable;
+import java.util.concurrent.TimeUnit;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -357,61 +359,80 @@ public class Model extends Observable {
 		abholdatum = abholdatum + " " + abholzeit;
 		abholstation = getStation(abholstation).getStationsID();
 		rueckgabestation = getStation(rueckgabestation).getStationsID();
-		//Integer tage = // TODO
+		// Integer tage = // TODO
 		fahrzeuge.clear();
 		PreparedStatement pstmt = null;
+		SimpleDateFormat parseFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 		try {
-			if (abholstation.equals(rueckgabestation)) {
-				pstmt = connection
-						.prepareStatement("SELECT * FROM Fahrzeug f WHERE f.Station = ? AND f.FahrzeugID not in ("
-								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= ?) AND f.FahrzeugID not in ("
-								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < ? AND b.Rueckgabedatum > ?)");
-				pstmt.setString(1, abholstation);
-				pstmt.setString(2, rueckgabedatum);
-				pstmt.setString(3, rueckgabedatum);
-				pstmt.setString(4, abholdatum);
-//				System.out
-//						.println("SELECT * FROM Fahrzeug f WHERE f.Station = "
-//								+ abholstation
-//								+ " AND f.FahrzeugID not in ( "
-//								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= "
-//								+ rueckgabedatum
-//								+ ") AND f.FahrzeugID not in ("
-//								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < "
-//								+ rueckgabedatum + " AND b.Rueckgabedatum > "
-//								+ rueckgabedatum + ")");
-			} else {
-				pstmt = connection
-						.prepareStatement("SELECT * FROM Fahrzeug f WHERE f.Station = ? AND f.FahrzeugID not in ("
-								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= ?) AND f.FahrzeugID not in ("
-								+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < ? AND b.Rueckgabedatum > ?) AND f.FahrzeugID not in ("
-								+ "SELECT FahrzeugID FROM Fahrzeug f, Buchung b WHERE f.FahrzeugID = b.Fahrzeug AND b.Abholdatum >= ?)");
-				pstmt.setString(1, abholstation);
-				pstmt.setString(2, rueckgabedatum);
-				pstmt.setString(3, rueckgabedatum);
-				pstmt.setString(4, abholdatum);
-				pstmt.setString(5, abholdatum);
+			Date abholung = parseFormat.parse(abholdatum);
+			Date rueckgabe = parseFormat.parse(rueckgabedatum);
+			int tage = (int) Math
+					.ceil((double) TimeUnit.MILLISECONDS.toMinutes(rueckgabe
+							.getTime() - abholung.getTime()) / 60 / 24);
+
+			if (abholung.compareTo(rueckgabe) < 0) {
+				try {
+					if (abholstation.equals(rueckgabestation)) {
+						pstmt = connection
+								.prepareStatement("SELECT * FROM Fahrzeug f WHERE f.Station = ? AND f.FahrzeugID not in ("
+										+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= ?) AND f.FahrzeugID not in ("
+										+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < ? AND b.Rueckgabedatum > ?)");
+						pstmt.setString(1, abholstation);
+						pstmt.setString(2, rueckgabedatum);
+						pstmt.setString(3, rueckgabedatum);
+						pstmt.setString(4, abholdatum);
+						// System.out
+						// .println("SELECT * FROM Fahrzeug f WHERE f.Station = "
+						// + abholstation
+						// + " AND f.FahrzeugID not in ( "
+						// +
+						// "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= "
+						// + rueckgabedatum
+						// + ") AND f.FahrzeugID not in ("
+						// +
+						// "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < "
+						// + rueckgabedatum + " AND b.Rueckgabedatum > "
+						// + rueckgabedatum + ")");
+					} else {
+						pstmt = connection
+								.prepareStatement("SELECT * FROM Fahrzeug f WHERE f.Station = ? AND f.FahrzeugID not in ("
+										+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.AbholStation != b.RueckgabeStation AND b.Abholdatum <= ?) AND f.FahrzeugID not in ("
+										+ "SELECT FahrzeugID FROM Buchung b, Fahrzeug f WHERE b.Fahrzeug = f.FahrzeugID AND b.Abholdatum < ? AND b.Rueckgabedatum > ?) AND f.FahrzeugID not in ("
+										+ "SELECT FahrzeugID FROM Fahrzeug f, Buchung b WHERE f.FahrzeugID = b.Fahrzeug AND b.Abholdatum >= ?)");
+						pstmt.setString(1, abholstation);
+						pstmt.setString(2, rueckgabedatum);
+						pstmt.setString(3, rueckgabedatum);
+						pstmt.setString(4, abholdatum);
+						pstmt.setString(5, abholdatum);
+					}
+
+					ResultSet rs = pstmt.executeQuery();
+
+					while (rs.next()) {
+						Fahrzeug fahrzeug = new Fahrzeug(
+								rs.getString("FahrzeugId"),
+								rs.getString("Beschreibung"),
+								rs.getString("Hersteller"),
+								rs.getString("Modell"),
+								Double.toString((Integer.parseInt(rs
+										.getString("PreisProTag"))) * tage),
+								"/assets/images/" + rs.getString("Bild"));
+						fahrzeuge.add(fahrzeug);
+					}
+				} catch (SQLException e) {
+					System.out.println("Fehler beim laden der Fahrzeuge");
+					e.printStackTrace();
+				} finally {
+					try {
+						pstmt.close();
+					} catch (SQLException | NullPointerException e) {
+						e.printStackTrace();
+					}
+				}
 			}
-			
-			ResultSet rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				Fahrzeug fahrzeug = new Fahrzeug(rs.getString("FahrzeugId"),
-						rs.getString("Beschreibung"),
-						rs.getString("Hersteller"), rs.getString("Modell"),
-						rs.getString("PreisProTag"), "/assets/images/" //TODO rs.getString("PreisProTag") * tage --> PreisGesamt
-								+ rs.getString("Bild"));
-				fahrzeuge.add(fahrzeug);
-			}
-		} catch (SQLException e) {
-			System.out.println("Fehler beim laden der Fahrzeuge");
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException | NullPointerException e) {
-				e.printStackTrace();
-			}
+		} catch (ParseException e1) {
+			System.out.println("MietenFormular nicht vollständig übergeben");
+			e1.printStackTrace();
 		}
 
 		return fahrzeuge;
