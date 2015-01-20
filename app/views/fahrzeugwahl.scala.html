@@ -16,13 +16,11 @@
 				AutoID:ersetzen
 		};
 		var JsonObj = JSON.stringify(JsonString);
-		alert("Ich geh in idSenden"+ JsonObj);
 		webSocket.send(JsonObj);
 	};
 	function receiveEvent(event) {
-		alert("Ich erhalte ein Event");
 		var obj = JSON.parse(event.data);
-		$("#auto" + obj.AutoID).html("Nicht mehr verfügbar");
+		$("#auto" + obj.AutoID).html("");
 
 	};
 </script>

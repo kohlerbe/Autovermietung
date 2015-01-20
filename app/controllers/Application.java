@@ -312,17 +312,12 @@ public class Application extends Controller {
 		return new WebSocket<JsonNode>() {
 			public void onReady(WebSocket.In<JsonNode> in,
 					final WebSocket.Out<JsonNode> out) {
-				System.out.println(": Application return Websocket");
 				
 				final AutoObserver	obs = new AutoObserver();
 				obs.auto = out;
 				
-				System.out.println(": Anzahl observer: "
-						+ Model.sharedInstance.countObservers());
-				
 				in.onMessage(new Callback<JsonNode>() {
 					public void invoke(JsonNode obj) {
-						System.out.println("Application Callback JSON:"+ obj);
 					}
 				});
 				in.onClose(new Callback0() {

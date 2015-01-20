@@ -139,6 +139,8 @@ public class Model extends Observable {
 		} finally {
 			try {
 				pstmt.close();
+				setChanged();
+				notifyObservers(Fahrzeug);
 			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
@@ -498,14 +500,12 @@ public class Model extends Observable {
 	}
 
 	public JsonNode zeigeAktuelleAutos(JsonNode obj) {
-		System.out.println("update bei observer wurde aufgerufen");
 		JsonNode autos = null;
 		String autoID = obj.get("AutoID").asText();
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {
 			autos = mapper.readTree("{\"AutoID\":\"" + autoID + "\"}");
-			System.out.println("JSON try in Models: " + autos);
 		} catch (JsonProcessingException e) {
 			System.out.println("Json erstellen in Model fehlgeschlagen");
 			e.printStackTrace();

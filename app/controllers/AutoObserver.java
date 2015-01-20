@@ -26,7 +26,6 @@ public class AutoObserver implements Observer{
 		JsonNode jsonAutoID = null;
 		try{
 			jsonAutoID = mapper.readTree("{\"AutoID\":\""+autoID+"\"}");
-			System.out.println("JSON: "+jsonAutoID);
 			
 		}catch (JsonProcessingException e) {
 			System.out.println("Fehler bei update von Observer - JSON Exc");
