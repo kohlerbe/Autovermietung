@@ -44,7 +44,7 @@ Dieses Projekt wurde im Rahmen der Vorlesung **Web-Technologien** angefertigt. B
  - Startseite Auto Karusell
 
 ###Use-Case###
-<img src="/public/images/usecase.JPG">
+<img src="/public/images/usecase.jpg">
 
 ##3. First Idea##
 
