@@ -44,7 +44,7 @@ Dieses Projekt wurde im Rahmen der Vorlesung **Web-Technologien** angefertigt. B
  - Startseite Auto Karusell
 
 ###Use-Case###
-<img src="/public/images/usecase.jp">
+![UseCase](https://github.com/HLK65/Autovermietung/blob/master/public/images/usecase.JPG)
 
 ##3. First Idea##
 
