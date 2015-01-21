@@ -17,18 +17,25 @@ Web-Technologien - Autovermietung Bodensee – Team Nr.10
 Mit viel Elan und Motivation sahen wir die ersten Schritte vor uns sich Gedanken zu machen über das Aussehen der Seite, sowie deren Funktionen, die nachfolgend beschrieben sind.
 
 ###Inhaltsverzeichnis###
-	1. Projektbeschreibung
-	2. Anforderungsanalyse
-	3. Erste Idee
-	4. Architektur
-	5. Genutzte Technologien
-	6. Wichtiger "Code Snippet"
-	7. Fazit
+
+<a href="#projektbeschreibung">1. Projektbeschreibung</a>
+
+<a href="#anforderung">2. Anforderungsanalyse</a>
+
+<a href="#idee">3. Erste Idee</a>
+
+<a href="arch">4. Architektur</a>
+
+<a href="tech">5. Genutzte Technologien</a>
+
+<a href="code">6. Wichtiger "Code Snippet"</a>
+
+<a href="fazit">7. Fazit</a>
  
-##1. Projektbeschreibung##
+##<a name="projektbeschreibung">1. Projektbeschreibung</a>##
 Dieses Projekt wurde im Rahmen der Vorlesung **Web-Technologien** angefertigt. Bei dem Projekt handelt es sich um eine Autovermietungs-Webseite, in der Kunden Autos mieten können im Stile von [*Sixt*](http://sixt.de "") und [*Europcar*](http://europcar.de "").
 
-##2. Anforderungsanalyse##
+##<a name="anforderung">2. Anforderungsanalyse</a>##
 
 ###Funktional###
  - Anmelden / Registrieren
@@ -46,7 +53,7 @@ Dieses Projekt wurde im Rahmen der Vorlesung **Web-Technologien** angefertigt. B
 ###Use-Case###
 <img src="/public/images/usecase.jpg">
 
-##3. First Idea##
+##<a name="idee">3. First Idea</a>##
 
 ###Mockups###
 Nachfolgend sind die wichtigsten Mockups mit Vergleich zur entgültigen Version aufgelistet, die wir erstellt haben, um das Design grob festzulegen. 
@@ -60,7 +67,7 @@ Nachfolgend sind die wichtigsten Mockups mit Vergleich zur entgültigen Version 
 ####*- Buchungsübersicht*####
 <img src="/public/images/bestelluebersicht.JPG">
 
-##4. Architektur##
+##<a name="arch">4. Architektur</a>##
 
 ###ERM-Datenbankentwurf###
 <img src="/public/images/erm.JPG">
@@ -69,7 +76,7 @@ Nachfolgend sind die wichtigsten Mockups mit Vergleich zur entgültigen Version 
 ###UML-Diagramm###
 <img src="/public/images/uml.JPG">
 
-##5. Genutzte Technologien##
+##<a name="tech">5. Genutzte Technologien</a>##
 
 Neben *Java*/*Scala*:
 
@@ -89,14 +96,14 @@ Neben *Java*/*Scala*:
 
 **[Observer Pattern / WebSockets / JSON]** Übergabe der Fahrzeug ID im JSON-Format beim Buchen eines Fahrzeugs, um Doppelbuchungen vorzubeugen. Das gebuchte Fahrzeug verschwindet bei allen Clients.
  
-##6. Code Snippet##
+##<a name="code">6. Code Snippet</a>##
 
 Im nachfolgendem Ausschnitt wird in der Methode *checkFahrzeugwahl()* eine **doppelte Hash-Map** angelegt, um auf die Daten der zu speichernden Miet-Anfrage später zugreifen zu können:
 
 ###Code###
 <img src="/public/images/wichtigercode.jpg">
 
-##7. Fazit##
+##<a name="fazit">7. Fazit</a>##
 
 ###Gelerntes###
 
