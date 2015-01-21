@@ -44,7 +44,7 @@ Dieses Projekt wurde im Rahmen der Vorlesung **Web-Technologien** angefertigt. B
  - Startseite Auto Karusell
 
 ###Use-Case###
-![UseCase](https://github.com/HLK65/Autovermietung/blob/master/public/images/usecase.JPG)
+<img src="/public/images/usecase.JPG">
 
 ##3. First Idea##
 
@@ -56,9 +56,9 @@ Nachfolgend sind die wichtigsten Mockups mit Vergleich zur entgültigen Version 
 ####*- Mieten*####
 <img src="/public/images/mieten.JPG">
 ####*- Fahrzeugauswahl*####
-<img src="/public/images/fahrzeugauswahl.jpg">
+<img src="/public/images/fahrzeugauswahl.JPG">
 ####*- Buchungsübersicht*####
-<img src="/public/images/bestelluebersicht.jpg">
+<img src="/public/images/bestelluebersicht.JPG">
 
 ##4. Architektur##
 
