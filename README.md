@@ -24,13 +24,13 @@ Mit viel Elan und Motivation sahen wir die ersten Schritte vor uns sich Gedanken
 
 <a href="#idee">3. Erste Idee</a>
 
-<a href="arch">4. Architektur</a>
+<a href="#arch">4. Architektur</a>
 
-<a href="tech">5. Genutzte Technologien</a>
+<a href="#tech">5. Genutzte Technologien</a>
 
-<a href="code">6. Wichtiger "Code Snippet"</a>
+<a href="#code">6. Wichtiger "Code Snippet"</a>
 
-<a href="fazit">7. Fazit</a>
+<a href="#fazit">7. Fazit</a>
  
 ##<a name="projektbeschreibung">1. Projektbeschreibung</a>##
 Dieses Projekt wurde im Rahmen der Vorlesung **Web-Technologien** angefertigt. Bei dem Projekt handelt es sich um eine Autovermietungs-Webseite, in der Kunden Autos mieten können im Stile von [*Sixt*](http://sixt.de "") und [*Europcar*](http://europcar.de "").
