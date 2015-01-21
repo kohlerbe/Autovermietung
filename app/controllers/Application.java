@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class Application extends Controller {
 
-	public static String s;
 	public static int eingeloggt;
 	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String, String>>();
 	public static HashMap<String, String> innerMap = new HashMap<String, String>();
@@ -51,7 +50,7 @@ public class Application extends Controller {
 		return ok(fahrzeuguebersicht.render(eingeloggt));
 	}
 	
-	//Ajax Methode
+	//Ajax getFahrzeuge() in Model
 	 public static Result fahrzeuge(int count) {
 		
 		ArrayList<Fahrzeug> arrayList = Model.sharedInstance.getFahrzeuge();
@@ -147,7 +146,8 @@ public class Application extends Controller {
 		return redirect("/");
 
 	}
-
+	
+	//Anfrage des Kunden speichern
 	public static Result checkFahrzeugwahl(String abholstation,
 			String abholdatum, String abholzeit, String rueckgabestation,
 			String rueckgabedatum, String rueckgabezeit) {
@@ -307,6 +307,7 @@ public class Application extends Controller {
 			return redirect("/login");
 		}
 	}
+	
 	public static WebSocket<JsonNode> autoSocket() {
 		System.out.println("Application Websocket");
 		return new WebSocket<JsonNode>() {

@@ -119,6 +119,8 @@ public class Model extends Observable {
 		} finally {
 			try {
 				pstmt.close();
+				
+				//AB HIER UPDATE DES OBSERVERS
 				setChanged();
 				notifyObservers(Fahrzeug);
 			} catch (SQLException | NullPointerException e) {
@@ -320,7 +322,7 @@ public class Model extends Observable {
 		}
 		return null;
 	}
-
+//Überladene Methode alle Fahrzeuge zurückgeben
 	public ArrayList<Fahrzeug> getFahrzeuge() {
 		fahrzeuge.clear();
 		PreparedStatement pstmt = null;
@@ -349,10 +351,11 @@ public class Model extends Observable {
 
 		return fahrzeuge;
 	}
-
+//Überladene Methode Nur verfügbare Fahrzeuge anzeigen lassen
 	public ArrayList<Fahrzeug> getFahrzeuge(String abholstation,
 			String abholdatum, String abholzeit, String rueckgabestation,
 			String rueckgabedatum, String rueckgabezeit) {
+			
 		rueckgabedatum = rueckgabedatum + " " + rueckgabezeit;
 		abholdatum = abholdatum + " " + abholzeit;
 		abholstation = getStation(abholstation).getStationsID();
