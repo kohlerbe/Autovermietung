@@ -52,9 +52,9 @@ Dieses Projekt wurde im Rahmen der Vorlesung **Web-Technologien** angefertigt. B
 Nachfolgend sind die wichtigsten Mockups mit Vergleich zur entgültigen Version aufgelistet, die wir erstellt haben, um das Design grob festzulegen. 
 
 #####*- Registrieren*#####
-<img src="/public/images/registrieren.jpg">
+<img src="/public/images/registrieren.JPG">
 ####*- Mieten*####
-<img src="/public/images/mieten.jpg">
+<img src="/public/images/mieten.JPG">
 ####*- Fahrzeugauswahl*####
 <img src="/public/images/fahrzeugauswahl.jpg">
 ####*- Buchungsübersicht*####
@@ -63,11 +63,11 @@ Nachfolgend sind die wichtigsten Mockups mit Vergleich zur entgültigen Version 
 ##4. Architektur##
 
 ###ERM-Datenbankentwurf###
-<img src="/public/images/erm.jpg">
+<img src="/public/images/erm.JPG">
 
 
 ###UML-Diagramm###
-<img src="/public/images/uml.jpg">
+<img src="/public/images/uml.JPG">
 
 ##5. Genutzte Technologien##
 
