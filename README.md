@@ -20,7 +20,7 @@ email: max@mustermann.de <br/>
 passwort: max
 
 ###Erste Schritte###
-Mit viel Elan und Motivation sahen wir die ersten Schritte vor uns sich Gedanken zu machen über das Aussehen der Seite, sowie deren Funktionen, die nachfolgend beschrieben sind.
+Mit viel Elan und Motivation sahen wir die ersten Schritte vor uns. Wir machten uns Gedanken über das Aussehen der Seite, sowie deren Funktionen, die nachfolgend beschrieben sind.
 
 ###Inhaltsverzeichnis###
 
