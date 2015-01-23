@@ -11,7 +11,7 @@ Web-Technologien - Autovermietung Bodensee – Team Nr.10
 
 **Unser Projekt-Link auf Heroku:**
 
-[--WebTec Projekt Autovermietung--](http://autovermietung.herokuapp.com "WebTec : autovermietung.herokuapp.com")
+[--WebTech Projekt Autovermietung--](http://autovermietung.herokuapp.com "WebTech : autovermietung.herokuapp.com")
 
 Die Applikation ist getestet mit Mozilla Firefox 34.0.5 und Google Chrome 40.0.2.
 
