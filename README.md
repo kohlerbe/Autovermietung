@@ -115,7 +115,7 @@ Im nachfolgendem Ausschnitt wird in der Methode *checkFahrzeugwahl()* eine **dop
 ###Gelerntes###
 
 "Web Technologien" ist für uns das erste und nicht bei Weitem das letzte Projekt, von dem wir so profitieren konnten wie noch nie.
-Da für uns Alles bis auf Datenbanken und Java neu war, konnten wir durch das Projekt viele neue Technologien rund um das "World Wide Web" sowie Projektmanagement kennenlernen und viele neue Erfahrung durch die Anwendung dieser sammeln.
+Da für uns Alles bis auf Datenbanken und Java neu war, konnten wir durch das Projekt viele neue Technologien rund um die Webentwicklung sowie Projektmanagement kennenlernen und viele neue Erfahrung durch die Anwendung dieser sammeln.
 
 ###Probleme###
 
