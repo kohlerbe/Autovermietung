@@ -12,6 +12,10 @@ Web-Technologien - Autovermietung Bodensee – Team Nr.10
 **Unser Projekt-Link auf Heroku:**
 
 [--WebTec Projekt Autovermietung--](http://autovermietung.herokuapp.com "WebTec : autovermietung.herokuapp.com")
+Die Applikation ist getestet mit Mozilla Firefox 34.0.5 und Google Chrome 40.0.2
+Wenn Sie sich nicht registrieren wollen können Sie unseren Beispielnutzer mit folgenden Logindaten verwenden: 
+email: max@mustermann.de
+passwort: max
 
 ###Erste Schritte###
 Mit viel Elan und Motivation sahen wir die ersten Schritte vor uns sich Gedanken zu machen über das Aussehen der Seite, sowie deren Funktionen, die nachfolgend beschrieben sind.
@@ -95,6 +99,7 @@ Neben *Java*/*Scala*:
 **[AJAX]** Dynamisches laden der Fahrzeuge beim Scrollen im Fuhrpark
 
 **[Observer Pattern / WebSockets / JSON]** Übergabe der Fahrzeug ID im JSON-Format beim Buchen eines Fahrzeugs, um Doppelbuchungen vorzubeugen. Das gebuchte Fahrzeug verschwindet bei allen Clients.
+Wenige Browser blockieren die Erstellung des Websockets im JavaScript: "webSocket = new WS("ws://autovermietung.herokuapp.com/autoSocket");" In diesem Fall wird dies in der Browserkonsole ausgegeben.
  
 ##<a name="code">6. Code Snippet</a>##
 
@@ -107,8 +112,8 @@ Im nachfolgendem Ausschnitt wird in der Methode *checkFahrzeugwahl()* eine **dop
 
 ###Gelerntes###
 
-Web-Tec ist für uns das erste und nicht bei Weitem das letzte Projekt, von dem wir so profitieren konnten wie noch nie.
-Da für uns Alles bis auf Datenbanken und Java neu war, konnten wir durch das Projekt viele neue Technologien rund um das "World Wide Web" kennenlernen und viele neue Erfahrung durch die Anwendung dieser sammeln.
+"Web Technologien" ist für uns das erste und nicht bei Weitem das letzte Projekt, von dem wir so profitieren konnten wie noch nie.
+Da für uns Alles bis auf Datenbanken und Java neu war, konnten wir durch das Projekt viele neue Technologien rund um das "World Wide Web" und Projektmanagement kennenlernen und viele neue Erfahrung durch die Anwendung dieser sammeln.
 
 ###Probleme###
 
