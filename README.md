@@ -14,8 +14,11 @@ Web-Technologien - Autovermietung Bodensee – Team Nr.10
 [--WebTec Projekt Autovermietung--](http://autovermietung.herokuapp.com "WebTec : autovermietung.herokuapp.com")
 
 Die Applikation ist getestet mit Mozilla Firefox 34.0.5 und Google Chrome 40.0.2
+
 Wenn Sie sich nicht registrieren wollen können Sie unseren Beispielnutzer mit folgenden Logindaten verwenden: 
+
 email: max@mustermann.de
+
 passwort: max
 
 ###Erste Schritte###
