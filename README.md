@@ -34,7 +34,7 @@ Mit viel Elan und Motivation sahen wir die ersten Schritte vor uns. Wir machten 
 
 <a href="#tech">5. Genutzte Technologien</a>
 
-<a href="#code">6. Wichtiger "Code Snippet"</a>
+<a href="#code">6. Wichtiger "Code Snippets"</a>
 
 <a href="#fazit">7. Fazit</a>
  
@@ -103,12 +103,19 @@ Neben *Java*/*Scala*:
 **[Observer Pattern / WebSockets / JSON]** Übergabe der Fahrzeug ID im JSON-Format beim Buchen eines Fahrzeugs, um Doppelbuchungen vorzubeugen. Das gebuchte Fahrzeug verschwindet bei allen Clients.<br/>
 Wenige Browser blockieren die Erstellung des Websockets im JavaScript: "webSocket = new WS("ws://autovermietung.herokuapp.com/autoSocket");" In diesem Fall wird dies in der Browserkonsole ausgegeben.
  
-##<a name="code">6. Code Snippet</a>##
+##<a name="code">6. Code Snippets</a>##
 
-Im nachfolgendem Ausschnitt wird in der Methode *checkFahrzeugwahl()* eine **doppelte Hash-Map** angelegt, um auf die Daten der zu speichernden Miet-Anfrage später zugreifen zu können:
+###Snippet 1###
 
-###Code###
+Im nachfolgendem Snippet Nr.1 wird in der Methode *checkFahrzeugwahl()* eine **doppelte Hash-Map** angelegt, um auf die Daten der zu speichernden Miet-Anfrage später zugreifen zu können.
+
 <img src="/public/images/wichtigercode.jpg">
+
+###Snippet 2###
+
+Im Snippet Nr.2 wird die JQuery Ajax Funktion *loadcontent()* verwendet, um Fahrzeuge aus der Datenbank zu laden. Doppeltes Laden durch schlechte Performanz manch Rechner und Browser wird durch ein **lock** verhindert. 
+
+<img src="/public/images/ajaxcode.JPG">
 
 ##<a name="fazit">7. Fazit</a>##
 

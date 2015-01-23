@@ -1,7 +1,7 @@
-// AJAX NR 2 /fahrzeugübersicht Aktuell
+// AJAX /fahrzeugübersicht Aktuell
 $(document).ready(function() {
 	count = 0;
-	start = 4;  //Anzahl Fahrzeuge die immer ausgegeben werden
+	start = 4;  //Anzahl Fahrzeuge die immer am Anfang ausgegeben werden, dannach immer +1
 	lock = false;
 	for (i = 0; i < start; i++) {
 		if (lock == false) {
