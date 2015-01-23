@@ -100,7 +100,7 @@ Neben *Java*/*Scala*:
 
 **[AJAX]** Dynamisches laden der Fahrzeuge beim Scrollen im Fuhrpark
 
-**[Observer Pattern / WebSockets / JSON]** Übergabe der Fahrzeug ID im JSON-Format beim Buchen eines Fahrzeugs, um Doppelbuchungen vorzubeugen. Das gebuchte Fahrzeug verschwindet bei allen Clients.
+**[Observer Pattern / WebSockets / JSON]** Übergabe der Fahrzeug ID im JSON-Format beim Buchen eines Fahrzeugs, um Doppelbuchungen vorzubeugen. Das gebuchte Fahrzeug verschwindet bei allen Clients.<br/>
 Wenige Browser blockieren die Erstellung des Websockets im JavaScript: "webSocket = new WS("ws://autovermietung.herokuapp.com/autoSocket");" In diesem Fall wird dies in der Browserkonsole ausgegeben.
  
 ##<a name="code">6. Code Snippet</a>##
@@ -115,7 +115,7 @@ Im nachfolgendem Ausschnitt wird in der Methode *checkFahrzeugwahl()* eine **dop
 ###Gelerntes###
 
 "Web Technologien" ist für uns das erste und nicht bei Weitem das letzte Projekt, von dem wir so profitieren konnten wie noch nie.
-Da für uns Alles bis auf Datenbanken und Java neu war, konnten wir durch das Projekt viele neue Technologien rund um das "World Wide Web" und Projektmanagement kennenlernen und viele neue Erfahrung durch die Anwendung dieser sammeln.
+Da für uns Alles bis auf Datenbanken und Java neu war, konnten wir durch das Projekt viele neue Technologien rund um das "World Wide Web" sowie Projektmanagement kennenlernen und viele neue Erfahrung durch die Anwendung dieser sammeln.
 
 ###Probleme###
 
